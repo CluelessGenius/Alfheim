@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alfheim.TRIGGERS
+namespace Alfheim_Model.TRIGGERS
 {
-    class StaticTrigger : Trigger
+    class IntervalTirgger : Trigger
     {
     }
 }
