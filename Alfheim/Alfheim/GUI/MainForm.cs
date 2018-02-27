@@ -19,7 +19,8 @@ namespace Alfheim.GUI
         public MainForm():base()
         {
             InitializeComponent();
-            taskBindingSource.DataSource = Tasks;
+            
+            //taskBindingSource.DataSource = Tasks;
         }
 
         private void btn_tasks_add_Click(object sender, EventArgs e)
@@ -30,12 +31,12 @@ namespace Alfheim.GUI
         
         private void btn_tasks_del_Click(object sender, EventArgs e)
         {
-            if (dgv_tasks_grid.SelectedRows.Count==0)
-            {
-                return;
-            }
-            Tasks.RemoveAt(dgv_tasks_grid.SelectedRows[0].Index);
-            taskBindingSource.ResetBindings(false);
+            //if (dgv_tasks_grid.SelectedRows.Count==0)
+            //{
+            //    return;
+            //}
+            //Tasks.RemoveAt(dgv_tasks_grid.SelectedRows[0].Index);
+            //taskBindingSource.ResetBindings(false);
         }
 
         private void dgv_tasks_grid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -67,49 +68,80 @@ namespace Alfheim.GUI
 
         private void dgv_tasks_grid_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgv_tasks_grid.SelectedRows==null || dgv_tasks_grid.SelectedRows.Count == 0 || dgv_tasks_grid.SelectedRows[0]==null || dgv_tasks_grid.SelectedRows[0].Index<0)
-            {
-                return;
-            }
+            //if (dgv_tasks_grid.SelectedRows==null || dgv_tasks_grid.SelectedRows.Count == 0 || dgv_tasks_grid.SelectedRows[0]==null || dgv_tasks_grid.SelectedRows[0].Index<0)
+            //{
+            //    return;
+            //}
 
-            DetailedTask = taskBindingSource[dgv_tasks_grid.SelectedRows[0].Index] as Task;
-            if (DetailedTask!=null)
-            {
-                trl_detail_trigger.Visible = true;
-            }
-            else
-            {
-                trl_detail_trigger.Visible = false;
-            }
-            trl_detail_trigger.Triggers = DetailedTask.Triggers;
+            //DetailedTask = taskBindingSource[dgv_tasks_grid.SelectedRows[0].Index] as Task;
+            //if (DetailedTask!=null)
+            //{
+            //    trl_detail_trigger.Visible = true;
+            //}
+            //else
+            //{
+            //    trl_detail_trigger.Visible = false;
+            //}
+            //trl_detail_trigger.Triggers = DetailedTask.Triggers;
             
-            clb_detail_devices.Items.Clear();
-            clb_detail_devices.Items.AddRange(DetailedTask.Devices.ToArray());
-            clb_detail_actions.Items.Clear();
-            clb_detail_actions.Items.AddRange(DetailedTask.Actions.ToArray());
+            //clb_detail_devices.Items.Clear();
+            //clb_detail_devices.Items.AddRange(DetailedTask.Devices.ToArray());
+            //clb_detail_actions.Items.Clear();
+            //clb_detail_actions.Items.AddRange(DetailedTask.Actions.ToArray());
 
-            propertyGrid1.SelectedObject = DetailedTask;
+            //propertyGrid1.SelectedObject = DetailedTask;
         }
 
         private void clb_detail_MouseClick(object sender, MouseEventArgs e)
         {
-            if ((sender as CheckedListBox).SelectedIndex < 0)
+            //if ((sender as CheckedListBox).SelectedIndex < 0)
+            //{
+            //    return;
+            //}
+            //switch ((sender as CheckedListBox).Name)
+            //{
+            //    case "clb_detail_trigger":
+            //        pg_task_detailed.SelectedObject = DetailedTask.Triggers[(sender as CheckedListBox).SelectedIndex];
+            //        break;
+            //    case "clb_detail_devices":
+            //        pg_task_detailed.SelectedObject = DetailedTask.Devices[(sender as CheckedListBox).SelectedIndex];
+            //        break;
+            //    case "clb_detail_actions":
+            //        pg_task_detailed.SelectedObject = DetailedTask.Actions[(sender as CheckedListBox).SelectedIndex];
+            //        break;
+            //    default:
+            //        break;
+            //}
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnl_sidebar_expand_Click(object sender, EventArgs e)
+        {
+            if (pnl_sidebar.Width >= 200)
             {
-                return;
+                pnl_sidebar.Width = 16;
             }
-            switch ((sender as CheckedListBox).Name)
+            else
             {
-                case "clb_detail_trigger":
-                    pg_task_detailed.SelectedObject = DetailedTask.Triggers[(sender as CheckedListBox).SelectedIndex];
-                    break;
-                case "clb_detail_devices":
-                    pg_task_detailed.SelectedObject = DetailedTask.Devices[(sender as CheckedListBox).SelectedIndex];
-                    break;
-                case "clb_detail_actions":
-                    pg_task_detailed.SelectedObject = DetailedTask.Actions[(sender as CheckedListBox).SelectedIndex];
-                    break;
-                default:
-                    break;
+                pnl_sidebar.Width = 200;
+            }
+        }
+
+        private void pnl_sysmon_expand_Click(object sender, EventArgs e)
+        {
+            if (pnl_sysmon.Width >= 200)
+            {
+                Width -= pnl_sysmon.Width - 16;
+                pnl_sysmon.Width = 16;
+            }
+            else
+            {
+                pnl_sysmon.Width = 400;
+                Width += pnl_sysmon.Width - 16;
             }
         }
     }

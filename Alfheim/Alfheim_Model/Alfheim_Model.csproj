@@ -49,6 +49,7 @@
     <Compile Include="TRIGGERS\IntervalTirgger.cs" />
     <Compile Include="TRIGGERS\StaticTrigger.cs" />
     <Compile Include="TRIGGERS\Trigger.cs" />
+    <Compile Include="TRIGGERS\TriggerType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

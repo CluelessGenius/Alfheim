@@ -13,5 +13,6 @@ namespace Alfheim_Model.TRIGGERS
 
         public bool Enabled { get; set; }
 
+        public TriggerType Type { get; set; }
     }
 }
