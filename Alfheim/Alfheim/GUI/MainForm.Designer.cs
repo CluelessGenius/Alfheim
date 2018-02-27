@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnl_content = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.taskList3 = new Alfheim.GUI.UserControls.TaskList();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.triggerList6 = new Alfheim.GUI.UserControls.ParamList();
             this.triggerList5 = new Alfheim.GUI.UserControls.ParamList();
@@ -41,7 +42,6 @@
             this.pnl_sidebar_expand = new System.Windows.Forms.Panel();
             this.taskList1 = new Alfheim.GUI.UserControls.TaskList();
             this.taskList2 = new Alfheim.GUI.UserControls.TaskList();
-            this.taskList3 = new Alfheim.GUI.UserControls.TaskList();
             this.pnl_content.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,6 +72,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1248, 688);
             this.panel2.TabIndex = 3;
+            // 
+            // taskList3
+            // 
+            this.taskList3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.taskList3.BackColor = System.Drawing.Color.Transparent;
+            this.taskList3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.taskList3.ForeColor = System.Drawing.Color.White;
+            this.taskList3.Location = new System.Drawing.Point(10, 10);
+            this.taskList3.Margin = new System.Windows.Forms.Padding(10, 10, 10, 0);
+            this.taskList3.Name = "taskList3";
+            this.taskList3.SelectedRowIndex = 0;
+            this.taskList3.SelectedTask = null;
+            this.taskList3.Size = new System.Drawing.Size(1228, 331);
+            this.taskList3.TabIndex = 1;
+            this.taskList3.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList3.Tasks")));
             // 
             // tableLayoutPanel1
             // 
@@ -175,7 +191,7 @@
             this.pnl_sidebar.Location = new System.Drawing.Point(0, 0);
             this.pnl_sidebar.Name = "pnl_sidebar";
             this.pnl_sidebar.Size = new System.Drawing.Size(16, 688);
-            this.pnl_sidebar.TabIndex = 0;
+            this.pnl_sidebar.TabIndex = 100;
             // 
             // pnl_sidebar_expand
             // 
@@ -216,22 +232,6 @@
             this.taskList2.Size = new System.Drawing.Size(566, 350);
             this.taskList2.TabIndex = 0;
             this.taskList2.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList2.Tasks")));
-            // 
-            // taskList3
-            // 
-            this.taskList3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.taskList3.BackColor = System.Drawing.Color.Black;
-            this.taskList3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.taskList3.ForeColor = System.Drawing.Color.White;
-            this.taskList3.Location = new System.Drawing.Point(10, 10);
-            this.taskList3.Margin = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.taskList3.Name = "taskList3";
-            this.taskList3.SelectedRowIndex = 0;
-            this.taskList3.SelectedTask = null;
-            this.taskList3.Size = new System.Drawing.Size(1228, 331);
-            this.taskList3.TabIndex = 1;
-            this.taskList3.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList3.Tasks")));
             // 
             // MainForm
             // 

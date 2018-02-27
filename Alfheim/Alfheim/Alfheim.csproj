@@ -215,6 +215,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\icons8-grafikkarte-64.png" />
+    <None Include="Resources\icons8-speicherkartensteckplatz-64.png" />
+    <None Include="Resources\icons8-raspberry-pi-64.png" />
+    <None Include="Resources\icons8-aktiver-zustand-64.png" />
+    <None Include="Resources\icons8-motherboard-64.png" />
+    <None Include="Resources\icons8-lunge-64.png" />
+    <None Include="Resources\icons8-prozess-64.png" />
+    <None Include="Resources\icons8-einhorn-64.png" />
+    <None Include="Resources\icons8-komet-64.png" />
+    <None Include="Resources\icons8-flash-bang-64.png" />
+    <None Include="Resources\icons8-element-wasser-64.png" />
+    <None Include="Resources\icons8-stern-64.png" />
+    <None Include="Resources\icons8-breite-64.png" />
     <None Include="Resources\icons8-trash-32.png" />
     <None Include="Resources\icons8-systemaufgabe-32.png" />
     <None Include="Resources\icons8-menü-32.png" />

@@ -45,7 +45,7 @@
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(560, 21);
             this.lbl_name.TabIndex = 13;
-            this.lbl_name.Text = "TRIGGER";
+            this.lbl_name.Text = "TASKS";
             // 
             // pnl_tasks
             // 
@@ -79,7 +79,7 @@
             // 
             this.addButton1.AutoSize = true;
             this.addButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addButton1.BackColor = System.Drawing.Color.Transparent;
+            this.addButton1.BackColor = System.Drawing.Color.Black;
             this.addButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addButton1.Location = new System.Drawing.Point(3, 315);
             this.addButton1.Name = "addButton1";
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DimGray;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_content);
             this.DoubleBuffered = true;
