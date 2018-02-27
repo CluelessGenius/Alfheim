@@ -13,37 +13,23 @@ namespace Alfheim.GUI
 {
     public class ResizableNonBorderForm : Form
     {
-        TransparentBackground BG;
+        
 
         public ResizableNonBorderForm():base()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // no borders
             this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.ResizeRedraw, true); // this is to avoid visual artifacts
-
-           
-
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
-            {
-                BG = new TransparentBackground();
-                BG.DesktopLocation = new Point(this.DesktopLocation.X, this.DesktopLocation.Y + 32);
-                BG.Size = new Size(this.Width, this.Height - 32);
-                BG.Show();
-            }
-            
+            this.SetStyle(ControlStyles.ResizeRedraw, true); // this is to avoid visual artifacts 
         }
 
         
 
         protected override void OnPaint(PaintEventArgs e) 
         {
-            
-            
             lbl_from_name.Text = this.Text;
             Rectangle rc = new Rectangle(0, 0, this.ClientSize.Width, 32);
             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 209, 65, 26)), rc);
-            
         }
 
         private const int
@@ -145,7 +131,6 @@ namespace Alfheim.GUI
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ResizableNonBorderForm";
-            this.Move += new System.EventHandler(this.ResizableNonBorderForm_Move);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,19 +160,7 @@ namespace Alfheim.GUI
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        [DllImport("user32.dll", SetLastError = true)]
-        internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-
-        private void ResizableNonBorderForm_Move(object sender, EventArgs e)
-        {
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
-            {
-                MoveWindow(BG.Handle, Location.X, Location.Y, Width, Height, true);
-            }
-
-        }
-
+        
         Rectangle Bottomcenter { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
         Rectangle Rightcenter { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
 
@@ -195,8 +168,7 @@ namespace Alfheim.GUI
         Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
         Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
         Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
-
-
+        
         protected override void WndProc(ref Message message)
         {
             if (message.Msg == 0x84)

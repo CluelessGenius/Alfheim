@@ -153,9 +153,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_trash_64 {
+        internal static System.Drawing.Bitmap icons8_trash_32 {
             get {
-                object obj = ResourceManager.GetObject("icons8_trash_64", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_trash_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

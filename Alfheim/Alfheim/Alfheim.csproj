@@ -78,29 +78,59 @@
     <Compile Include="GUI\ResizableNonBorderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\TransparentBackground.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\TransparentBackground.Designer.cs">
-      <DependentUpon>TransparentBackground.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\UserControls\AddButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\UserControls\AddButton.Designer.cs">
       <DependentUpon>AddButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerList.cs">
+    <Compile Include="GUI\UserControls\ParamEnumEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerList.Designer.cs">
-      <DependentUpon>TriggerList.cs</DependentUpon>
+    <Compile Include="GUI\UserControls\ParamEnumEdit.Designer.cs">
+      <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerListEntry.cs">
+    <Compile Include="GUI\UserControls\ParamDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerListEntry.Designer.cs">
-      <DependentUpon>TriggerListEntry.cs</DependentUpon>
+    <Compile Include="GUI\UserControls\ParamDetail.Designer.cs">
+      <DependentUpon>ParamDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\TaskListEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\TaskListEntry.Designer.cs">
+      <DependentUpon>TaskListEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\TaskList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\TaskList.Designer.cs">
+      <DependentUpon>TaskList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamList.Designer.cs">
+      <DependentUpon>ParamList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamListEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamListEntry.Designer.cs">
+      <DependentUpon>ParamListEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamBoolEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamBoolEdit.Designer.cs">
+      <DependentUpon>ParamBoolEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamStringEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamStringEdit.Designer.cs">
+      <DependentUpon>ParamStringEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,17 +140,32 @@
     <EmbeddedResource Include="GUI\ResizableNonBorderForm.resx">
       <DependentUpon>ResizableNonBorderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\TransparentBackground.resx">
-      <DependentUpon>TransparentBackground.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TriggerList.resx">
-      <DependentUpon>TriggerList.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UserControls\ParamEnumEdit.resx">
+      <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TriggerListEntry.resx">
-      <DependentUpon>TriggerListEntry.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UserControls\ParamDetail.resx">
+      <DependentUpon>ParamDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\TaskListEntry.resx">
+      <DependentUpon>TaskListEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\TaskList.resx">
+      <DependentUpon>TaskList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamList.resx">
+      <DependentUpon>ParamList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamListEntry.resx">
+      <DependentUpon>ParamListEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamBoolEdit.resx">
+      <DependentUpon>ParamBoolEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamStringEdit.resx">
+      <DependentUpon>ParamStringEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -170,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\icons8-trash-32.png" />
     <None Include="Resources\icons8-systemaufgabe-32.png" />
     <None Include="Resources\icons8-menü-32.png" />
     <None Include="Resources\doublearrow_right1.png" />

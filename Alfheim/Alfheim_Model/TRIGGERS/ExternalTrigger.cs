@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.TRIGGERS
 {
-    class ExternalTrigger : Trigger
+    class ExternalTrigger : Param
     {
     }
 }

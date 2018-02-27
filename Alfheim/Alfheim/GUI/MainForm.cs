@@ -26,7 +26,7 @@ namespace Alfheim.GUI
         private void btn_tasks_add_Click(object sender, EventArgs e)
         {
             Tasks.Add(new Task());
-            taskBindingSource.ResetBindings(false);
+            //taskBindingSource.ResetBindings(false);
         }
         
         private void btn_tasks_del_Click(object sender, EventArgs e)
@@ -135,13 +135,17 @@ namespace Alfheim.GUI
         {
             if (pnl_sysmon.Width >= 200)
             {
-                Width -= pnl_sysmon.Width - 16;
+                this.SuspendLayout();
+                Width -= 400 - 16;
                 pnl_sysmon.Width = 16;
+                this.ResumeLayout();
             }
             else
             {
+                this.SuspendLayout();
                 pnl_sysmon.Width = 400;
-                Width += pnl_sysmon.Width - 16;
+                Width += 400 - 16;
+                this.ResumeLayout();
             }
         }
     }

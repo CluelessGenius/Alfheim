@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Alfheim_Model;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class TriggerListEntry : UserControl
+    public partial class ParamListEntry : UserControl
     {
-        public Alfheim_Model.TRIGGERS.Trigger Trigger { get; set; }
+        public Param Param { get; set; }
 
         public Color Backcolor
         {
@@ -20,12 +21,13 @@ namespace Alfheim.GUI.UserControls
             set { this.BackColor = value; }
         }
 
-        public TriggerListEntry(Alfheim_Model.TRIGGERS.Trigger trigger)
+        public ParamListEntry(Param trigger)
         {
             InitializeComponent();
-            Trigger = trigger;
-            lbl_name.Text = Trigger.ToString();
-            tgl_enabled.Checked = Trigger.Enabled;
+            Param = trigger;
+            lbl_name.DataBindings.Add(new Binding("Text",Param,"Name"));
+            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X- lbl_name.Location.X - 30, Height);
+            tgl_enabled.DataBindings.Add(new Binding("Checked",Param,"Enabled"));
             tgl_enabled.BackColor = Color.FromArgb(209, 65, 26);
         }
 
@@ -35,7 +37,7 @@ namespace Alfheim.GUI.UserControls
 
         private void tgl_enabled_CheckedChanged(object sender, EventArgs e)
         {
-            Trigger.Enabled = tgl_enabled.Checked;
+            Param.Enabled = tgl_enabled.Checked;
         }
 
         private void btn_del_Click(object sender, EventArgs e)

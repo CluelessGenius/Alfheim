@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.ACTIONS
 {
-    public class Action
+    public class Action : Param
     {
     }
 }

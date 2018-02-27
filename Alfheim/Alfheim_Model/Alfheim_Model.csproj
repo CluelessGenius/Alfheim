@@ -44,12 +44,12 @@
     <Compile Include="DEVICES\Device.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="Param.cs" />
     <Compile Include="TRIGGERS\AppointmentTrigger.cs" />
     <Compile Include="TRIGGERS\ExternalTrigger.cs" />
     <Compile Include="TRIGGERS\IntervalTirgger.cs" />
     <Compile Include="TRIGGERS\StaticTrigger.cs" />
     <Compile Include="TRIGGERS\Trigger.cs" />
-    <Compile Include="TRIGGERS\TriggerType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

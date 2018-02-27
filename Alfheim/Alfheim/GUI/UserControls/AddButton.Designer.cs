@@ -35,6 +35,7 @@
             // 
             // button1
             // 
+            this.button1.AutoSize = true;
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.BackgroundImage = global::Alfheim.Properties.Resources.icons8_plus_math_64;
@@ -75,6 +76,7 @@
             this.Name = "AddButton";
             this.Size = new System.Drawing.Size(200, 32);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
