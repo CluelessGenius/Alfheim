@@ -15,53 +15,53 @@ namespace Alfheim.GUI.UserControls
 {
     public partial class ParamDetail : UserControl
     {
-        private Param detailedParam;
+        private Trigger detailedParam;
         
         public ParamDetail()
         {
             InitializeComponent();
         }
-
-        public void RefreshData()
-        {
-            pnl_proplist?.Controls?.Clear();
-            lbl_name?.DataBindings?.Clear();
-            lbl_name.Text="";
-            if (detailedParam == null)
-            {
-                return;
-            }
-            else if (detailedParam.Name != null)
-            {
-                lbl_name.DataBindings.Add(new Binding("Text", DetailedParam, "Name"));
-                List<PropertyInfo> props = detailedParam.GetType().GetProperties().Where(p=>p.CustomAttributes.Any(c => c.AttributeType == typeof(DetailOrder))).ToList();
-                props.Sort((x,y) => GetDetailorder(x).CompareTo(GetDetailorder(y)));
-                foreach (PropertyInfo pinf in props)
-                {
-                    if (pinf.PropertyType.Name == nameof(String))
-                    {
-                        var stringedit = new ParamStringEdit(pinf.Name, pinf.GetValue(detailedParam)?.ToString());
-                        stringedit.Width = Width - 20;
-                        stringedit.StringChanged += Edit_ValueChanged;
-                        pnl_proplist.Controls.Add(stringedit);
-                    }
-                    else if (pinf.PropertyType.Name == nameof(Boolean))
-                    {
-                        var booledit = new ParamBoolEdit(pinf.Name, (bool)pinf.GetValue(detailedParam));
-                        booledit.Width = Width - 20;
-                        booledit.BoolChanged += Edit_ValueChanged;
-                        pnl_proplist.Controls.Add(booledit);
-                    }
-                    else if (pinf.PropertyType.IsEnum)
-                    {
-                        var enumedit = new ParamEnumEdit(pinf.Name, pinf.GetValue(detailedParam));
-                        enumedit.Width = Width - 20;
-                        enumedit.EnumChanged += Edit_ValueChanged;
-                        pnl_proplist.Controls.Add(enumedit);
-                    }
-                }
-            }
-        }
+        
+        //public void RefreshData()
+        //{
+        //    pnl_proplist?.Controls?.Clear();
+        //    lbl_name?.DataBindings?.Clear();
+        //    lbl_name.Text="";
+        //    if (detailedParam == null)
+        //    {
+        //        return;
+        //    }
+        //    else if (detailedParam.Name != null)
+        //    {
+        //        lbl_name.DataBindings.Add(new Binding("Text", DetailedParam, "Name"));
+        //        List<PropertyInfo> props = detailedParam.GetType().GetProperties().Where(p=>p.CustomAttributes.Any(c => c.AttributeType == typeof(DetailOrder))).ToList();
+        //        props.Sort((x,y) => GetDetailorder(x).CompareTo(GetDetailorder(y)));
+        //        foreach (PropertyInfo pinf in props)
+        //        {
+        //            if (pinf.PropertyType.Name == nameof(String))
+        //            {
+        //                var stringedit = new ParamStringEdit(pinf.Name, pinf.GetValue(detailedParam)?.ToString());
+        //                stringedit.Width = Width - 20;
+        //                stringedit.StringChanged += Edit_ValueChanged;
+        //                pnl_proplist.Controls.Add(stringedit);
+        //            }
+        //            else if (pinf.PropertyType.Name == nameof(Boolean))
+        //            {
+        //                var booledit = new ParamBoolEdit(pinf.Name, (bool)pinf.GetValue(detailedParam));
+        //                booledit.Width = Width - 20;
+        //                booledit.BoolChanged += Edit_ValueChanged;
+        //                pnl_proplist.Controls.Add(booledit);
+        //            }
+        //            else if (pinf.PropertyType.IsEnum)
+        //            {
+        //                var enumedit = new ParamEnumEdit(pinf.Name, pinf.GetValue(detailedParam));
+        //                enumedit.Width = Width - 20;
+        //                enumedit.EnumChanged += Edit_ValueChanged;
+        //                pnl_proplist.Controls.Add(enumedit);
+        //            }
+        //        }
+        //    }
+        //}
 
         private int GetDetailorder(PropertyInfo p)
         {
@@ -77,13 +77,13 @@ namespace Alfheim.GUI.UserControls
             detailedParam.GetType().GetProperty(e.Property).SetValue(detailedParam, e.NewValue);
         }
 
-        public Param DetailedParam
+        public Trigger DetailedTrigger
         {
             get { return detailedParam; }
             set
             {
                 detailedParam = value;
-                RefreshData();
+                //RefreshData();
             }
         }
     }

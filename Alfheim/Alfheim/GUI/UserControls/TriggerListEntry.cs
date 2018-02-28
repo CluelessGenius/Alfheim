@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Alfheim_Model;
+using Alfheim_Model.TRIGGERS;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class ParamListEntry : UserControl
+    public partial class TriggerListEntry : UserControl
     {
-        public Param Param { get; set; }
+        public Trigger Param { get; set; }
 
         public Color Backcolor
         {
@@ -21,7 +22,7 @@ namespace Alfheim.GUI.UserControls
             set { this.BackColor = value; }
         }
 
-        public ParamListEntry(Param trigger)
+        public TriggerListEntry(Trigger trigger)
         {
             InitializeComponent();
             Param = trigger;
@@ -30,7 +31,7 @@ namespace Alfheim.GUI.UserControls
             tgl_enabled.DataBindings.Add(new Binding("Checked",Param,"Enabled"));
             tgl_enabled.BackColor = Color.FromArgb(209, 65, 26);
         }
-
+        
         public event EventHandler Deleted;
 
         public event EventHandler Clicked;

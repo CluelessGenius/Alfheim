@@ -108,17 +108,17 @@
     <Compile Include="GUI\UserControls\TaskList.Designer.cs">
       <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamList.cs">
+    <Compile Include="GUI\UserControls\TriggerList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamList.Designer.cs">
-      <DependentUpon>ParamList.cs</DependentUpon>
+    <Compile Include="GUI\UserControls\TriggerList.Designer.cs">
+      <DependentUpon>TriggerList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamListEntry.cs">
+    <Compile Include="GUI\UserControls\TriggerListEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamListEntry.Designer.cs">
-      <DependentUpon>ParamListEntry.cs</DependentUpon>
+    <Compile Include="GUI\UserControls\TriggerListEntry.Designer.cs">
+      <DependentUpon>TriggerListEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\ParamBoolEdit.cs">
       <SubType>UserControl</SubType>
@@ -155,11 +155,11 @@
     <EmbeddedResource Include="GUI\UserControls\TaskList.resx">
       <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\ParamList.resx">
-      <DependentUpon>ParamList.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UserControls\TriggerList.resx">
+      <DependentUpon>TriggerList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\ParamListEntry.resx">
-      <DependentUpon>ParamListEntry.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UserControls\TriggerListEntry.resx">
+      <DependentUpon>TriggerListEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\ParamBoolEdit.resx">
       <DependentUpon>ParamBoolEdit.cs</DependentUpon>
@@ -178,6 +178,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Alfheim.GUI.MainForm.datasource" />
     <None Include="Properties\DataSources\Alfheim_Model.Task.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

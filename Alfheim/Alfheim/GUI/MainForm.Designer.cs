@@ -33,15 +33,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.taskList3 = new Alfheim.GUI.UserControls.TaskList();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.triggerList6 = new Alfheim.GUI.UserControls.ParamList();
-            this.triggerList5 = new Alfheim.GUI.UserControls.ParamList();
-            this.triggerList1 = new Alfheim.GUI.UserControls.ParamList();
+            this.trl_triggerlist = new Alfheim.GUI.UserControls.TriggerList();
             this.pnl_sysmon = new System.Windows.Forms.Panel();
             this.pnl_sysmon_expand = new System.Windows.Forms.Panel();
             this.pnl_sidebar = new System.Windows.Forms.Panel();
             this.pnl_sidebar_expand = new System.Windows.Forms.Panel();
-            this.taskList1 = new Alfheim.GUI.UserControls.TaskList();
-            this.taskList2 = new Alfheim.GUI.UserControls.TaskList();
             this.pnl_content.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -83,11 +79,11 @@
             this.taskList3.Location = new System.Drawing.Point(10, 10);
             this.taskList3.Margin = new System.Windows.Forms.Padding(10, 10, 10, 0);
             this.taskList3.Name = "taskList3";
-            this.taskList3.SelectedRowIndex = 0;
             this.taskList3.SelectedTask = null;
             this.taskList3.Size = new System.Drawing.Size(1228, 331);
             this.taskList3.TabIndex = 1;
             this.taskList3.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList3.Tasks")));
+            this.taskList3.SelectionChanged += new System.EventHandler(this.TaskList3_SelectionChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -98,9 +94,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.triggerList6, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.triggerList5, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.triggerList1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.trl_triggerlist, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 341);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -109,56 +103,22 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1248, 347);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // triggerList6
+            // trl_triggerlist
             // 
-            this.triggerList6.BackColor = System.Drawing.Color.Black;
-            this.triggerList6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel1.SetColumnSpan(this.triggerList6, 2);
-            this.triggerList6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.triggerList6.ForeColor = System.Drawing.Color.White;
-            this.triggerList6.Location = new System.Drawing.Point(828, 10);
-            this.triggerList6.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
-            this.triggerList6.Name = "triggerList6";
-            this.triggerList6.Parameters = ((System.Collections.Generic.List<Alfheim_Model.Param>)(resources.GetObject("triggerList6.Parameters")));
-            this.triggerList6.ParamType = Alfheim.GUI.UserControls.ParamListType.ACTIONS;
-            this.triggerList6.SelectedRowIndex = 0;
-            this.triggerList6.SelectedTrigger = null;
-            this.triggerList6.Size = new System.Drawing.Size(410, 327);
-            this.triggerList6.TabIndex = 5;
-            // 
-            // triggerList5
-            // 
-            this.triggerList5.BackColor = System.Drawing.Color.Black;
-            this.triggerList5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel1.SetColumnSpan(this.triggerList5, 2);
-            this.triggerList5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.triggerList5.ForeColor = System.Drawing.Color.White;
-            this.triggerList5.Location = new System.Drawing.Point(424, 10);
-            this.triggerList5.Margin = new System.Windows.Forms.Padding(10);
-            this.triggerList5.Name = "triggerList5";
-            this.triggerList5.Parameters = ((System.Collections.Generic.List<Alfheim_Model.Param>)(resources.GetObject("triggerList5.Parameters")));
-            this.triggerList5.ParamType = Alfheim.GUI.UserControls.ParamListType.DEVICES;
-            this.triggerList5.SelectedRowIndex = 0;
-            this.triggerList5.SelectedTrigger = null;
-            this.triggerList5.Size = new System.Drawing.Size(394, 327);
-            this.triggerList5.TabIndex = 4;
-            // 
-            // triggerList1
-            // 
-            this.triggerList1.BackColor = System.Drawing.Color.Black;
-            this.triggerList1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel1.SetColumnSpan(this.triggerList1, 2);
-            this.triggerList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.triggerList1.ForeColor = System.Drawing.Color.White;
-            this.triggerList1.Location = new System.Drawing.Point(10, 10);
-            this.triggerList1.Margin = new System.Windows.Forms.Padding(10, 10, 0, 10);
-            this.triggerList1.Name = "triggerList1";
-            this.triggerList1.Parameters = ((System.Collections.Generic.List<Alfheim_Model.Param>)(resources.GetObject("triggerList1.Parameters")));
-            this.triggerList1.ParamType = Alfheim.GUI.UserControls.ParamListType.TRIGGER;
-            this.triggerList1.SelectedRowIndex = 0;
-            this.triggerList1.SelectedTrigger = null;
-            this.triggerList1.Size = new System.Drawing.Size(404, 327);
-            this.triggerList1.TabIndex = 0;
+            this.trl_triggerlist.AddingEnabled = false;
+            this.trl_triggerlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.trl_triggerlist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.trl_triggerlist, 2);
+            this.trl_triggerlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trl_triggerlist.ForeColor = System.Drawing.Color.White;
+            this.trl_triggerlist.Location = new System.Drawing.Point(10, 5);
+            this.trl_triggerlist.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
+            this.trl_triggerlist.Name = "trl_triggerlist";
+            this.trl_triggerlist.Triggers = null;
+            this.trl_triggerlist.SelectedRowIndex = 0;
+            this.trl_triggerlist.SelectedTrigger = null;
+            this.trl_triggerlist.Size = new System.Drawing.Size(399, 332);
+            this.trl_triggerlist.TabIndex = 0;
             // 
             // pnl_sysmon
             // 
@@ -205,34 +165,6 @@
             this.pnl_sidebar_expand.TabIndex = 1;
             this.pnl_sidebar_expand.Click += new System.EventHandler(this.pnl_sidebar_expand_Click);
             // 
-            // taskList1
-            // 
-            this.taskList1.BackColor = System.Drawing.Color.Black;
-            this.taskList1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.taskList1.ForeColor = System.Drawing.Color.White;
-            this.taskList1.Location = new System.Drawing.Point(0, 0);
-            this.taskList1.Margin = new System.Windows.Forms.Padding(10);
-            this.taskList1.Name = "taskList1";
-            this.taskList1.SelectedRowIndex = 0;
-            this.taskList1.SelectedTask = null;
-            this.taskList1.Size = new System.Drawing.Size(566, 350);
-            this.taskList1.TabIndex = 0;
-            this.taskList1.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList1.Tasks")));
-            // 
-            // taskList2
-            // 
-            this.taskList2.BackColor = System.Drawing.Color.Black;
-            this.taskList2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.taskList2.ForeColor = System.Drawing.Color.White;
-            this.taskList2.Location = new System.Drawing.Point(0, 0);
-            this.taskList2.Margin = new System.Windows.Forms.Padding(10);
-            this.taskList2.Name = "taskList2";
-            this.taskList2.SelectedRowIndex = 0;
-            this.taskList2.SelectedTask = null;
-            this.taskList2.Size = new System.Drawing.Size(566, 350);
-            this.taskList2.TabIndex = 0;
-            this.taskList2.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList2.Tasks")));
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.Black;
@@ -263,12 +195,8 @@
         private System.Windows.Forms.Panel pnl_sysmon_expand;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private UserControls.ParamList triggerList6;
-        private UserControls.ParamList triggerList5;
-        private UserControls.ParamList triggerList1;
-        private UserControls.TaskList taskList1;
-        private UserControls.TaskList taskList2;
         private UserControls.TaskList taskList3;
+        private UserControls.TriggerList trl_triggerlist;
     }
 }
 

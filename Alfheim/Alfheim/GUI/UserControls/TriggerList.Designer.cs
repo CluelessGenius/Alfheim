@@ -1,6 +1,6 @@
 ﻿namespace Alfheim.GUI.UserControls
 {
-    partial class ParamList
+    partial class TriggerList
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -60,12 +60,12 @@
             this.addButton1.TabIndex = 0;
             this.addButton1.Clicked += new System.EventHandler(this.Addbutton_Clicked);
             // 
-            // pnl_triggers
+            // pnl_parameters
             // 
             this.pnl_parameters.AutoScroll = true;
             this.pnl_parameters.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnl_parameters.Location = new System.Drawing.Point(3, 24);
-            this.pnl_parameters.Name = "pnl_triggers";
+            this.pnl_parameters.Name = "pnl_parameters";
             this.pnl_parameters.Size = new System.Drawing.Size(277, 285);
             this.pnl_parameters.TabIndex = 14;
             this.pnl_parameters.WrapContents = false;
@@ -91,8 +91,9 @@
             // 
             // triggerDetail1
             // 
+            this.triggerDetail1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.triggerDetail1.BackColor = System.Drawing.Color.Transparent;
-            this.triggerDetail1.DetailedParam = null;
+            this.triggerDetail1.DetailedTrigger = null;
             this.triggerDetail1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.triggerDetail1.ForeColor = System.Drawing.Color.White;
             this.triggerDetail1.Location = new System.Drawing.Point(286, 24);
@@ -101,17 +102,17 @@
             this.triggerDetail1.Size = new System.Drawing.Size(277, 323);
             this.triggerDetail1.TabIndex = 15;
             // 
-            // TriggerList
+            // ParamList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_content);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(10);
-            this.Name = "TriggerList";
+            this.Name = "ParamList";
             this.Size = new System.Drawing.Size(566, 350);
             this.pnl_content.ResumeLayout(false);
             this.pnl_content.PerformLayout();

@@ -19,15 +19,63 @@ namespace Alfheim.GUI.UserControls
 
         public List<Alfheim_Model.Task> Tasks
         {
-            get { return tasks; }
+            get
+            {
+                if (tasks == null)
+                    tasks = new List<Alfheim_Model.Task>();
+                return tasks;
+            }
             set
             {
-                if (value != null)
-                {
-                    tasks = value;
-                    RefreshTaskList();
-                }
+                tasks = value;
             }
+        }
+
+        private Alfheim_Model.Task selectedTask;
+
+        public Alfheim_Model.Task SelectedTask
+        {
+            get
+            { 
+                if (selectedTask == null)
+                    selectedTask = new Alfheim_Model.Task();
+                return selectedTask;
+            }
+            set
+            {
+                selectedTask = value;
+            }
+        }
+
+        private int selectedRowIndex = -1;
+
+        public TaskList()
+        {
+            InitializeComponent();
+
+        }
+        
+        private void Addbutton_Clicked(object sender, EventArgs e)
+        {
+            Alfheim_Model.Task newtask = new Alfheim_Model.Task();
+            Tasks.Add(newtask);
+            TaskListEntry entrycontrol = new TaskListEntry(newtask);
+            entrycontrol.Width = pnl_tasks.Width - 30;
+            entrycontrol.Clicked += Entry_Clicked;
+            entrycontrol.Deleted += Entry_Deleted;
+            pnl_tasks.Controls.Add(entrycontrol);
+        }
+
+        private void Entry_Deleted(object sender, EventArgs e)
+        {
+            Tasks.Remove((sender as TaskListEntry).Task);
+            pnl_tasks.Controls.Remove((sender as TriggerListEntry));
+            //triggerDetail1.DetailedParam = null;
+        }
+        
+        public void SetTaskList(ref List<Alfheim_Model.Task> tasklist)
+        {
+            Tasks = tasklist;
         }
 
         public void RefreshTaskList()
@@ -36,55 +84,47 @@ namespace Alfheim.GUI.UserControls
             {
                 return;
             }
+            SuspendLayout();
             pnl_tasks.Controls.Clear();
             List<TaskListEntry> entrycontrols = tasks.Select(t => (new TaskListEntry(t))).ToList();
             entrycontrols.ForEach(e => 
             {
-                e.Width = pnl_tasks.Width - 20;
+                e.Width = pnl_tasks.Width - 30;
                 e.Clicked += Entry_Clicked;
                 e.Deleted += Entry_Deleted;
                 pnl_tasks.Controls.Add(e);
             });
+            selectedRowIndex = -1;
+            SelectedTask = null;
+            if (SelectionChanged != null)
+            {
+                SelectionChanged(this, EventArgs.Empty);
+            }
+            ResumeLayout();
         }
 
 
-        private void Addbutton_Clicked(object sender, EventArgs e)
-        {
-            
-            RefreshTaskList();
-        }
-
-        private void Entry_Deleted(object sender, EventArgs e)
-        {
-            Tasks.Remove((sender as TaskListEntry).Task);
-            pnl_tasks.Controls.Remove((sender as ParamListEntry));
-            //triggerDetail1.DetailedParam = null;
-        }
-
-        public int SelectedRowIndex { get; set; }
-
-        public Alfheim_Model.Task SelectedTask { get; set; }
+        public event EventHandler SelectionChanged;
         
-        public TaskList()
-        {
-            InitializeComponent();
-            tasks = new List<Alfheim_Model.Task>();
-        }
-
         private void Entry_Clicked(object sender, EventArgs e)
         {
-            foreach (TaskListEntry entry in pnl_tasks.Controls)
+            ChangeSelection(pnl_tasks.Controls.IndexOf(sender as TaskListEntry));
+        }
+
+        private void ChangeSelection(int index)
+        {
+            if (index < 0 || index >= Tasks.Count || index == selectedRowIndex)
             {
-                if (entry.BackColor != Color.Transparent)
-                {
-                    entry.BackColor = Color.Transparent;
-                    break;
-                }
+                return;
             }
-            (sender as TaskListEntry).BackColor = Color.FromArgb(209, 65, 26);
-            SelectedRowIndex = pnl_tasks.Controls.IndexOf(sender as TaskListEntry);
-            SelectedTask = Tasks[SelectedRowIndex];
-            //triggerDetail1.DetailedParam = SelectedTrigger;
+            if (selectedRowIndex >= 0)
+            {
+                (pnl_tasks.Controls[selectedRowIndex] as TaskListEntry).BackColor = Color.Transparent;
+            }
+            selectedRowIndex = index;
+            SelectedTask = Tasks[index];
+            (pnl_tasks.Controls[selectedRowIndex] as TaskListEntry).BackColor = Color.FromArgb(100,209, 65, 26);
+            SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         

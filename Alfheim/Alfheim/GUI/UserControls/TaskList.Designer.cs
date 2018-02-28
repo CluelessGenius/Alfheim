@@ -50,6 +50,7 @@
             // pnl_tasks
             // 
             this.pnl_tasks.AutoScroll = true;
+            this.pnl_tasks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_tasks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnl_tasks.Location = new System.Drawing.Point(3, 24);
             this.pnl_tasks.Name = "pnl_tasks";

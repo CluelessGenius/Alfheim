@@ -17,9 +17,11 @@ namespace Alfheim_Model
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public bool Enabled { get; set; }
 
-        public Task(string name = "Dummy Task", bool enabled = true)
+        public Task(string name = "Dummy Task",string description = "", bool enabled = true)
         {
             Name = name;
             Enabled = enabled;

@@ -1,6 +1,6 @@
 ﻿namespace Alfheim.GUI.UserControls
 {
-    partial class ParamListEntry
+    partial class TriggerListEntry
     {
         /// <summary> 
         /// Erforderliche Designervariable.
