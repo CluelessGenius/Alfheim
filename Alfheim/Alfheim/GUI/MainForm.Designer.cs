@@ -1,4 +1,7 @@
-﻿namespace Alfheim.GUI
+﻿using System;
+using System.Windows.Forms;
+
+namespace Alfheim.GUI
 {
     partial class MainForm
     {
@@ -79,7 +82,7 @@
             this.taskList3.Location = new System.Drawing.Point(10, 10);
             this.taskList3.Margin = new System.Windows.Forms.Padding(10, 10, 10, 0);
             this.taskList3.Name = "taskList3";
-            this.taskList3.SelectedTask = null;
+            this.taskList3.SelectedTask = ((Alfheim_Model.Task)(resources.GetObject("taskList3.SelectedTask")));
             this.taskList3.Size = new System.Drawing.Size(1228, 331);
             this.taskList3.TabIndex = 1;
             this.taskList3.Tasks = ((System.Collections.Generic.List<Alfheim_Model.Task>)(resources.GetObject("taskList3.Tasks")));
@@ -114,11 +117,11 @@
             this.trl_triggerlist.Location = new System.Drawing.Point(10, 5);
             this.trl_triggerlist.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
             this.trl_triggerlist.Name = "trl_triggerlist";
-            this.trl_triggerlist.Triggers = null;
             this.trl_triggerlist.SelectedRowIndex = 0;
             this.trl_triggerlist.SelectedTrigger = null;
             this.trl_triggerlist.Size = new System.Drawing.Size(399, 332);
             this.trl_triggerlist.TabIndex = 0;
+            this.trl_triggerlist.Triggers = null;
             // 
             // pnl_sysmon
             // 
@@ -172,10 +175,12 @@
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.pnl_content);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Opacity = 0.92D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ALFHEIM";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Controls.SetChildIndex(this.pnl_content, 0);
             this.pnl_content.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -186,6 +191,7 @@
             this.PerformLayout();
 
         }
+        
 
         #endregion
         private System.Windows.Forms.Panel pnl_content;

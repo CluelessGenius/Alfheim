@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.DEVICES
 {
+    [Serializable]
     public class Device : Param
     {
 

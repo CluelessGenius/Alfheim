@@ -25,6 +25,17 @@ namespace Alfheim_Model
         {
             Name = name;
             Enabled = enabled;
+            Description = description;
+            Triggers = new List<TRIGGERS.Trigger>();
+            Devices = new List<DEVICES.Device>();
+            Actions = new List<ACTIONS.Action>();
+        }
+
+        public Task()
+        {
+            Name = "Dummy Task";
+            Enabled = true;
+            Description = "";
             Triggers = new List<TRIGGERS.Trigger>();
             Devices = new List<DEVICES.Device>();
             Actions = new List<ACTIONS.Action>();

@@ -244,6 +244,10 @@
       <Project>{6d9e1585-278b-4410-bc9d-48ee3c196920}</Project>
       <Name>Alfheim_Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alfheim_ViewModel\Alfheim_ViewModel.csproj">
+      <Project>{98f1cf00-8482-4718-9625-6e49d5625ec8}</Project>
+      <Name>Alfheim_ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -28,6 +28,7 @@ namespace Alfheim.GUI.UserControls
             set
             {
                 tasks = value;
+                RefreshTaskList();
             }
         }
 
@@ -69,7 +70,7 @@ namespace Alfheim.GUI.UserControls
         private void Entry_Deleted(object sender, EventArgs e)
         {
             Tasks.Remove((sender as TaskListEntry).Task);
-            pnl_tasks.Controls.Remove((sender as TriggerListEntry));
+            pnl_tasks.Controls.Remove((sender as TaskListEntry));
             //triggerDetail1.DetailedParam = null;
         }
         
@@ -127,6 +128,15 @@ namespace Alfheim.GUI.UserControls
             SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        
+        private void pnl_tasks_SizeChanged(object sender, EventArgs e)
+        {
+            pnl_tasks.SuspendLayout();
+            foreach (TaskListEntry ctrl in pnl_tasks.Controls)
+            {
+                ctrl.Width = pnl_tasks.Width - 30;
+            }
+            pnl_tasks.ResumeLayout();
+            pnl_tasks.PerformLayout();
+        }
     }
 }

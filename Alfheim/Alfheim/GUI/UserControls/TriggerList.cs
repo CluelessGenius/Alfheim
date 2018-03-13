@@ -23,6 +23,11 @@ namespace Alfheim.GUI.UserControls
             set
             {
                 triggers = value;
+                if (triggers!=null)
+                {
+                    AddingEnabled = true;
+                }
+                RefreshParamList();
             }
         }
 

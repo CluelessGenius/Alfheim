@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.lbl_name = new System.Windows.Forms.Label();
-            this.pnl_tasks = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_content = new System.Windows.Forms.TableLayoutPanel();
             this.addButton1 = new Alfheim.GUI.UserControls.AddButton();
+            this.pnl_tasks = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_content.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,17 +46,6 @@
             this.lbl_name.Size = new System.Drawing.Size(560, 21);
             this.lbl_name.TabIndex = 13;
             this.lbl_name.Text = "TASKS";
-            // 
-            // pnl_tasks
-            // 
-            this.pnl_tasks.AutoScroll = true;
-            this.pnl_tasks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_tasks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.pnl_tasks.Location = new System.Drawing.Point(3, 24);
-            this.pnl_tasks.Name = "pnl_tasks";
-            this.pnl_tasks.Size = new System.Drawing.Size(560, 285);
-            this.pnl_tasks.TabIndex = 14;
-            this.pnl_tasks.WrapContents = false;
             // 
             // pnl_content
             // 
@@ -88,6 +77,22 @@
             this.addButton1.TabIndex = 0;
             this.addButton1.Clicked += new System.EventHandler(this.Addbutton_Clicked);
             // 
+            // pnl_tasks
+            // 
+            this.pnl_tasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_tasks.AutoScroll = true;
+            this.pnl_tasks.AutoSize = true;
+            this.pnl_tasks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnl_tasks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnl_tasks.Location = new System.Drawing.Point(3, 24);
+            this.pnl_tasks.Name = "pnl_tasks";
+            this.pnl_tasks.Size = new System.Drawing.Size(560, 285);
+            this.pnl_tasks.TabIndex = 14;
+            this.pnl_tasks.WrapContents = false;
+            this.pnl_tasks.SizeChanged += new System.EventHandler(this.pnl_tasks_SizeChanged);
+            // 
             // TaskList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,7 +114,7 @@
         #endregion
         private System.Windows.Forms.Label lbl_name;
         private AddButton addButton1;
-        private System.Windows.Forms.FlowLayoutPanel pnl_tasks;
         private System.Windows.Forms.TableLayoutPanel pnl_content;
+        private System.Windows.Forms.FlowLayoutPanel pnl_tasks;
     }
 }

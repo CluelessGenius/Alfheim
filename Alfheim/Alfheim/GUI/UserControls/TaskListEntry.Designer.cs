@@ -57,13 +57,13 @@
             // 
             // tgl_enabled
             // 
-            this.tgl_enabled.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.tgl_enabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.tgl_enabled.Checked = true;
             this.tgl_enabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tgl_enabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tgl_enabled.DisplayStatus = false;
-            this.tgl_enabled.Location = new System.Drawing.Point(1152, 12);
+            this.tgl_enabled.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tgl_enabled.Location = new System.Drawing.Point(1151, 12);
             this.tgl_enabled.Margin = new System.Windows.Forms.Padding(12);
             this.tgl_enabled.Name = "tgl_enabled";
             this.tableLayoutPanel1.SetRowSpan(this.tgl_enabled, 2);
@@ -98,6 +98,8 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 6;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -118,7 +120,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1212, 40);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1211, 40);
             this.tableLayoutPanel1.TabIndex = 14;
             this.tableLayoutPanel1.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
@@ -126,10 +128,10 @@
             // 
             this.pnl_actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_actions.BackColor = System.Drawing.Color.Transparent;
-            this.pnl_actions.Location = new System.Drawing.Point(772, 20);
+            this.pnl_actions.Location = new System.Drawing.Point(771, 20);
             this.pnl_actions.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_actions.Name = "pnl_actions";
-            this.pnl_actions.Size = new System.Drawing.Size(367, 20);
+            this.pnl_actions.Size = new System.Drawing.Size(366, 20);
             this.pnl_actions.TabIndex = 17;
             this.pnl_actions.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
@@ -144,7 +146,7 @@
             this.lbl_description.Location = new System.Drawing.Point(130, 1);
             this.lbl_description.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(1009, 17);
+            this.lbl_description.Size = new System.Drawing.Size(1007, 17);
             this.lbl_description.TabIndex = 14;
             this.lbl_description.Text = "text describing the task and its purpose";
             this.lbl_description.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -169,7 +171,7 @@
             this.pnl_devices.Location = new System.Drawing.Point(405, 20);
             this.pnl_devices.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_devices.Name = "pnl_devices";
-            this.pnl_devices.Size = new System.Drawing.Size(367, 20);
+            this.pnl_devices.Size = new System.Drawing.Size(366, 20);
             this.pnl_devices.TabIndex = 16;
             this.pnl_devices.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
@@ -190,6 +192,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

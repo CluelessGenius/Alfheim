@@ -45,6 +45,8 @@ namespace Alfheim.GUI
         private Button button1;
         private Button btn_form_max;
         private Button button2;
+        private NotifyIcon notifyIcon;
+        private IContainer components;
         const int _ = 10; // you can rename this variable if you like
 
         Rectangle Topcenter { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
@@ -52,11 +54,13 @@ namespace Alfheim.GUI
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResizableNonBorderForm));
             this.lbl_from_name = new System.Windows.Forms.Label();
             this.btn_form_max = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // lbl_from_name
@@ -121,6 +125,12 @@ namespace Alfheim.GUI
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            // 
             // ResizableNonBorderForm
             // 
             this.ClientSize = new System.Drawing.Size(1280, 720);
@@ -138,6 +148,7 @@ namespace Alfheim.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            notifyIcon.Dispose();
             this.Close();
         }
 
@@ -159,8 +170,15 @@ namespace Alfheim.GUI
         private void button2_Click_1(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
         }
-        
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.ShowInTaskbar = true;
+            this.WindowState = FormWindowState.Normal;
+        }
+
         Rectangle Bottomcenter { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
         Rectangle Rightcenter { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
 
