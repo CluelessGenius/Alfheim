@@ -74,7 +74,9 @@ namespace Alfheim.GUI
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             dataManager.SaveTasks(Tasks);
         }
+        
     }
 }

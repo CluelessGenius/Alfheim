@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Alfheim_Model.TRIGGERS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alfheim_Model.TRIGGERS
+namespace Alfheim_Model.DEVICES
 {
     [Serializable]
-    public class StaticTrigger : TriggerBase
+    public class Motherboard : Device
     {
 
     }

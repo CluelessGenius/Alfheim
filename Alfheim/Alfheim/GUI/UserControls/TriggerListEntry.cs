@@ -27,7 +27,7 @@ namespace Alfheim.GUI.UserControls
             InitializeComponent();
             Param = trigger;
             lbl_name.DataBindings.Add(new Binding("Text",Param,"Name"));
-            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X- lbl_name.Location.X - 30, Height);
+            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X- lbl_name.Location.X, Height);
             tgl_enabled.DataBindings.Add(new Binding("Checked",Param,"Enabled"));
             tgl_enabled.BackColor = Color.FromArgb(209, 65, 26);
         }
@@ -43,18 +43,10 @@ namespace Alfheim.GUI.UserControls
 
         private void btn_del_Click(object sender, EventArgs e)
         {
-            if (Clicked != null)
-                Clicked(this, e);
             if (Deleted != null)
                 Deleted(this, e);
         }
-
-        private void tgl_enabled_Click(object sender, EventArgs e)
-        {
-            if (Clicked != null)
-                Clicked(this, e);
-        }
-
+        
         private void lbl_name_Click(object sender, EventArgs e)
         {
             if (Clicked != null)
@@ -65,6 +57,11 @@ namespace Alfheim.GUI.UserControls
         {
             if (Clicked != null)
                 Clicked(this, e);
+        }
+
+        private void TriggerListEntry_SizeChanged(object sender, EventArgs e)
+        {
+            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
         }
     }
 }

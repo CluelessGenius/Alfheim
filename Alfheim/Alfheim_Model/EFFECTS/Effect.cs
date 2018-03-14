@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alfheim_Model.TRIGGERS
+namespace Alfheim_Model.EFFECTS
 {
-    class IntervalTirgger : Param
+    [Serializable]
+    public class Effect
     {
+        public string Name { get; set; }
     }
 }

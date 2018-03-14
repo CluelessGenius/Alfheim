@@ -31,21 +31,31 @@ namespace Alfheim.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnl_content = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.taskList3 = new Alfheim.GUI.UserControls.TaskList();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.trl_triggerlist = new Alfheim.GUI.UserControls.TriggerList();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.pnl_sysmon = new System.Windows.Forms.Panel();
             this.pnl_sysmon_expand = new System.Windows.Forms.Panel();
             this.pnl_sidebar = new System.Windows.Forms.Panel();
             this.pnl_sidebar_expand = new System.Windows.Forms.Panel();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnl_content.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.metroTabControl1.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
             this.pnl_sysmon.SuspendLayout();
             this.pnl_sidebar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_content
@@ -97,31 +107,98 @@ namespace Alfheim.GUI
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.trl_triggerlist, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 341);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1248, 347);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 6);
+            this.panel1.Controls.Add(this.metroTabControl1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(10, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1228, 332);
+            this.panel1.TabIndex = 2;
+            // 
+            // metroTabControl1
+            // 
+            this.metroTabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroTabControl1.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
+            this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.metroTabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.metroTabControl1.Name = "metroTabControl1";
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(1226, 330);
+            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Orange;
+            this.metroTabControl1.TabIndex = 1;
+            this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabControl1.UseSelectable = true;
+            // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.metroTabPage1.BackgroundImage = global::Alfheim.Properties.Resources.bg;
+            this.metroTabPage1.Controls.Add(this.trl_triggerlist);
+            this.metroTabPage1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 41);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(1218, 285);
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = "TRIGGERS";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
             // trl_triggerlist
             // 
             this.trl_triggerlist.AddingEnabled = false;
             this.trl_triggerlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.trl_triggerlist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel1.SetColumnSpan(this.trl_triggerlist, 2);
-            this.trl_triggerlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trl_triggerlist.Dock = System.Windows.Forms.DockStyle.Left;
             this.trl_triggerlist.ForeColor = System.Drawing.Color.White;
-            this.trl_triggerlist.Location = new System.Drawing.Point(10, 5);
+            this.trl_triggerlist.Location = new System.Drawing.Point(0, 0);
             this.trl_triggerlist.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
             this.trl_triggerlist.Name = "trl_triggerlist";
-            this.trl_triggerlist.SelectedRowIndex = 0;
+            this.trl_triggerlist.SelectedRowIndex = -1;
             this.trl_triggerlist.SelectedTrigger = null;
-            this.trl_triggerlist.Size = new System.Drawing.Size(399, 332);
+            this.trl_triggerlist.Size = new System.Drawing.Size(604, 285);
             this.trl_triggerlist.TabIndex = 0;
             this.trl_triggerlist.Triggers = null;
+            // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.metroTabPage2.BackgroundImage = global::Alfheim.Properties.Resources.bg;
+            this.metroTabPage2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(1218, 288);
+            this.metroTabPage2.Style = MetroFramework.MetroColorStyle.White;
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "ACTIONS";
+            this.metroTabPage2.UseCustomBackColor = true;
+            this.metroTabPage2.UseCustomForeColor = true;
+            this.metroTabPage2.UseStyleColors = true;
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
             // pnl_sysmon
             // 
@@ -168,6 +245,10 @@ namespace Alfheim.GUI
             this.pnl_sidebar_expand.TabIndex = 1;
             this.pnl_sidebar_expand.Click += new System.EventHandler(this.pnl_sidebar_expand_Click);
             // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = null;
+            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.Black;
@@ -185,8 +266,12 @@ namespace Alfheim.GUI
             this.pnl_content.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.metroTabControl1.ResumeLayout(false);
+            this.metroTabPage1.ResumeLayout(false);
             this.pnl_sysmon.ResumeLayout(false);
             this.pnl_sidebar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +288,11 @@ namespace Alfheim.GUI
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private UserControls.TaskList taskList3;
         private UserControls.TriggerList trl_triggerlist;
+        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private Panel panel1;
     }
 }
 

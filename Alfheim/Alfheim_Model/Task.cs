@@ -10,16 +10,55 @@ namespace Alfheim_Model
     public class Task
     {
         public List<TRIGGERS.Trigger> Triggers { get; set; }
-
-        public List<DEVICES.Device> Devices { get; set; }
-
+        
         public List<ACTIONS.Action> Actions { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public bool Enabled { get; set; }
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set
+            {
+                active = value;
+                if (active)
+                {
+                    DoAction();
+                }
+            }
+        }
+
+        public void DoAction()
+        {
+
+        }
+
+        private bool enabled;
+
+        public bool Enabled
+        {
+            get { return enabled; }
+            set
+            {
+                enabled = value;
+                if (enabled)
+                {
+                    ActivateTriggers();
+                }
+            }
+        }
+        
+        public void ActivateTriggers()
+        {
+            if (Triggers!=null && Triggers.Any(t=>t.Enabled&&t.TriggerType==TRIGGERS.TriggerType.Static))
+            {
+                Active = true;
+            }
+        }
 
         public Task(string name = "Dummy Task",string description = "", bool enabled = true)
         {
@@ -27,7 +66,6 @@ namespace Alfheim_Model
             Enabled = enabled;
             Description = description;
             Triggers = new List<TRIGGERS.Trigger>();
-            Devices = new List<DEVICES.Device>();
             Actions = new List<ACTIONS.Action>();
         }
 
@@ -37,7 +75,6 @@ namespace Alfheim_Model
             Enabled = true;
             Description = "";
             Triggers = new List<TRIGGERS.Trigger>();
-            Devices = new List<DEVICES.Device>();
             Actions = new List<ACTIONS.Action>();
         }
     }

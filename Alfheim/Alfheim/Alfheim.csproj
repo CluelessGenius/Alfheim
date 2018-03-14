@@ -84,17 +84,29 @@
     <Compile Include="GUI\UserControls\AddButton.Designer.cs">
       <DependentUpon>AddButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\UserControls\ParamDateTimeEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamDateTimeEdit.Designer.cs">
+      <DependentUpon>ParamDateTimeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamNumericEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ParamNumericEdit.Designer.cs">
+      <DependentUpon>ParamNumericEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\UserControls\ParamEnumEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\UserControls\ParamEnumEdit.Designer.cs">
       <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamDetail.cs">
+    <Compile Include="GUI\UserControls\TriggerDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\ParamDetail.Designer.cs">
-      <DependentUpon>ParamDetail.cs</DependentUpon>
+    <Compile Include="GUI\UserControls\TriggerDetail.Designer.cs">
+      <DependentUpon>TriggerDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\TaskListEntry.cs">
       <SubType>UserControl</SubType>
@@ -143,11 +155,17 @@
     <EmbeddedResource Include="GUI\UserControls\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamDateTimeEdit.resx">
+      <DependentUpon>ParamDateTimeEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\ParamNumericEdit.resx">
+      <DependentUpon>ParamNumericEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\ParamEnumEdit.resx">
       <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\ParamDetail.resx">
-      <DependentUpon>ParamDetail.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UserControls\TriggerDetail.resx">
+      <DependentUpon>TriggerDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\TaskListEntry.resx">
       <DependentUpon>TaskListEntry.cs</DependentUpon>

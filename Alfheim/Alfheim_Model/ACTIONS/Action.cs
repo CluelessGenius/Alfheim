@@ -9,5 +9,8 @@ namespace Alfheim_Model.ACTIONS
     [Serializable]
     public class Action : Param
     {
+        public DEVICES.Device Device { get; set; }
+
+        public EFFECTS.Effect Effect { get; set; }
     }
 }

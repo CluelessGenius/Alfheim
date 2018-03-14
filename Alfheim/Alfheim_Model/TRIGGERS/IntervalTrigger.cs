@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 namespace Alfheim_Model.TRIGGERS
 {
     [Serializable]
-    public class AppointmentTrigger : TriggerBase
+    public class IntervalTrigger : TriggerBase
     {
-        private DateTime appointment = DateTime.Now;
+        private long interval;
 
         [DetailOrder(Position = 1)]
-        public DateTime Appointment
+        public long Interval
         {
             get
             {
-                return appointment;
+                return interval;
             }
 
             set
             {
-                appointment = value;
+                interval = value;
             }
         }
     }

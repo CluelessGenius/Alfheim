@@ -1,6 +1,6 @@
 ﻿namespace Alfheim.GUI.UserControls
 {
-    partial class ParamDetail
+    partial class TriggerDetail
     {
         /// <summary> 
         /// Erforderliche Designervariable.

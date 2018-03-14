@@ -72,7 +72,6 @@
             this.tgl_enabled.TabIndex = 13;
             this.tgl_enabled.Text = "An";
             this.tgl_enabled.UseSelectable = true;
-            this.tgl_enabled.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
             // btn_del
             // 

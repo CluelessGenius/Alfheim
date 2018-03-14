@@ -37,6 +37,7 @@
             // 
             this.lbl_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_name.AutoEllipsis = true;
             this.lbl_name.AutoSize = true;
             this.lbl_name.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_name.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -65,7 +66,6 @@
             this.tgl_enabled.Text = "An";
             this.tgl_enabled.UseSelectable = true;
             this.tgl_enabled.CheckedChanged += new System.EventHandler(this.tgl_enabled_CheckedChanged);
-            this.tgl_enabled.Click += new System.EventHandler(this.tgl_enabled_Click);
             // 
             // btn_del
             // 
@@ -86,7 +86,7 @@
             this.btn_del.UseVisualStyleBackColor = false;
             this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
             // 
-            // ParamListEntry
+            // TriggerListEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,9 +98,10 @@
             this.Controls.Add(this.btn_del);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ParamListEntry";
+            this.Name = "TriggerListEntry";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Size = new System.Drawing.Size(206, 22);
+            this.SizeChanged += new System.EventHandler(this.TriggerListEntry_SizeChanged);
             this.Click += new System.EventHandler(this.TriggerListEntry_Click);
             this.ResumeLayout(false);
             this.PerformLayout();

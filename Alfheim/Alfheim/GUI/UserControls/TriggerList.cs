@@ -27,6 +27,7 @@ namespace Alfheim.GUI.UserControls
                 {
                     AddingEnabled = true;
                 }
+                SelectedRowIndex = -1;
                 RefreshParamList();
             }
         }
@@ -70,21 +71,25 @@ namespace Alfheim.GUI.UserControls
             List<TriggerListEntry> entrycontrols = triggers.Select(t => (new TriggerListEntry(t))).ToList();
             entrycontrols.ForEach(e => 
             {
-                e.Width = pnl_parameters.Width - 20;
+                e.Width = pnl_parameters.Width - 24;
                 e.Clicked += Entry_Clicked;
                 e.Deleted += Entry_Deleted;
                 pnl_parameters.Controls.Add(e);
             });
-            if (SelectedTrigger == null)
+            try
             {
+                triggerDetail1.DetailedTrigger = SelectedTrigger = Triggers[SelectedRowIndex];    
+            }
+            catch (Exception)
+            {
+                triggerDetail1.DetailedTrigger = SelectedTrigger = null;
                 return;
             }
-            triggerDetail1.DetailedTrigger = SelectedTrigger;
         }
         
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
-            Triggers.Add(new Trigger() { Name = "Dummy Trigger Static" });
+            Triggers.Add(new Trigger() { Name = "Dummy Trigger Static" , TriggerType = TriggerType.Static });
             RefreshParamList();
         }
 

@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,15 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACTIONS\Action.cs" />
+    <Compile Include="DEVICES\LED.cs" />
+    <Compile Include="DEVICES\Motherboard.cs" />
     <Compile Include="DEVICES\Device.cs" />
+    <Compile Include="EFFECTS\Effect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="TRIGGERS\AppointmentTrigger.cs" />
     <Compile Include="TRIGGERS\ExternalTrigger.cs" />
-    <Compile Include="TRIGGERS\IntervalTirgger.cs" />
+    <Compile Include="TRIGGERS\IntervalTrigger.cs" />
     <Compile Include="TRIGGERS\StaticTrigger.cs" />
     <Compile Include="TRIGGERS\Trigger.cs" />
+    <Compile Include="TRIGGERS\TriggerBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

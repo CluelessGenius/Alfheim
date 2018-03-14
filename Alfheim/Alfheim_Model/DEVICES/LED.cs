@@ -1,27 +1,26 @@
-﻿using Alfheim_Model.TRIGGERS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Alfheim_Model.DEVICES
 {
-    [Serializable]
-    public class Device : Param
+    class LED : Param
     {
-        private List<LED> lEDs;
+        private Color color;
 
-        internal List<LED> LEDs
+        public Color Color
         {
             get
             {
-                return lEDs;
+                return color;
             }
 
             set
             {
-                lEDs = value;
+                color = value;
             }
         }
     }
