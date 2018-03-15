@@ -89,10 +89,10 @@ namespace Alfheim.GUI.UserControls
             }
             else if (p.PropertyType == typeof(DateTime))
             {
-                var datetimeedit = new ParamDateTimeEdit(proppath, (DateTime)p.GetValue(valueobject));
-                datetimeedit.Width = Width - 30;
-                datetimeedit.DateTimeChanged += Edit_ValueChanged;
-                pnl_proplist.Controls.Add(datetimeedit);
+                var dateedit = new ParamDateTimeEdit(proppath, (DateTime)p.GetValue(valueobject));
+                dateedit.Width = Width - 30;
+                dateedit.DateTimeChanged += Edit_ValueChanged;
+                pnl_proplist.Controls.Add(dateedit);
                 return true;
             }
             else

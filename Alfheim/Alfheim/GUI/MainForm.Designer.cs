@@ -166,7 +166,7 @@ namespace Alfheim.GUI
             // 
             // trl_triggerlist
             // 
-            this.trl_triggerlist.AddingEnabled = false;
+            this.trl_triggerlist.EnablingEnabled = false;
             this.trl_triggerlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.trl_triggerlist.Dock = System.Windows.Forms.DockStyle.Left;
             this.trl_triggerlist.ForeColor = System.Drawing.Color.White;

@@ -18,13 +18,13 @@ namespace Alfheim.GUI.UserControls
         {
             InitializeComponent();
             propertyname = name;
-            dateTimePicker1.CustomFormat = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FullDateTimePattern;
             dateTimePicker1.Value = value;
+            dateTimePicker2.Value = value;
         }
 
         public event EventHandler<ValuechangedEventArgs> DateTimeChanged;
         
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if (DateTimeChanged == null)
             {
@@ -32,11 +32,12 @@ namespace Alfheim.GUI.UserControls
             }
             DateTimeChanged(this, new ValuechangedEventArgs()
             {
-                NewValue = (sender as DateTimePicker).Value,
+                NewValue = dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay,
                 OldValue = null,
                 Property = propertyname
             });
         }
+        
     }
     
 }

@@ -54,8 +54,6 @@
             this.tgl_enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tgl_enabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.tgl_enabled.Checked = true;
-            this.tgl_enabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tgl_enabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tgl_enabled.DisplayStatus = false;
             this.tgl_enabled.Location = new System.Drawing.Point(173, 5);
@@ -63,9 +61,9 @@
             this.tgl_enabled.Size = new System.Drawing.Size(30, 12);
             this.tgl_enabled.Style = MetroFramework.MetroColorStyle.Orange;
             this.tgl_enabled.TabIndex = 13;
-            this.tgl_enabled.Text = "An";
+            this.tgl_enabled.Text = "Aus";
             this.tgl_enabled.UseSelectable = true;
-            this.tgl_enabled.CheckedChanged += new System.EventHandler(this.tgl_enabled_CheckedChanged);
+            this.tgl_enabled.Click += new System.EventHandler(this.tgl_enabled_Click);
             // 
             // btn_del
             // 

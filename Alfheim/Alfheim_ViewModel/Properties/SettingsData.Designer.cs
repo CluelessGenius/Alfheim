@@ -34,5 +34,41 @@ namespace Alfheim_ViewModel.Properties {
                 this["Tasks"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Triggers {
+            get {
+                return ((string)(this["Triggers"]));
+            }
+            set {
+                this["Triggers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Devices {
+            get {
+                return ((string)(this["Devices"]));
+            }
+            set {
+                this["Devices"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Effects {
+            get {
+                return ((string)(this["Effects"]));
+            }
+            set {
+                this["Effects"] = value;
+            }
+        }
     }
 }

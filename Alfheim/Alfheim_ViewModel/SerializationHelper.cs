@@ -1,4 +1,5 @@
 ﻿using Alfheim_Model;
+using Alfheim_Model.TRIGGERS;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,15 +29,15 @@ namespace Alfheim_ViewModel
             return xml;
         }
 
-        public List<Task> DeSerialize(string xmltasks)
+        public void DeSerialize(string xmltasks, out List<Task> list)
         {
             if (String.IsNullOrEmpty(xmltasks))
             {
-                return new List<Task>();
+                list = new List<Task>();
+                return;
             }
             XmlSerializer serializer = new XmlSerializer(typeof(List<Task>));
-            List<Task> list;
-
+            
             using (var sww = new StringReader(xmltasks))
             {
                 using (XmlReader reader = XmlReader.Create(sww))
@@ -45,8 +46,43 @@ namespace Alfheim_ViewModel
                     list = serializer.Deserialize(reader) as List<Task>;
                 }
             }
+        }
 
-            return list;
+        public string Serialize(List<Trigger> triggers)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Trigger>));
+            var xml = "";
+
+            using (var sww = new StringWriter())
+            {
+                using (XmlWriter writer = XmlWriter.Create(sww))
+                {
+                    serializer.Serialize(writer, triggers);
+                    xml = sww.ToString(); // Your XML
+                }
+            }
+
+            return xml;
+        }
+
+        public void DeSerialize(string xmltriggers, out List<Trigger> list)
+        {
+            if (String.IsNullOrEmpty(xmltriggers))
+            {
+                list = new List<Trigger>();
+                return;
+            }
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Trigger>));
+            
+
+            using (var sww = new StringReader(xmltriggers))
+            {
+                using (XmlReader reader = XmlReader.Create(sww))
+                {
+
+                    list = serializer.Deserialize(reader) as List<Trigger>;
+                }
+            }
         }
     }
 }

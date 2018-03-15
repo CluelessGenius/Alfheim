@@ -38,8 +38,6 @@ namespace Alfheim.GUI.UserControls
         {
             get
             { 
-                if (selectedTask == null)
-                    selectedTask = new Alfheim_Model.Task();
                 return selectedTask;
             }
             set
@@ -69,9 +67,18 @@ namespace Alfheim.GUI.UserControls
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
+            if (selectedRowIndex >= 0)
+            {
+                (pnl_tasks.Controls[selectedRowIndex] as TaskListEntry).BackColor = Color.Transparent;
+            }
             Tasks.Remove((sender as TaskListEntry).Task);
             pnl_tasks.Controls.Remove((sender as TaskListEntry));
-            //triggerDetail1.DetailedParam = null;
+            selectedRowIndex = -1;
+            SelectedTask = null;
+            if (SelectionChanged != null)
+            {
+                SelectionChanged(this, EventArgs.Empty);
+            }
         }
         
         public void SetTaskList(ref List<Alfheim_Model.Task> tasklist)

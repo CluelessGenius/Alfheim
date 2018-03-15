@@ -7,11 +7,49 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.TRIGGERS
 {
+    public enum TriggerType
+    {
+        Static,
+        Interval,
+        External,
+        Appointment
+    }
+
     [Serializable]
     public class Trigger : Param
     {
-        
+        private long iD;
+
+        private TriggerBase trig;
+
         private TriggerType triggerType;
+
+        public long ID
+        {
+            get
+            {
+                return iD;
+            }
+
+            set
+            {
+                iD = value;
+            }
+        }
+
+        [DetailOrder(Position = 2)]
+        public TriggerBase Trig
+        {
+            get
+            {
+                return trig;
+            }
+
+            set
+            {
+                trig = value;
+            }
+        }
 
         [DetailOrder(Position = 1)]
         public TriggerType TriggerType
@@ -43,30 +81,5 @@ namespace Alfheim_Model.TRIGGERS
                 }
             }
         }
-
-        [DetailOrder(Position = 2)]
-        public TriggerBase Trig
-        {
-            get
-            {
-                return trig;
-            }
-
-            set
-            {
-                trig = value;
-            }
-        }
-
-        private TriggerBase trig;
     }
-
-    public enum TriggerType
-    {
-        Static,
-        Interval,
-        External,
-        Appointment
-    }
-
 }

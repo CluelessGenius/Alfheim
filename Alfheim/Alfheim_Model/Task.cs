@@ -9,7 +9,7 @@ namespace Alfheim_Model
     [Serializable]
     public class Task
     {
-        public List<TRIGGERS.Trigger> Triggers { get; set; }
+        public List<long> Triggers { get; set; }
         
         public List<ACTIONS.Action> Actions { get; set; }
 
@@ -45,27 +45,27 @@ namespace Alfheim_Model
             set
             {
                 enabled = value;
-                if (enabled)
-                {
-                    ActivateTriggers();
-                }
+                //if (enabled)
+                //{
+                //    ActivateTriggers();
+                //}
             }
         }
         
-        public void ActivateTriggers()
-        {
-            if (Triggers!=null && Triggers.Any(t=>t.Enabled&&t.TriggerType==TRIGGERS.TriggerType.Static))
-            {
-                Active = true;
-            }
-        }
+        //public void ActivateTriggers()
+        //{
+        //    if (Triggers!=null && Triggers.Any(t=>t.Enabled&&t.TriggerType==TRIGGERS.TriggerType.Static))
+        //    {
+        //        Active = true;
+        //    }
+        //}
 
         public Task(string name = "Dummy Task",string description = "", bool enabled = true)
         {
             Name = name;
             Enabled = enabled;
             Description = description;
-            Triggers = new List<TRIGGERS.Trigger>();
+            Triggers = new List<long>();
             Actions = new List<ACTIONS.Action>();
         }
 
@@ -74,7 +74,7 @@ namespace Alfheim_Model
             Name = "Dummy Task";
             Enabled = true;
             Description = "";
-            Triggers = new List<TRIGGERS.Trigger>();
+            Triggers = new List<long>();
             Actions = new List<ACTIONS.Action>();
         }
     }

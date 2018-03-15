@@ -1,4 +1,5 @@
 ﻿using Alfheim_Model;
+using Alfheim_Model.TRIGGERS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,23 @@ namespace Alfheim_ViewModel
 
         public List<Task> LoadTasks()
         {
-            List<Task> tasks = serializationhelper.DeSerialize(Properties.SettingsData.Default.Tasks);
+            List<Task> tasks;
+            serializationhelper.DeSerialize(Properties.SettingsData.Default.Tasks,out tasks);
             return tasks;
+        }
+
+        public void SaveTriggers(List<Trigger> triggers)
+        {
+            string xmltriggers = serializationhelper.Serialize(triggers);
+            Properties.SettingsData.Default.Triggers = xmltriggers;
+            Properties.SettingsData.Default.Save();
+        }
+
+        public List<Trigger> LoadTriggers()
+        {
+            List<Trigger> triggers;
+            serializationhelper.DeSerialize(Properties.SettingsData.Default.Triggers, out triggers);
+            return triggers;
         }
 
     }

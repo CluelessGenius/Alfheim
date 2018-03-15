@@ -117,27 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="taskList3.SelectedTask" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAERBbGZoZWltX01vZGVsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1
-        cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAwDAAAAkwFBbGZoZWltX01vZGVsLCBWZXJzaW9u
-        PTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbF1dLCBtc2NvcmxpYiwg
-        VmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkz
-        NGUwODkFAQAAABJBbGZoZWltX01vZGVsLlRhc2sGAAAAGTxUcmlnZ2Vycz5rX19CYWNraW5nRmllbGQY
-        PEFjdGlvbnM+a19fQmFja2luZ0ZpZWxkFTxOYW1lPmtfX0JhY2tpbmdGaWVsZBw8RGVzY3JpcHRpb24+
-        a19fQmFja2luZ0ZpZWxkBmFjdGl2ZQdlbmFibGVkBAQBAQAAQVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5l
-        cmljLkxpc3RgMVtbQWxmaGVpbV9Nb2RlbC5UUklHR0VSUy5UcmlnZ2VyAwAAAD9TeXN0ZW0uQ29sbGVj
-        dGlvbnMuR2VuZXJpYy5MaXN0YDFbW0FsZmhlaW1fTW9kZWwuQUNUSU9OUy5BY3Rpb24DAAAAAQECAAAA
-        CQQAAAAJBQAAAAYGAAAACkR1bW15IFRhc2sGBwAAAAAAAQUEAAAAQVN5c3RlbS5Db2xsZWN0aW9ucy5H
-        ZW5lcmljLkxpc3RgMVtbQWxmaGVpbV9Nb2RlbC5UUklHR0VSUy5UcmlnZ2VyAwAAAAZfaXRlbXMFX3Np
-        emUIX3ZlcnNpb24EAAAgQWxmaGVpbV9Nb2RlbC5UUklHR0VSUy5UcmlnZ2VyW10CAAAACAgDAAAACQgA
-        AAAAAAAAAAAAAAUFAAAAP1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbQWxmaGVpbV9N
-        b2RlbC5BQ1RJT05TLkFjdGlvbgMAAAAGX2l0ZW1zBV9zaXplCF92ZXJzaW9uBAAAHkFsZmhlaW1fTW9k
-        ZWwuQUNUSU9OUy5BY3Rpb25bXQIAAAAICAMAAAAJCQAAAAAAAAAAAAAABwgAAAAAAQAAAAAAAAAEHkFs
-        ZmhlaW1fTW9kZWwuVFJJR0dFUlMuVHJpZ2dlcgIAAAAHCQAAAAABAAAAAAAAAAQcQWxmaGVpbV9Nb2Rl
-        bC5BQ1RJT05TLkFjdGlvbgIAAAAL
-</value>
-  </data>
+  
   <data name="taskList3.Tasks" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAJMBQWxmaGVpbV9Nb2RlbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0

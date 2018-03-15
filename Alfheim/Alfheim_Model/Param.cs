@@ -22,19 +22,7 @@ namespace Alfheim_Model
                 OnPropertyChanged("Name");
             }
         }
-
-        private bool enabled;
         
-        public bool Enabled
-        {
-            get { return enabled; }
-            set
-            {
-                enabled = value;
-                OnPropertyChanged("Enabled");
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string property)
