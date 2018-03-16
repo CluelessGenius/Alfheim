@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model
 {
-    [Serializable]
     public class Param : INotifyPropertyChanged
     {
         private string name;

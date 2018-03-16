@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.TRIGGERS
 {
-    [Serializable]
-    public class AppointmentTrigger : TriggerBase
+    [JsonObject]
+    public class AppointmentTrigger : ITrigger
     {
         private DateTime appointment = DateTime.Now;
 
         [DetailOrder(Position = 1)]
+        [JsonProperty("Appointment")]
         public DateTime Appointment
         {
             get

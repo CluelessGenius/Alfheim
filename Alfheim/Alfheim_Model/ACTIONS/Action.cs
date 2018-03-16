@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model.ACTIONS
 {
-    [Serializable]
     public class Action : Param
     {
         public DEVICES.Device Device { get; set; }

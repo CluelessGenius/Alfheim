@@ -12,8 +12,8 @@ namespace Alfheim_ViewModel.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
-    internal sealed partial class SettingsData : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+    public sealed partial class SettingsData : global::System.Configuration.ApplicationSettingsBase {
         
         private static SettingsData defaultInstance = ((SettingsData)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new SettingsData())));
         

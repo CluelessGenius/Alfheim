@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Alfheim_Model.TRIGGERS
 {
@@ -14,16 +16,17 @@ namespace Alfheim_Model.TRIGGERS
         External,
         Appointment
     }
-
-    [Serializable]
+    
+    [JsonObject]
     public class Trigger : Param
     {
         private long iD;
 
-        private TriggerBase trig;
+        private ITrigger trig;
 
         private TriggerType triggerType;
 
+        [JsonProperty("ID")]
         public long ID
         {
             get
@@ -36,9 +39,10 @@ namespace Alfheim_Model.TRIGGERS
                 iD = value;
             }
         }
-
+        
         [DetailOrder(Position = 2)]
-        public TriggerBase Trig
+        [JsonProperty("Trig")]
+        public ITrigger Trig
         {
             get
             {
@@ -52,6 +56,7 @@ namespace Alfheim_Model.TRIGGERS
         }
 
         [DetailOrder(Position = 1)]
+        [JsonProperty("TriggerType")]
         public TriggerType TriggerType
         {
             get
