@@ -102,34 +102,52 @@
     <Compile Include="GUI\UserControls\ParamEnumEdit.Designer.cs">
       <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerDetail.cs">
+    <Compile Include="GUI\UserControls\Effects\EffectDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerDetail.Designer.cs">
+    <Compile Include="GUI\UserControls\Effects\EffectDetail.Designer.cs">
+      <DependentUpon>EffectDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Effects\EffectList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Effects\EffectList.Designer.cs">
+      <DependentUpon>EffectList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Effects\EffectListEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Effects\EffectListEntry.Designer.cs">
+      <DependentUpon>EffectListEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Trigger\TriggerDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Trigger\TriggerDetail.Designer.cs">
       <DependentUpon>TriggerDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TaskListEntry.cs">
+    <Compile Include="GUI\UserControls\Tasks\TaskListEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TaskListEntry.Designer.cs">
+    <Compile Include="GUI\UserControls\Tasks\TaskListEntry.Designer.cs">
       <DependentUpon>TaskListEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TaskList.cs">
+    <Compile Include="GUI\UserControls\Tasks\TaskList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TaskList.Designer.cs">
+    <Compile Include="GUI\UserControls\Tasks\TaskList.Designer.cs">
       <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerList.cs">
+    <Compile Include="GUI\UserControls\Trigger\TriggerList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerList.Designer.cs">
+    <Compile Include="GUI\UserControls\Trigger\TriggerList.Designer.cs">
       <DependentUpon>TriggerList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerListEntry.cs">
+    <Compile Include="GUI\UserControls\Trigger\TriggerListEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\TriggerListEntry.Designer.cs">
+    <Compile Include="GUI\UserControls\Trigger\TriggerListEntry.Designer.cs">
       <DependentUpon>TriggerListEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\ParamBoolEdit.cs">
@@ -144,6 +162,7 @@
     <Compile Include="GUI\UserControls\ParamStringEdit.Designer.cs">
       <DependentUpon>ParamStringEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\UserControls\ValuechangedEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\MainForm.resx">
@@ -165,19 +184,28 @@
     <EmbeddedResource Include="GUI\UserControls\ParamEnumEdit.resx">
       <DependentUpon>ParamEnumEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TriggerDetail.resx">
+    <EmbeddedResource Include="GUI\UserControls\Effects\EffectDetail.resx">
+      <DependentUpon>EffectDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Effects\EffectList.resx">
+      <DependentUpon>EffectList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Effects\EffectListEntry.resx">
+      <DependentUpon>EffectListEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Trigger\TriggerDetail.resx">
       <DependentUpon>TriggerDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TaskListEntry.resx">
+    <EmbeddedResource Include="GUI\UserControls\Tasks\TaskListEntry.resx">
       <DependentUpon>TaskListEntry.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TaskList.resx">
+    <EmbeddedResource Include="GUI\UserControls\Tasks\TaskList.resx">
       <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TriggerList.resx">
+    <EmbeddedResource Include="GUI\UserControls\Trigger\TriggerList.resx">
       <DependentUpon>TriggerList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\UserControls\TriggerListEntry.resx">
+    <EmbeddedResource Include="GUI\UserControls\Trigger\TriggerListEntry.resx">
       <DependentUpon>TriggerListEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\ParamBoolEdit.resx">

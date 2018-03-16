@@ -12,12 +12,15 @@ namespace Alfheim.GUI.UserControls
 {
     public partial class ParamBoolEdit : UserControl
     {
-        public ParamBoolEdit(string name, bool value)
+        public ParamBoolEdit(string name, bool value, long id)
         {
             InitializeComponent();
             lbl_name.Text = name;
             metroToggle1.Checked = value;
+            iD = id;
         }
+
+        long iD;
 
         public event EventHandler<ValuechangedEventArgs> BoolChanged;
 
@@ -31,7 +34,8 @@ namespace Alfheim.GUI.UserControls
             {
                 NewValue = (sender as MetroFramework.Controls.MetroToggle).Checked,
                 OldValue = null,
-                Property = lbl_name.Text
+                Property = lbl_name.Text,
+                ID = iD
             });
         }
     }

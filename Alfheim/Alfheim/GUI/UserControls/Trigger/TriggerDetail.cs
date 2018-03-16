@@ -57,7 +57,7 @@ namespace Alfheim.GUI.UserControls
         {
             if (p.PropertyType.Name == nameof(String))
             {
-                var stringedit = new ParamStringEdit(proppath, p.GetValue(valueobject)?.ToString());
+                var stringedit = new ParamStringEdit(proppath, p.GetValue(valueobject)?.ToString(), detailedTrigger.ID);
                 stringedit.Width = Width - 30;
                 stringedit.StringChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(stringedit);
@@ -65,7 +65,7 @@ namespace Alfheim.GUI.UserControls
             }
             else if (p.PropertyType == typeof(long))
             {
-                var numericedit = new ParamNumericEdit(proppath, (long)p.GetValue(valueobject));
+                var numericedit = new ParamNumericEdit(proppath, (long)p.GetValue(valueobject), detailedTrigger.ID);
                 numericedit.Width = Width - 30;
                 numericedit.NumberChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(numericedit);
@@ -73,7 +73,7 @@ namespace Alfheim.GUI.UserControls
             }
             else if (p.PropertyType.Name == nameof(Boolean))
             {
-                var booledit = new ParamBoolEdit(proppath, (bool)p.GetValue(valueobject));
+                var booledit = new ParamBoolEdit(proppath, (bool)p.GetValue(valueobject), detailedTrigger.ID);
                 booledit.Width = Width - 30;
                 booledit.BoolChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(booledit);
@@ -81,7 +81,7 @@ namespace Alfheim.GUI.UserControls
             }
             else if (p.PropertyType.IsEnum)
             {
-                var enumedit = new ParamEnumEdit(proppath, p.GetValue(valueobject));
+                var enumedit = new ParamEnumEdit(proppath, p.GetValue(valueobject), detailedTrigger.ID);
                 enumedit.Width = Width - 30;
                 enumedit.EnumChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(enumedit);
@@ -89,7 +89,7 @@ namespace Alfheim.GUI.UserControls
             }
             else if (p.PropertyType == typeof(DateTime))
             {
-                var dateedit = new ParamDateTimeEdit(proppath, (DateTime)p.GetValue(valueobject));
+                var dateedit = new ParamDateTimeEdit(proppath, (DateTime)p.GetValue(valueobject), detailedTrigger.ID);
                 dateedit.Width = Width - 30;
                 dateedit.DateTimeChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(dateedit);
@@ -100,8 +100,7 @@ namespace Alfheim.GUI.UserControls
                 return false;
             }
         }
-
-
+        
         private int GetDetailorder(PropertyInfo p)
         {
             return Convert.ToInt32(p.CustomAttributes.Single(c => c.AttributeType == typeof(DetailOrder)).NamedArguments.Single(a => a.MemberName == "Position").TypedValue.Value);
@@ -118,18 +117,17 @@ namespace Alfheim.GUI.UserControls
             {
                 return;
             }
-            object objecttochange = detailedTrigger;
-            for (int i = 1; i < proppath.Length; i++)
+            if (ValueChanged!=null)
             {
-                objecttochange = objecttochange.GetType().GetProperty(proppath[i-1]).GetValue(objecttochange);
+                ValueChanged(sender, e);
             }
-            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
-
             if (proppath.Last() == "TriggerType")
             {
                 RefreshData();
             }
         }
+
+        public event EventHandler<ValuechangedEventArgs> ValueChanged;
 
         public Trigger DetailedTrigger
         {
@@ -140,13 +138,6 @@ namespace Alfheim.GUI.UserControls
                 RefreshData();
             }
         }
-    }
-
-    public class ValuechangedEventArgs : EventArgs
-    {
-        public string Property { get; set; }
-        public object OldValue { get; set; }
-        public object NewValue { get; set; }
     }
     
 }

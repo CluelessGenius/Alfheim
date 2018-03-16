@@ -14,7 +14,7 @@ namespace Alfheim.GUI.UserControls
     {
         Type EnumType;
 
-        public ParamEnumEdit(string name, object value)
+        public ParamEnumEdit(string name, object value,long id)
         {
             InitializeComponent();
             lbl_name.Text = name;
@@ -22,7 +22,10 @@ namespace Alfheim.GUI.UserControls
             string[] values = Enum.GetNames(EnumType);
             comboBox1.Items.AddRange(values);
             comboBox1.SelectedItem = value.ToString();
+            iD = id;
         }
+
+        long iD;
 
         public event EventHandler<ValuechangedEventArgs> EnumChanged;
         
@@ -36,7 +39,8 @@ namespace Alfheim.GUI.UserControls
             {
                 NewValue = Enum.Parse(EnumType, (sender as ComboBox).SelectedItem.ToString()),
                 OldValue = null,
-                Property = lbl_name.Text
+                Property = lbl_name.Text,
+                ID = iD
             });
         }
     }

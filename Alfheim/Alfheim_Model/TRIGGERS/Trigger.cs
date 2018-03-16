@@ -18,30 +18,15 @@ namespace Alfheim_Model.TRIGGERS
     }
 
     [JsonObject]
+    [Serializable]
     public class Trigger : Param
     {
-        private long iD;
-
         private ITrigger trig;
 
         private TriggerType triggerType;
-
-        [JsonProperty("ID", Order = 1)]
-        public long ID
-        {
-            get
-            {
-                return iD;
-            }
-
-            set
-            {
-                iD = value;
-            }
-        }
         
         [DetailOrder(Position = 1)]
-        [JsonProperty("TriggerType", Order = 2)]
+        [JsonProperty("TriggerType", Order = 1)]
         public TriggerType TriggerType
         {
             get
@@ -73,7 +58,7 @@ namespace Alfheim_Model.TRIGGERS
         }
 
         [DetailOrder(Position = 2)]
-        [JsonProperty("Trig", Order = 3)]
+        [JsonProperty("Trig", Order = 2)]
         public ITrigger Trig
         {
             get

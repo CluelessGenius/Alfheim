@@ -12,12 +12,15 @@ namespace Alfheim.GUI.UserControls
 {
     public partial class ParamStringEdit : UserControl
     {
-        public ParamStringEdit(string name, string value)
+        public ParamStringEdit(string name, string value, long id)
         {
             InitializeComponent();
             metroTextBox1.WaterMark = name;
             metroTextBox1.Text = value;
+            iD = id;
         }
+
+        long iD;
 
         public event EventHandler<ValuechangedEventArgs> StringChanged;
 
@@ -30,7 +33,8 @@ namespace Alfheim.GUI.UserControls
             StringChanged(this, new ValuechangedEventArgs()
                                     { NewValue = (sender as MetroFramework.Controls.MetroTextBox).Text,
                                       OldValue = null,
-                                      Property = (sender as MetroFramework.Controls.MetroTextBox).WaterMark});
+                                      Property = (sender as MetroFramework.Controls.MetroTextBox).WaterMark,
+                                      ID = iD});
         }
     }
 }

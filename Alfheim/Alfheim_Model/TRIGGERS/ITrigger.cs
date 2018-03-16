@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 namespace Alfheim_Model.TRIGGERS
 {
     [JsonObject]
+    [Serializable]
     public class ITrigger
     {
 

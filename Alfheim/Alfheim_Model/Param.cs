@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,11 +8,30 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model
 {
+    [JsonObject]
+    [Serializable]
     public class Param : INotifyPropertyChanged
     {
+        private long iD;
+
+        [JsonProperty("ID", Order = 1)]
+        public long ID
+        {
+            get
+            {
+                return iD;
+            }
+
+            set
+            {
+                iD = value;
+            }
+        }
+
         private string name;
 
         [DetailOrder(Position = 0)]
+        [JsonProperty("Name",Order = 2)]
         public string Name
         {
             get { return name; }
@@ -21,7 +41,7 @@ namespace Alfheim_Model
                 OnPropertyChanged("Name");
             }
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string property)
@@ -29,10 +49,5 @@ namespace Alfheim_Model
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-    }
-
-    public class DetailOrder : Attribute
-    {
-        public int Position { get; set; }
     }
 }

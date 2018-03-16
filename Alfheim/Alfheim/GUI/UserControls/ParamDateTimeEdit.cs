@@ -14,13 +14,16 @@ namespace Alfheim.GUI.UserControls
     {
         string propertyname = "";
 
-        public ParamDateTimeEdit(string name, DateTime value)
+        public ParamDateTimeEdit(string name, DateTime value, long id)
         {
             InitializeComponent();
             propertyname = name;
             dateTimePicker1.Value = value;
             dateTimePicker2.Value = value;
+            iD = id;
         }
+
+        long iD;
 
         public event EventHandler<ValuechangedEventArgs> DateTimeChanged;
         
@@ -34,7 +37,8 @@ namespace Alfheim.GUI.UserControls
             {
                 NewValue = dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay,
                 OldValue = null,
-                Property = propertyname
+                Property = propertyname,
+                ID = iD
             });
         }
         

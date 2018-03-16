@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim_Model
 {
+    [Serializable]
     public class Task
     {
         public List<long> Triggers { get; set; }

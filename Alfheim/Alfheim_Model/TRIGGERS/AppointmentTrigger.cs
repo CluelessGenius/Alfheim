@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Alfheim_Model.TRIGGERS
 {
     [JsonObject]
+    [Serializable]
     public class AppointmentTrigger : ITrigger
     {
         private DateTime appointment = DateTime.Now;

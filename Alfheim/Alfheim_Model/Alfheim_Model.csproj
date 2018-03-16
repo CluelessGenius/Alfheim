@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACTIONS\Action.cs" />
+    <Compile Include="DetailOrder.cs" />
     <Compile Include="DEVICES\LED.cs" />
     <Compile Include="DEVICES\Motherboard.cs" />
     <Compile Include="DEVICES\Device.cs" />

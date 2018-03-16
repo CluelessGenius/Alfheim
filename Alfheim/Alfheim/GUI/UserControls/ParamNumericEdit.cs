@@ -14,13 +14,16 @@ namespace Alfheim.GUI.UserControls
     {
         string propertyname = "";
 
-        public ParamNumericEdit(string name, long value)
+        public ParamNumericEdit(string name, long value, long id)
         {
             InitializeComponent();
             propertyname = name;
             lbl_name.Text = name.Split('.').Last();
             numericUpDown1.Value = value;
+            iD = id;
         }
+
+        long iD;
 
         public event EventHandler<ValuechangedEventArgs> NumberChanged;
         
@@ -32,10 +35,25 @@ namespace Alfheim.GUI.UserControls
             }
             NumberChanged(this, new ValuechangedEventArgs()
             {
-                NewValue = (long)(sender as NumericUpDown).Value,
+                NewValue = (long)numericUpDown1.Value,
                 OldValue = null,
-                Property = propertyname
+                Property = propertyname,
+                ID = iD
             });
+        }
+
+        char[] allowedchars = new char[] { '\b', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!allowedchars.Contains(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+            // HACK: Doing this will cause the numericUpDown to update it's value attribute if the user 
+            // types in something (rather than clicking the up/down buttons)
+            decimal i = numericUpDown1.Value;
         }
     }
     

@@ -8,20 +8,14 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public enum ParamListType
-    {
-        TRIGGER,
-        DEVICES,
-        ACTIONS
-    }
-
-    public partial class TriggerList : UserControl
+    
+    public partial class EffectList : UserControl
     {
         private bool enablingEnabled;
         private Trigger selectedTrigger;
         private List<Trigger> triggers;
 
-        public TriggerList()
+        public EffectList()
         {
             InitializeComponent();
             EnablingEnabled = false;
