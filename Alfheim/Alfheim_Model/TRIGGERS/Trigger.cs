@@ -16,7 +16,7 @@ namespace Alfheim_Model.TRIGGERS
         External,
         Appointment
     }
-    
+
     [JsonObject]
     public class Trigger : Param
     {
@@ -26,7 +26,7 @@ namespace Alfheim_Model.TRIGGERS
 
         private TriggerType triggerType;
 
-        [JsonProperty("ID")]
+        [JsonProperty("ID", Order = 1)]
         public long ID
         {
             get
@@ -40,23 +40,8 @@ namespace Alfheim_Model.TRIGGERS
             }
         }
         
-        [DetailOrder(Position = 2)]
-        [JsonProperty("Trig")]
-        public ITrigger Trig
-        {
-            get
-            {
-                return trig;
-            }
-
-            set
-            {
-                trig = value;
-            }
-        }
-
         [DetailOrder(Position = 1)]
-        [JsonProperty("TriggerType")]
+        [JsonProperty("TriggerType", Order = 2)]
         public TriggerType TriggerType
         {
             get
@@ -84,6 +69,21 @@ namespace Alfheim_Model.TRIGGERS
                     default:
                         break;
                 }
+            }
+        }
+
+        [DetailOrder(Position = 2)]
+        [JsonProperty("Trig", Order = 3)]
+        public ITrigger Trig
+        {
+            get
+            {
+                return trig;
+            }
+
+            set
+            {
+                trig = value;
             }
         }
     }

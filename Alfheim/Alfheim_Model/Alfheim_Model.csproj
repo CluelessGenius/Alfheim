@@ -57,7 +57,7 @@
     <Compile Include="TRIGGERS\IntervalTrigger.cs" />
     <Compile Include="TRIGGERS\StaticTrigger.cs" />
     <Compile Include="TRIGGERS\Trigger.cs" />
-    <Compile Include="TRIGGERS\TriggerBase.cs" />
+    <Compile Include="TRIGGERS\ITrigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
