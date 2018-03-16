@@ -1,43 +1,45 @@
 ﻿using Alfheim_Model;
+using Alfheim_Model.EFFECTS;
 using Alfheim_Model.TRIGGERS;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Alfheim_ViewModel
 {
     public class DataManager
     {
-        SerializationHelper serializationhelper = new SerializationHelper();
-
-        public void SaveTasks(List<Task> tasks)
+        private DataMemberManager<Effect> effectManager;
+        private DataMemberManager<Task> taskManager;
+        private DataMemberManager<Trigger> triggerManager;
+        public DataManager()
         {
-            string xmltasks = serializationhelper.Serialize(tasks);
-            Properties.SettingsData.Default.Tasks = xmltasks;
-            Properties.SettingsData.Default.Save();
+            taskManager = new DataMemberManager<Task>();
+            triggerManager = new DataMemberManager<Trigger>();
+            effectManager = new DataMemberManager<Effect>();
         }
 
-        public List<Task> LoadTasks()
+        public DataMemberManager<Effect> EffectManager
         {
-            List<Task> tasks;
-            serializationhelper.DeSerialize(Properties.SettingsData.Default.Tasks,out tasks);
-            return tasks;
+            get
+            {
+                return effectManager;
+            }
         }
-
-        public void SaveTriggers(List<Trigger> triggers)
+        
+        public DataMemberManager<Task> TaskManager
         {
-            string xmltriggers = serializationhelper.Serialize(triggers);
-            Properties.SettingsData.Default.Triggers = xmltriggers;
-            Properties.SettingsData.Default.Save();
+            get
+            {
+                return taskManager;
+            }
         }
-
-        public List<Trigger> LoadTriggers()
+        
+        public DataMemberManager<Trigger> TriggerManager
         {
-            List<Trigger> triggers;
-            serializationhelper.DeSerialize(Properties.SettingsData.Default.Triggers, out triggers);
-            return triggers;
+            get
+            {
+                return triggerManager;
+            }
         }
-
+        
     }
 }

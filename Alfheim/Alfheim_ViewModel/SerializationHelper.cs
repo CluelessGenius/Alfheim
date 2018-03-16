@@ -1,4 +1,5 @@
 ﻿using Alfheim_Model;
+using Alfheim_Model.EFFECTS;
 using Alfheim_Model.TRIGGERS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -20,30 +21,45 @@ namespace Alfheim_ViewModel
             return JsonConvert.SerializeObject(tasks);
         }
 
-        public void DeSerialize(string xmltasks, out List<Task> list)
-        {
-            if (String.IsNullOrEmpty(xmltasks))
-            {
-                list = new List<Task>();
-                return;
-            }
-            list = JsonConvert.DeserializeObject<List<Task>>(xmltasks);
-        }
+        //public void DeSerialize(string xmltasks, out List<Task> list)
+        //{
+        //    if (String.IsNullOrEmpty(xmltasks))
+        //    {
+        //        list = new List<Task>();
+        //        return;
+        //    }
+        //    list = JsonConvert.DeserializeObject<List<Task>>(xmltasks);
+        //}
 
-        public string Serialize(List<Trigger> triggers)
+        //public string Serialize(List<Trigger> triggers)
+        //{
+        //    return JsonConvert.SerializeObject(triggers);
+        //}
+
+        //public void DeSerialize(string xmltriggers, out List<Trigger> list)
+        //{
+        //    if (String.IsNullOrEmpty(xmltriggers))
+        //    {
+        //        list = new List<Trigger>();
+        //        return;
+        //    }
+        //    list = JsonConvert.DeserializeObject<List<Trigger>>(xmltriggers);
+        //}
+
+        public string Serialize<T>(List<T> triggers)
         {
             return JsonConvert.SerializeObject(triggers);
         }
 
-        public void DeSerialize(string xmltriggers, out List<Trigger> list)
+        public void DeSerialize<T>(string xmltriggers, out List<T> list)
         {
             if (String.IsNullOrEmpty(xmltriggers))
             {
-                list = new List<Trigger>();
+                list = new List<T>();
                 return;
             }
-            list = JsonConvert.DeserializeObject<List<Trigger>>(xmltriggers);
+            list = JsonConvert.DeserializeObject<List<T>>(xmltriggers);
         }
-        
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Alfheim.GUI.UserControls;
 using Alfheim_Model;
+using Alfheim_Model.EFFECTS;
 using Alfheim_Model.TRIGGERS;
 using Alfheim_ViewModel;
 using System;
@@ -16,40 +17,35 @@ namespace Alfheim.GUI
     public partial class MainForm : ResizableNonBorderForm
     {
         DataManager dataManager = new DataManager();
-        public List<Task> Tasks = new List<Task>();
-        public List<Trigger> Triggers = new List<Trigger>();
 
         public MainForm():base()
         {
             InitializeComponent();
-            Tasks = dataManager.LoadTasks();
-            Triggers = dataManager.LoadTriggers();
-            taskList3.Tasks = Tasks;
-            trl_triggerlist.Triggers = Triggers;
-            trl_triggerlist.TriggerEnabledChanged += Trl_triggerlist_TriggerEnabledChanged;
+            taskList3.SetDataManager(ref dataManager);
+            trl_triggerlist.SetDataManager(ref dataManager);
         }
 
-        private void Trl_triggerlist_TriggerEnabledChanged(object sender, EventArgs e)
-        {
-            if ((bool)(e as ValuechangedEventArgs).NewValue && !taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
-            {
-                taskList3.SelectedTask.Triggers.Add((sender as Trigger).ID);
-            }
-            else if (!(bool)(e as ValuechangedEventArgs).NewValue && taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
-            {
-                taskList3.SelectedTask.Triggers.Remove((sender as Trigger).ID);
-            }
+        //private void Trl_triggerlist_TriggerEnabledChanged(object sender, EventArgs e)
+        //{
+        //    if ((bool)(e as ValuechangedEventArgs).NewValue && !taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
+        //    {
+        //        taskList3.SelectedTask.Triggers.Add((sender as Trigger).ID);
+        //    }
+        //    else if (!(bool)(e as ValuechangedEventArgs).NewValue && taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
+        //    {
+        //        taskList3.SelectedTask.Triggers.Remove((sender as Trigger).ID);
+        //    }
             
-        }
+        //}
 
-        private void TaskList3_SelectionChanged(object sender, EventArgs e)
-        {
-            trl_triggerlist.EnablingEnabled = taskList3.SelectedTask != null;
-            if (taskList3.SelectedTask!=null)
-            {
-                trl_triggerlist.SetToggles(taskList3.SelectedTask.Triggers);
-            }
-        }
+        //private void TaskList3_SelectionChanged(object sender, EventArgs e)
+        //{
+        //    trl_triggerlist.EnablingEnabled = taskList3.SelectedTask != null;
+        //    if (taskList3.SelectedTask!=null)
+        //    {
+        //        trl_triggerlist.SetToggles(taskList3.SelectedTask.Triggers);
+        //    }
+        //}
 
         private void pnl_sidebar_expand_Click(object sender, EventArgs e)
         {
@@ -92,12 +88,7 @@ namespace Alfheim.GUI
                 this.ResumeLayout();
             }
         }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            dataManager.SaveTasks(Tasks);
-            dataManager.SaveTriggers(Triggers);
-        }
+        
         
     }
 }

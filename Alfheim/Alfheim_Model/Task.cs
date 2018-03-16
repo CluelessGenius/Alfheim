@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 namespace Alfheim_Model
 {
     [Serializable]
-    public class Task
+    public class Task: Param
     {
         public List<long> Triggers { get; set; }
         
         public List<ACTIONS.Action> Actions { get; set; }
-
-        public string Name { get; set; }
-
+        
         public string Description { get; set; }
 
         private bool active;

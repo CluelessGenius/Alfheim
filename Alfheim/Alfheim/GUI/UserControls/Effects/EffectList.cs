@@ -8,7 +8,6 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    
     public partial class EffectList : UserControl
     {
         private bool enablingEnabled;
@@ -19,6 +18,18 @@ namespace Alfheim.GUI.UserControls
         {
             InitializeComponent();
             EnablingEnabled = false;
+            triggerDetail1.ValueChanged += TriggerDetail1_ValueChanged;
+        }
+
+        private void TriggerDetail1_ValueChanged(object sender, ValuechangedEventArgs e)
+        {
+            string[] proppath = e.Property.Split('.');
+            object objecttochange = Triggers.Single(t=>t.ID==e.ID);
+            for (int i = 1; i < proppath.Length; i++)
+            {
+                objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
+            }
+            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
         }
 
         public bool EnablingEnabled

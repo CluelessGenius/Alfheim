@@ -70,5 +70,17 @@ namespace Alfheim_ViewModel.Properties {
                 this["Effects"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long MaxID {
+            get {
+                return ((long)(this["MaxID"]));
+            }
+            set {
+                this["MaxID"] = value;
+            }
+        }
     }
 }

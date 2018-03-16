@@ -57,7 +57,7 @@ namespace Alfheim.GUI.UserControls
         {
             if (p.PropertyType.Name == nameof(String))
             {
-                var stringedit = new ParamStringEdit(proppath, p.GetValue(valueobject)?.ToString(),detailedTrigger.ID);
+                var stringedit = new ParamStringEdit(proppath, p.GetValue(valueobject)?.ToString(), detailedTrigger.ID);
                 stringedit.Width = Width - 30;
                 stringedit.StringChanged += Edit_ValueChanged;
                 pnl_proplist.Controls.Add(stringedit);
@@ -100,8 +100,7 @@ namespace Alfheim.GUI.UserControls
                 return false;
             }
         }
-
-
+        
         private int GetDetailorder(PropertyInfo p)
         {
             return Convert.ToInt32(p.CustomAttributes.Single(c => c.AttributeType == typeof(DetailOrder)).NamedArguments.Single(a => a.MemberName == "Position").TypedValue.Value);
@@ -118,18 +117,17 @@ namespace Alfheim.GUI.UserControls
             {
                 return;
             }
-            object objecttochange = detailedTrigger;
-            for (int i = 1; i < proppath.Length; i++)
+            if (ValueChanged!=null)
             {
-                objecttochange = objecttochange.GetType().GetProperty(proppath[i-1]).GetValue(objecttochange);
+                ValueChanged(sender, e);
             }
-            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
-
             if (proppath.Last() == "TriggerType")
             {
                 RefreshData();
             }
         }
+
+        public event EventHandler<ValuechangedEventArgs> ValueChanged;
 
         public Trigger DetailedTrigger
         {
@@ -141,4 +139,5 @@ namespace Alfheim.GUI.UserControls
             }
         }
     }
+    
 }

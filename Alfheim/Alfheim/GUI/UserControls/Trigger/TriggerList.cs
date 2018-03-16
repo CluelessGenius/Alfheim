@@ -1,4 +1,5 @@
 ﻿using Alfheim_Model.TRIGGERS;
+using Alfheim_ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,19 +9,11 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public enum ParamListType
-    {
-        TRIGGER,
-        DEVICES,
-        ACTIONS
-    }
-
     public partial class TriggerList : UserControl
     {
+        public int selectedRowIndex = -1;
+        DataManager dataManager;
         private bool enablingEnabled;
-        private Trigger selectedTrigger;
-        private List<Trigger> triggers;
-
         public TriggerList()
         {
             InitializeComponent();
@@ -28,15 +21,12 @@ namespace Alfheim.GUI.UserControls
             triggerDetail1.ValueChanged += TriggerDetail1_ValueChanged;
         }
 
-        private void TriggerDetail1_ValueChanged(object sender, ValuechangedEventArgs e)
+        public DataManager DataManager
         {
-            string[] proppath = e.Property.Split('.');
-            object objecttochange = Triggers.Single(t=>t.ID==e.ID);
-            for (int i = 1; i < proppath.Length; i++)
+            get
             {
-                objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
+                return dataManager;
             }
-            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
         }
 
         public bool EnablingEnabled
@@ -52,56 +42,12 @@ namespace Alfheim.GUI.UserControls
             }
         }
 
-        public int SelectedRowIndex { get; set; }
+        
 
-        public Trigger SelectedTrigger
+        public void SetDataManager(ref DataManager datamanager)
         {
-            get { return selectedTrigger; }
-            set
-            {
-                selectedTrigger = value;
-            }
-        }
-
-        public List<Trigger> Triggers
-        {
-            get { return triggers; }
-            set
-            {
-                triggers = value;
-                SelectedRowIndex = -1;
-                RefreshParamList();
-            }
-        }
-
-        public event EventHandler TriggerEnabledChanged;
-
-        public void RefreshParamList()
-        {
-            pnl_parameters.Controls.Clear();
-            if (triggers == null)
-            {
-                return;
-            }
-            List<TriggerListEntry> entrycontrols = triggers.Select(t => (new TriggerListEntry(t))).ToList();
-            entrycontrols.ForEach(e =>
-            {
-                e.Width = pnl_parameters.Width - 24;
-                e.Clicked += Entry_Clicked;
-                e.Deleted += Entry_Deleted;
-                e.EnabledToggleChanged += EntryEnabled_Changed;
-                e.EnablingPossible = enablingEnabled;
-                pnl_parameters.Controls.Add(e);
-            });
-            try
-            {
-                triggerDetail1.DetailedTrigger = SelectedTrigger = Triggers[SelectedRowIndex];
-            }
-            catch (Exception)
-            {
-                triggerDetail1.DetailedTrigger = SelectedTrigger = null;
-                return;
-            }
+            dataManager = datamanager;
+            RefreshParamList();
         }
 
         public void SetToggles(List<long> IDs)
@@ -112,19 +58,9 @@ namespace Alfheim.GUI.UserControls
             }
         }
 
-        private void EntryEnabled_Changed(object sender, EventArgs e)
-        {
-            if (TriggerEnabledChanged!=null)
-            {
-                TriggerEnabledChanged(sender, e);
-            }
-        }
-
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
-            Properties.Settings.Default.MaxID += 1;
-            Properties.Settings.Default.Save();
-            Triggers.Add(new Trigger() { Name = "Dummy Trigger Static", TriggerType = TriggerType.Static, ID = Properties.Settings.Default.MaxID });
+            dataManager.TriggerManager.Create();
             RefreshParamList();
         }
 
@@ -139,16 +75,47 @@ namespace Alfheim.GUI.UserControls
                 }
             }
             (sender as TriggerListEntry).BackColor = Color.FromArgb(209, 65, 26);
-            SelectedRowIndex = pnl_parameters.Controls.IndexOf(sender as TriggerListEntry);
-            SelectedTrigger = Triggers[SelectedRowIndex];
-            triggerDetail1.DetailedTrigger = SelectedTrigger;
         }
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            Triggers.Remove((sender as TriggerListEntry).Param);
             pnl_parameters.Controls.Remove((sender as TriggerListEntry));
             triggerDetail1.DetailedTrigger = null;
+        }
+
+        private void TriggerDetail1_ValueChanged(object sender, ValuechangedEventArgs e)
+        {
+            string[] proppath = e.Property.Split('.');
+            object objecttochange = dataManager.TriggerManager.Members.Single(t=>t.ID==e.ID);
+            for (int i = 1; i < proppath.Length; i++)
+            {
+                objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
+            }
+            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
+        }
+
+        private void RefreshParamList(int selectedindex = -1)
+        {
+            SuspendLayout();
+            pnl_parameters.Controls.Clear();
+            List<TriggerListEntry> entrycontrols = dataManager.TriggerManager.Members.Select(t => (new TriggerListEntry(t))).ToList();
+            entrycontrols.ForEach(e =>
+            {
+                e.Width = pnl_parameters.Width - 24;
+                e.Clicked += Entry_Clicked;
+                e.Deleted += Entry_Deleted;
+                //e.EnabledToggleChanged += EntryEnabled_Changed;
+                e.EnablingPossible = enablingEnabled;
+                pnl_parameters.Controls.Add(e);
+            });
+            selectedRowIndex = selectedindex;
+            try
+            {
+                (pnl_parameters.Controls[selectedRowIndex] as TriggerListEntry).BackColor = Color.FromArgb(209, 65, 26);
+            }
+            catch (Exception) { }
+            dataManager.TriggerManager.Select(selectedRowIndex);
+            ResumeLayout();
         }
     }
 }
