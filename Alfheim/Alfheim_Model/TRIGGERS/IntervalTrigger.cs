@@ -25,6 +25,7 @@ namespace Alfheim_Model.TRIGGERS
             set
             {
                 interval = value;
+                OnPropertyChanged(nameof(Interval));
             }
         }
     }

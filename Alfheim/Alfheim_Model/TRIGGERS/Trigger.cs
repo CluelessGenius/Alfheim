@@ -36,23 +36,28 @@ namespace Alfheim_Model.TRIGGERS
 
             set
             {
-                triggerType = value;
-                switch (value)
+                if (triggerType != value)
                 {
-                    case TriggerType.Static:
-                        Trig = new StaticTrigger();
-                        break;
-                    case TriggerType.Interval:
-                        Trig = new IntervalTrigger();
-                        break;
-                    case TriggerType.External:
-                        Trig = new ExternalTrigger();
-                        break;
-                    case TriggerType.Appointment:
-                        Trig = new AppointmentTrigger();
-                        break;
-                    default:
-                        break;
+                    triggerType = value;
+                    switch (triggerType)
+                    {
+                        case TriggerType.Static:
+                            Trig = new StaticTrigger();
+                            break;
+                        case TriggerType.Interval:
+                            Trig = new IntervalTrigger();
+                            break;
+                        case TriggerType.External:
+                            Trig = new ExternalTrigger();
+                            break;
+                        case TriggerType.Appointment:
+                            Trig = new AppointmentTrigger();
+                            break;
+                        default:
+                            break;
+                    }
+                    Trig.PropertyChanged += Trig_PropertyChanged;
+                    OnPropertyChanged(nameof(TriggerType));
                 }
             }
         }
@@ -63,13 +68,64 @@ namespace Alfheim_Model.TRIGGERS
         {
             get
             {
+                if (trig==null)
+                {
+                    switch (triggerType)
+                    {
+                        case TriggerType.Static:
+                            Trig = new StaticTrigger();
+                            break;
+                        case TriggerType.Interval:
+                            Trig = new IntervalTrigger();
+                            break;
+                        case TriggerType.External:
+                            Trig = new ExternalTrigger();
+                            break;
+                        case TriggerType.Appointment:
+                            Trig = new AppointmentTrigger();
+                            break;
+                        default:
+                            break;
+                    }
+                    Trig.PropertyChanged += Trig_PropertyChanged;
+                }
                 return trig;
+            }
+
+            private set
+            {
+                if (value != trig)
+                {
+                    trig = value;
+                }
+            }
+        }
+
+        private void Trig_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(e.PropertyName,sender);
+        }
+
+        [JsonIgnore]
+        [IgnoreWhenSaving]
+        public bool TriggerEnabled
+        {
+            get
+            {
+                return triggerEnabled;
             }
 
             set
             {
-                trig = value;
+                if (value != triggerEnabled)
+                {
+                    triggerEnabled = value;
+                    OnPropertyChanged(nameof(TriggerEnabled));
+                }
             }
         }
+
+        private bool triggerEnabled;
+        
     }
 }

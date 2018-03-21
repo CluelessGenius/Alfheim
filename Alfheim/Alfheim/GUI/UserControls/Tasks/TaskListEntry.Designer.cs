@@ -63,7 +63,7 @@
             this.tgl_enabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tgl_enabled.DisplayStatus = false;
             this.tgl_enabled.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tgl_enabled.Location = new System.Drawing.Point(1151, 12);
+            this.tgl_enabled.Location = new System.Drawing.Point(1149, 12);
             this.tgl_enabled.Margin = new System.Windows.Forms.Padding(12);
             this.tgl_enabled.Name = "tgl_enabled";
             this.tableLayoutPanel1.SetRowSpan(this.tgl_enabled, 2);
@@ -72,6 +72,7 @@
             this.tgl_enabled.TabIndex = 13;
             this.tgl_enabled.Text = "An";
             this.tgl_enabled.UseSelectable = true;
+            this.tgl_enabled.CheckedChanged += new System.EventHandler(this.tgl_enabled_CheckedChanged);
             // 
             // btn_del
             // 
@@ -119,7 +120,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1211, 40);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1209, 40);
             this.tableLayoutPanel1.TabIndex = 14;
             this.tableLayoutPanel1.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
@@ -127,7 +128,7 @@
             // 
             this.pnl_actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_actions.BackColor = System.Drawing.Color.Transparent;
-            this.pnl_actions.Location = new System.Drawing.Point(771, 20);
+            this.pnl_actions.Location = new System.Drawing.Point(770, 20);
             this.pnl_actions.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_actions.Name = "pnl_actions";
             this.pnl_actions.Size = new System.Drawing.Size(366, 20);
@@ -145,7 +146,7 @@
             this.lbl_description.Location = new System.Drawing.Point(130, 1);
             this.lbl_description.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(1007, 17);
+            this.lbl_description.Size = new System.Drawing.Size(1006, 17);
             this.lbl_description.TabIndex = 14;
             this.lbl_description.Text = "text describing the task and its purpose";
             this.lbl_description.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -159,7 +160,7 @@
             this.pnl_trigger.Location = new System.Drawing.Point(48, 20);
             this.pnl_trigger.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_trigger.Name = "pnl_trigger";
-            this.pnl_trigger.Size = new System.Drawing.Size(357, 20);
+            this.pnl_trigger.Size = new System.Drawing.Size(356, 20);
             this.pnl_trigger.TabIndex = 15;
             this.pnl_trigger.Click += new System.EventHandler(this.TaskListEntry_Click);
             // 
@@ -167,7 +168,7 @@
             // 
             this.pnl_devices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_devices.BackColor = System.Drawing.Color.Transparent;
-            this.pnl_devices.Location = new System.Drawing.Point(405, 20);
+            this.pnl_devices.Location = new System.Drawing.Point(404, 20);
             this.pnl_devices.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_devices.Name = "pnl_devices";
             this.pnl_devices.Size = new System.Drawing.Size(366, 20);

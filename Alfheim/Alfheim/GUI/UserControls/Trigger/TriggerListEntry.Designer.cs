@@ -56,6 +56,7 @@
             this.tgl_enabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.tgl_enabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tgl_enabled.DisplayStatus = false;
+            this.tgl_enabled.Enabled = false;
             this.tgl_enabled.Location = new System.Drawing.Point(173, 5);
             this.tgl_enabled.Name = "tgl_enabled";
             this.tgl_enabled.Size = new System.Drawing.Size(30, 12);

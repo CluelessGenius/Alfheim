@@ -1,61 +1,111 @@
-﻿using System;
+﻿using Alfheim_Model;
+using Alfheim_Model.TRIGGERS;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Alfheim_Model.TRIGGERS;
-using Alfheim_Model;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
     public partial class TriggerDetail : UserControl
     {
         private Trigger detailedTrigger;
-        
+
         public TriggerDetail()
         {
             InitializeComponent();
         }
+        
+        public Trigger DetailedTrigger
+        {
+            get { return detailedTrigger; }
+        }
+
+        public void SetDetailedTrigger(Trigger trigger)
+        {
+            detailedTrigger = trigger;
+            detailedTrigger.PropertyChanged += DetailedTrigger_PropertyChanged;
+            RefreshData();
+        }
+
+        private void DetailedTrigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (sender is Trigger)
+            {
+                var trigsender = (sender as Trigger);
+                switch (e.PropertyName)
+                {
+                    case nameof(trigsender.Name):
+                        lbl_name.Text = trigsender.Name;
+                        break;
+                    case nameof(trigsender.TriggerType):
+                        RefreshData();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                //var names = pnl_proplist.Controls.Cast<IReflectionEdit>().First(edit=>edit.Propertyname=="Trig."+e.PropertyName);
+                
+                //string[] proppath = e.Property.Split('.');
+                //object objecttochange = triggerManager.Members.Single(t => t.ID == e.ID);
+                //for (int i = 1; i < proppath.Length; i++)
+                //{
+                //    objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
+                //}
+                //objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
+                
+            }
+
+        }
 
         public void RefreshData()
         {
+            SuspendLayout();
             pnl_proplist?.Controls?.Clear();
-            lbl_name?.DataBindings?.Clear();
             lbl_name.Text = "";
             if (detailedTrigger == null)
             {
                 return;
             }
-            else if (detailedTrigger.Name != null)
+            else
             {
-                lbl_name.DataBindings.Add(new Binding("Text", DetailedTrigger, "Name"));
-                List<PropertyInfo> props = detailedTrigger.GetType().GetProperties().Where(p => p.CustomAttributes.Any(c => c.AttributeType == typeof(DetailOrder))).ToList();
-                props.Sort((x, y) => GetDetailorder(x).CompareTo(GetDetailorder(y)));
-                foreach (PropertyInfo pinf in props)
+                lbl_name.Text = detailedTrigger.Name;
+                AddPropertiesOf(detailedTrigger);
+            }
+        }
+
+        private void AddPropertiesOf(object source, string proppath="")
+        {
+            
+            List<PropertyInfo> props = source.GetType().GetProperties().Where(p => p.CustomAttributes.Any(c => c.AttributeType == typeof(DetailOrder))).ToList();
+            props.Sort((x, y) => GetDetailorder(x).CompareTo(GetDetailorder(y)));
+
+            foreach (PropertyInfo pinf in props)
+            {
+                string path = proppath;
+                if (!String.IsNullOrEmpty(proppath))
                 {
-                    bool wasadded = AddCustomControl(pinf, detailedTrigger, pinf.Name);
-                    if (!wasadded && pinf.PropertyType.IsClass && !pinf.PropertyType.FullName.StartsWith("System."))
-                    {
-                        Type realtype = pinf.GetValue(detailedTrigger).GetType();
-                        List<PropertyInfo> ps = realtype.GetProperties().Where(p => p.CustomAttributes.Any(c => c.AttributeType == typeof(DetailOrder))).ToList();
-                        ps.Sort((x, y) => GetDetailorder(x).CompareTo(GetDetailorder(y)));
-                        foreach (PropertyInfo p in ps)
-                        {
-                            AddCustomControl(p, pinf.GetValue(detailedTrigger), pinf.Name+"."+p.Name);
-                        }
-                    }
+                    path += ".";
+                }
+                path += pinf.Name;
+                bool wasadded = AddCustomControl(pinf, source, path);
+
+                if (!wasadded && pinf.PropertyType.IsClass && !pinf.PropertyType.FullName.StartsWith("System."))
+                {
+                    object realobject = pinf.GetValue(source);
+                    AddPropertiesOf(realobject, path);
                 }
             }
         }
 
-        private bool AddCustomControl(PropertyInfo p, object valueobject,string proppath)
+        private bool AddCustomControl(PropertyInfo p, object valueobject, string proppath)
         {
-            if (p.PropertyType.Name == nameof(String))
+            if (p.PropertyType == typeof(string))
             {
                 var stringedit = new ParamStringEdit(proppath, p.GetValue(valueobject)?.ToString(), detailedTrigger.ID);
                 stringedit.Width = Width - 30;
@@ -71,7 +121,7 @@ namespace Alfheim.GUI.UserControls
                 pnl_proplist.Controls.Add(numericedit);
                 return true;
             }
-            else if (p.PropertyType.Name == nameof(Boolean))
+            else if (p.PropertyType == typeof(bool))
             {
                 var booledit = new ParamBoolEdit(proppath, (bool)p.GetValue(valueobject), detailedTrigger.ID);
                 booledit.Width = Width - 30;
@@ -100,11 +150,6 @@ namespace Alfheim.GUI.UserControls
                 return false;
             }
         }
-        
-        private int GetDetailorder(PropertyInfo p)
-        {
-            return Convert.ToInt32(p.CustomAttributes.Single(c => c.AttributeType == typeof(DetailOrder)).NamedArguments.Single(a => a.MemberName == "Position").TypedValue.Value);
-        }
 
         private void Edit_ValueChanged(object sender, ValuechangedEventArgs e)
         {
@@ -117,27 +162,19 @@ namespace Alfheim.GUI.UserControls
             {
                 return;
             }
-            if (ValueChanged!=null)
+
+            object objecttochange = detailedTrigger;
+            for (int i = 1; i < proppath.Length; i++)
             {
-                ValueChanged(sender, e);
+                objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
             }
-            if (proppath.Last() == "TriggerType")
-            {
-                RefreshData();
-            }
+            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
+
         }
 
-        public event EventHandler<ValuechangedEventArgs> ValueChanged;
-
-        public Trigger DetailedTrigger
+        private int GetDetailorder(PropertyInfo p)
         {
-            get { return detailedTrigger; }
-            set
-            {
-                detailedTrigger = value;
-                RefreshData();
-            }
+            return Convert.ToInt32(p.CustomAttributes.First(c => c.AttributeType == typeof(DetailOrder)).NamedArguments.Single(a => a.MemberName == "Position").TypedValue.Value);
         }
     }
-    
 }

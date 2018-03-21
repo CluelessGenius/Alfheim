@@ -9,7 +9,7 @@ namespace Alfheim_Model
     [Serializable]
     public class Task: Param
     {
-        public List<long> Triggers { get; set; }
+        private List<long> triggers;
         
         public List<ACTIONS.Action> Actions { get; set; }
         
@@ -35,6 +35,20 @@ namespace Alfheim_Model
 
         }
 
+        public void UpdateTriggers(TRIGGERS.Trigger trigger)
+        {
+            if (trigger.TriggerEnabled && !triggers.Contains(trigger.ID))
+            {
+                triggers.Add(trigger.ID);
+                OnPropertyChanged(nameof(Triggers));
+            }
+            else if (!trigger.TriggerEnabled && triggers.Contains(trigger.ID))
+            {
+                triggers.Remove(trigger.ID);
+                OnPropertyChanged(nameof(Triggers));
+            }
+        }
+        
         private bool enabled;
 
         public bool Enabled
@@ -42,14 +56,35 @@ namespace Alfheim_Model
             get { return enabled; }
             set
             {
-                enabled = value;
+                if (value != enabled)
+                {
+                    enabled = value;
+                    OnPropertyChanged(nameof(Enabled));
+                }
                 //if (enabled)
                 //{
                 //    ActivateTriggers();
                 //}
             }
         }
-        
+
+        public List<long> Triggers
+        {
+            get
+            {
+                return triggers;
+            }
+
+            set
+            {
+                if (value != triggers)
+                {
+                    triggers = value;
+                    OnPropertyChanged(nameof(Triggers));
+                }
+            }
+        }
+
         //public void ActivateTriggers()
         //{
         //    if (Triggers!=null && Triggers.Any(t=>t.Enabled&&t.TriggerType==TRIGGERS.TriggerType.Static))
@@ -58,7 +93,7 @@ namespace Alfheim_Model
         //    }
         //}
 
-        public Task(string name = "Dummy Task",string description = "", bool enabled = true)
+        public Task(string name = "Dummy Task",string description = "", bool enabled = false)
         {
             Name = name;
             Enabled = enabled;
@@ -70,7 +105,7 @@ namespace Alfheim_Model
         public Task()
         {
             Name = "Dummy Task";
-            Enabled = true;
+            Enabled = false;
             Description = "";
             Triggers = new List<long>();
             Actions = new List<ACTIONS.Action>();

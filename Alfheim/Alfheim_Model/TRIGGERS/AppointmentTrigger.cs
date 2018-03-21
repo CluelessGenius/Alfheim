@@ -25,6 +25,7 @@ namespace Alfheim_Model.TRIGGERS
             set
             {
                 appointment = value;
+                OnPropertyChanged(nameof(Appointment));
             }
         }
     }

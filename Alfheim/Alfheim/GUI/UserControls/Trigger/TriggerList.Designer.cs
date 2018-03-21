@@ -78,7 +78,6 @@
             // 
             this.triggerDetail1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.triggerDetail1.BackColor = System.Drawing.Color.Transparent;
-            this.triggerDetail1.DetailedTrigger = null;
             this.triggerDetail1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.triggerDetail1.ForeColor = System.Drawing.Color.White;
             this.triggerDetail1.Location = new System.Drawing.Point(287, 3);
@@ -98,6 +97,7 @@
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Name = "TriggerList";
             this.Size = new System.Drawing.Size(568, 352);
+            this.SizeChanged += new System.EventHandler(this.TriggerList_SizeChanged);
             this.pnl_content.ResumeLayout(false);
             this.ResumeLayout(false);
 

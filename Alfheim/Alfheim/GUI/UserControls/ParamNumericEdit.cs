@@ -10,34 +10,35 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class ParamNumericEdit : UserControl
+    public partial class ParamNumericEdit : IReflectionEdit
     {
-        string propertyname = "";
-
         public ParamNumericEdit(string name, long value, long id)
         {
             InitializeComponent();
-            propertyname = name;
+            Propertyname = name;
+            PropertyValue = value;
             lbl_name.Text = name.Split('.').Last();
-            numericUpDown1.Value = value;
+            numericUpDown1.Value = (long)PropertyValue;
             iD = id;
         }
-
+        
         long iD;
 
         public event EventHandler<ValuechangedEventArgs> NumberChanged;
         
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
+            PropertyValue = (long)numericUpDown1.Value;
             if (NumberChanged == null)
             {
                 return;
             }
+            
             NumberChanged(this, new ValuechangedEventArgs()
             {
-                NewValue = (long)numericUpDown1.Value,
+                NewValue = PropertyValue,
                 OldValue = null,
-                Property = propertyname,
+                Property = Propertyname,
                 ID = iD
             });
         }

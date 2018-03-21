@@ -14,7 +14,7 @@ namespace Alfheim_Model
     {
         private long iD;
 
-        [JsonProperty("ID", Order = 1)]
+        [JsonProperty(nameof(ID), Order = 1)]
         public long ID
         {
             get
@@ -31,24 +31,30 @@ namespace Alfheim_Model
         private string name;
 
         [DetailOrder(Position = 0)]
-        [JsonProperty("Name",Order = 2)]
+        [JsonProperty(nameof(Name),Order = 2)]
         public string Name
         {
             get { return name; }
             set
             {
-                name = value;
-                OnPropertyChanged("Name");
+                if (name != value)
+                {
+                    name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        protected virtual void OnPropertyChanged(string property, object sender = null)
+        {
+            if (PropertyChanged != null)
+            {
+                sender = sender == null ? this : sender;
+                PropertyChanged(sender, new PropertyChangedEventArgs(property));
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-        
     }
 }

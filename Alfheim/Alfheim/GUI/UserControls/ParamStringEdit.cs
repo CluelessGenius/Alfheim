@@ -10,30 +10,33 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class ParamStringEdit : UserControl
+    public partial class ParamStringEdit : IReflectionEdit
     {
         public ParamStringEdit(string name, string value, long id)
         {
             InitializeComponent();
-            metroTextBox1.WaterMark = name;
-            metroTextBox1.Text = value;
+            Propertyname = name;
+            PropertyValue = value;
+            metroTextBox1.WaterMark = name.Split('.').Last();
+            metroTextBox1.Text = (string)PropertyValue;
             iD = id;
         }
-
+        
         long iD;
 
         public event EventHandler<ValuechangedEventArgs> StringChanged;
 
         private void metroTextBox1_TextChanged(object sender, EventArgs e)
         {
+            PropertyValue = metroTextBox1.Text;
             if (StringChanged==null || String.IsNullOrEmpty((sender as MetroFramework.Controls.MetroTextBox).Text))
             {
                 return;
             }
             StringChanged(this, new ValuechangedEventArgs()
-                                    { NewValue = (sender as MetroFramework.Controls.MetroTextBox).Text,
+                                    { NewValue = PropertyValue,
                                       OldValue = null,
-                                      Property = (sender as MetroFramework.Controls.MetroTextBox).WaterMark,
+                                      Property = Propertyname,
                                       ID = iD});
         }
     }

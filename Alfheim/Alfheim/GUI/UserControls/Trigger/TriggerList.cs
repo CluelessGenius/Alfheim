@@ -2,7 +2,6 @@
 using Alfheim_ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,110 +11,134 @@ namespace Alfheim.GUI.UserControls
     public partial class TriggerList : UserControl
     {
         public int selectedRowIndex = -1;
-        DataManager dataManager;
-        private bool enablingEnabled;
+        private DataMemberManager<Trigger> triggerManager;
+
         public TriggerList()
         {
             InitializeComponent();
-            EnablingEnabled = false;
-            triggerDetail1.ValueChanged += TriggerDetail1_ValueChanged;
         }
 
-        public DataManager DataManager
+        public List<TriggerListEntry> Entries
         {
             get
             {
-                return dataManager;
+                return pnl_parameters.Controls.OfType<TriggerListEntry>().ToList();
             }
         }
 
-        public bool EnablingEnabled
+        public DataMemberManager<Trigger> TriggerManager
         {
-            get { return enablingEnabled; }
-            set
+            get
             {
-                enablingEnabled = value;
-                foreach (TriggerListEntry entry in pnl_parameters.Controls)
-                {
-                    entry.EnablingPossible = value;
-                }
+                return triggerManager;
             }
         }
 
-        
-
-        public void SetDataManager(ref DataManager datamanager)
+        public void SetDataManager(DataMemberManager<Trigger> triggermanager)
         {
-            dataManager = datamanager;
+            triggerManager = triggermanager;
+            triggerManager.PropertyChanged += TriggerManager_PropertyChanged;
             RefreshParamList();
         }
 
-        public void SetToggles(List<long> IDs)
+        public void SetTogglesEnabled(bool value)
         {
             foreach (TriggerListEntry entry in pnl_parameters.Controls)
             {
-                entry.ToggleEnabled = IDs.Contains(entry.Param.ID);
+                entry.SetToggleEnabled(value);
             }
         }
 
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
-            dataManager.TriggerManager.Create();
-            RefreshParamList();
+            triggerManager.Create();
         }
 
         private void Entry_Clicked(object sender, EventArgs e)
         {
-            foreach (TriggerListEntry entry in pnl_parameters.Controls)
-            {
-                if (entry.BackColor != Color.Transparent)
-                {
-                    entry.BackColor = Color.Transparent;
-                    break;
-                }
-            }
-            (sender as TriggerListEntry).BackColor = Color.FromArgb(209, 65, 26);
+            triggerManager.Select(Entries.IndexOf(sender as TriggerListEntry));
         }
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            pnl_parameters.Controls.Remove((sender as TriggerListEntry));
-            triggerDetail1.DetailedTrigger = null;
+            triggerManager.Delete(pnl_parameters.Controls.IndexOf(sender as TriggerListEntry));
         }
 
-        private void TriggerDetail1_ValueChanged(object sender, ValuechangedEventArgs e)
+        private void EntryEnabled_Changed(object sender, EventArgs e)
         {
-            string[] proppath = e.Property.Split('.');
-            object objecttochange = dataManager.TriggerManager.Members.Single(t=>t.ID==e.ID);
-            for (int i = 1; i < proppath.Length; i++)
-            {
-                objecttochange = objecttochange.GetType().GetProperty(proppath[i - 1]).GetValue(objecttochange);
-            }
-            objecttochange.GetType().GetProperty(proppath.Last()).SetValue(objecttochange, e.NewValue);
+            triggerManager.Members[Entries.IndexOf(sender as TriggerListEntry)].TriggerEnabled = (sender as TriggerListEntry).TriggerEnabled;
         }
 
         private void RefreshParamList(int selectedindex = -1)
         {
             SuspendLayout();
             pnl_parameters.Controls.Clear();
-            List<TriggerListEntry> entrycontrols = dataManager.TriggerManager.Members.Select(t => (new TriggerListEntry(t))).ToList();
-            entrycontrols.ForEach(e =>
+            foreach (Trigger trigger in triggerManager.Members)
             {
-                e.Width = pnl_parameters.Width - 24;
-                e.Clicked += Entry_Clicked;
-                e.Deleted += Entry_Deleted;
-                //e.EnabledToggleChanged += EntryEnabled_Changed;
-                e.EnablingPossible = enablingEnabled;
-                pnl_parameters.Controls.Add(e);
-            });
-            selectedRowIndex = selectedindex;
-            try
-            {
-                (pnl_parameters.Controls[selectedRowIndex] as TriggerListEntry).BackColor = Color.FromArgb(209, 65, 26);
+                var tle = new TriggerListEntry(trigger);
+                tle.Width = pnl_parameters.Width - 24;
+                tle.Clicked += Entry_Clicked;
+                tle.Deleted += Entry_Deleted;
+                tle.TriggerEnabledChanged += EntryEnabled_Changed;
+                if (triggerManager.Members.IndexOf(trigger) == selectedindex)
+                {
+                    tle.BackColor = Color.FromArgb(209, 65, 26);
+                }
+                pnl_parameters.Controls.Add(tle);
             }
-            catch (Exception) { }
-            dataManager.TriggerManager.Select(selectedRowIndex);
+            selectedRowIndex = selectedindex;
             ResumeLayout();
+        }
+        
+        private void TriggerList_SizeChanged(object sender, EventArgs e)
+        {
+            pnl_parameters.SuspendLayout();
+            foreach (TriggerListEntry ctrl in Entries)
+            {
+                ctrl.Width = pnl_parameters.Width - 24;
+            }
+            pnl_parameters.ResumeLayout();
+            pnl_parameters.PerformLayout();
+        }
+
+        private void TriggerManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (sender is Trigger)
+            {
+                var trigsender = (sender as Trigger);
+                Entries.Single(le => le.TriggerID == trigsender.ID).Update(trigsender);
+            }
+            else if (sender is DataMemberManager<Trigger>)
+            {
+                var trigsender = (sender as DataMemberManager<Trigger>);
+                switch (e.PropertyName)
+                {
+                    case nameof(trigsender.SelectedMember):
+                        if (trigsender.SelectedMember == null)
+                        {
+                            return;
+                        }
+                        int index = trigsender.Members.IndexOf(trigsender.SelectedMember);
+                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
+                        {
+                            Entries[selectedRowIndex].BackColor = Color.Transparent;
+                        }
+                        selectedRowIndex = index;
+                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
+                        {
+                            Entries[selectedRowIndex].BackColor = Color.FromArgb(209, 65, 26);
+                        }
+                        triggerDetail1.SetDetailedTrigger(trigsender.SelectedMember);
+                        break;
+
+                    case nameof(trigsender.Members):
+                        RefreshParamList();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

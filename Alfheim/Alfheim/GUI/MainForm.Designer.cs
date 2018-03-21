@@ -40,12 +40,12 @@ namespace Alfheim.GUI
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.trl_triggerlist = new Alfheim.GUI.UserControls.TriggerList();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.efl_effectlist = new Alfheim.GUI.UserControls.EffectList();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.pnl_sysmon = new System.Windows.Forms.Panel();
             this.pnl_sysmon_expand = new System.Windows.Forms.Panel();
             this.pnl_sidebar = new System.Windows.Forms.Panel();
             this.pnl_sidebar_expand = new System.Windows.Forms.Panel();
-            this.efl_effectlist = new Alfheim.GUI.UserControls.EffectList();
             this.pnl_content.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -136,9 +136,9 @@ namespace Alfheim.GUI
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 41);
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(599, 621);
+            this.metroTabPage1.Size = new System.Drawing.Size(599, 624);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "TRIGGERS";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -149,12 +149,11 @@ namespace Alfheim.GUI
             // 
             this.trl_triggerlist.BackColor = System.Drawing.Color.Transparent;
             this.trl_triggerlist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trl_triggerlist.EnablingEnabled = false;
             this.trl_triggerlist.ForeColor = System.Drawing.Color.White;
             this.trl_triggerlist.Location = new System.Drawing.Point(0, 0);
             this.trl_triggerlist.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
             this.trl_triggerlist.Name = "trl_triggerlist";
-            this.trl_triggerlist.Size = new System.Drawing.Size(599, 621);
+            this.trl_triggerlist.Size = new System.Drawing.Size(599, 624);
             this.trl_triggerlist.TabIndex = 0;
             // 
             // metroTabPage3
@@ -175,6 +174,21 @@ namespace Alfheim.GUI
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
             // 
+            // efl_effectlist
+            // 
+            this.efl_effectlist.BackColor = System.Drawing.Color.Transparent;
+            this.efl_effectlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.efl_effectlist.EnablingEnabled = false;
+            this.efl_effectlist.ForeColor = System.Drawing.Color.White;
+            this.efl_effectlist.Location = new System.Drawing.Point(0, 0);
+            this.efl_effectlist.Margin = new System.Windows.Forms.Padding(10);
+            this.efl_effectlist.Name = "efl_effectlist";
+            this.efl_effectlist.SelectedRowIndex = -1;
+            this.efl_effectlist.SelectedTrigger = null;
+            this.efl_effectlist.Size = new System.Drawing.Size(599, 621);
+            this.efl_effectlist.TabIndex = 2;
+            this.efl_effectlist.Triggers = null;
+            // 
             // metroTabPage2
             // 
             this.metroTabPage2.BackColor = System.Drawing.Color.Transparent;
@@ -183,9 +197,9 @@ namespace Alfheim.GUI
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
             this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.HorizontalScrollbarSize = 10;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 41);
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(599, 621);
+            this.metroTabPage2.Size = new System.Drawing.Size(599, 624);
             this.metroTabPage2.Style = MetroFramework.MetroColorStyle.White;
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "ACTIONS";
@@ -241,21 +255,6 @@ namespace Alfheim.GUI
             this.pnl_sidebar_expand.TabIndex = 1;
             this.pnl_sidebar_expand.Click += new System.EventHandler(this.pnl_sidebar_expand_Click);
             // 
-            // efl_effectlist
-            // 
-            this.efl_effectlist.BackColor = System.Drawing.Color.Transparent;
-            this.efl_effectlist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.efl_effectlist.EnablingEnabled = false;
-            this.efl_effectlist.ForeColor = System.Drawing.Color.White;
-            this.efl_effectlist.Location = new System.Drawing.Point(0, 0);
-            this.efl_effectlist.Margin = new System.Windows.Forms.Padding(10);
-            this.efl_effectlist.Name = "efl_effectlist";
-            this.efl_effectlist.SelectedRowIndex = 0;
-            this.efl_effectlist.SelectedTrigger = null;
-            this.efl_effectlist.Size = new System.Drawing.Size(599, 621);
-            this.efl_effectlist.TabIndex = 2;
-            this.efl_effectlist.Triggers = null;
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.Black;
@@ -265,7 +264,7 @@ namespace Alfheim.GUI
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Opacity = 0.92D;
+            this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ALFHEIM";
             this.Controls.SetChildIndex(this.pnl_content, 0);

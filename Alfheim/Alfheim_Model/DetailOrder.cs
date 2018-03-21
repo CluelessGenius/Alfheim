@@ -6,4 +6,8 @@ namespace Alfheim_Model
     {
         public int Position { get; set; }
     }
+
+    public class IgnoreWhenSaving : Attribute
+    {
+    }
 }

@@ -21,32 +21,27 @@ namespace Alfheim.GUI
         public MainForm():base()
         {
             InitializeComponent();
-            taskList3.SetDataManager(ref dataManager);
-            trl_triggerlist.SetDataManager(ref dataManager);
+            dataManager.TaskManager.PropertyChanged += TaskManager_PropertyChanged;
+            taskList3.SetDataManager(dataManager.TaskManager);
+            trl_triggerlist.SetDataManager(dataManager.TriggerManager);
         }
 
-        //private void Trl_triggerlist_TriggerEnabledChanged(object sender, EventArgs e)
-        //{
-        //    if ((bool)(e as ValuechangedEventArgs).NewValue && !taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
-        //    {
-        //        taskList3.SelectedTask.Triggers.Add((sender as Trigger).ID);
-        //    }
-        //    else if (!(bool)(e as ValuechangedEventArgs).NewValue && taskList3.SelectedTask.Triggers.Contains((sender as Trigger).ID))
-        //    {
-        //        taskList3.SelectedTask.Triggers.Remove((sender as Trigger).ID);
-        //    }
-            
-        //}
-
-        //private void TaskList3_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    trl_triggerlist.EnablingEnabled = taskList3.SelectedTask != null;
-        //    if (taskList3.SelectedTask!=null)
-        //    {
-        //        trl_triggerlist.SetToggles(taskList3.SelectedTask.Triggers);
-        //    }
-        //}
-
+        private void TaskManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is DataMemberManager<Task>)
+            {
+                var sendermgr = (sender as DataMemberManager<Task>);
+                switch (e.PropertyName)
+                {
+                    case nameof(sendermgr.SelectedMember):
+                        trl_triggerlist.SetTogglesEnabled(sendermgr.SelectedMember!=null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        
         private void pnl_sidebar_expand_Click(object sender, EventArgs e)
         {
             if (pnl_sidebar.Width >= 200)

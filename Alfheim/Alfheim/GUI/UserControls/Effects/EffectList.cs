@@ -18,7 +18,6 @@ namespace Alfheim.GUI.UserControls
         {
             InitializeComponent();
             EnablingEnabled = false;
-            triggerDetail1.ValueChanged += TriggerDetail1_ValueChanged;
         }
 
         private void TriggerDetail1_ValueChanged(object sender, ValuechangedEventArgs e)
@@ -38,10 +37,10 @@ namespace Alfheim.GUI.UserControls
             set
             {
                 enablingEnabled = value;
-                foreach (TriggerListEntry entry in pnl_parameters.Controls)
-                {
-                    entry.EnablingPossible = value;
-                }
+                //foreach (TriggerListEntry entry in pnl_parameters.Controls)
+                //{
+                //    entry.EnablingPossible = value;
+                //}
             }
         }
 
@@ -82,27 +81,18 @@ namespace Alfheim.GUI.UserControls
                 e.Width = pnl_parameters.Width - 24;
                 e.Clicked += Entry_Clicked;
                 e.Deleted += Entry_Deleted;
-                e.EnabledToggleChanged += EntryEnabled_Changed;
-                e.EnablingPossible = enablingEnabled;
+                e.TriggerEnabledChanged += EntryEnabled_Changed;
+                //e.EnablingPossible = enablingEnabled;
                 pnl_parameters.Controls.Add(e);
             });
-            try
-            {
-                triggerDetail1.DetailedTrigger = SelectedTrigger = Triggers[SelectedRowIndex];
-            }
-            catch (Exception)
-            {
-                triggerDetail1.DetailedTrigger = SelectedTrigger = null;
-                return;
-            }
         }
 
         public void SetToggles(List<long> IDs)
         {
-            foreach (TriggerListEntry entry in pnl_parameters.Controls)
-            {
-                entry.ToggleEnabled = IDs.Contains(entry.Param.ID);
-            }
+            //foreach (TriggerListEntry entry in pnl_parameters.Controls)
+            //{
+            //    entry.ToggleEnabled = IDs.Contains(entry.Param.ID);
+            //}
         }
 
         private void EntryEnabled_Changed(object sender, EventArgs e)
@@ -115,10 +105,10 @@ namespace Alfheim.GUI.UserControls
 
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
-            Properties.Settings.Default.MaxID += 1;
-            Properties.Settings.Default.Save();
-            Triggers.Add(new Trigger() { Name = "Dummy Trigger Static", TriggerType = TriggerType.Static, ID = Properties.Settings.Default.MaxID });
-            RefreshParamList();
+            //Properties.Settings.Default.MaxID += 1;
+            //Properties.Settings.Default.Save();
+            //Triggers.Add(new Trigger() { Name = "Dummy Trigger Static", TriggerType = TriggerType.Static, ID = Properties.Settings.Default.MaxID });
+            //RefreshParamList();
         }
 
         private void Entry_Clicked(object sender, EventArgs e)
@@ -134,14 +124,13 @@ namespace Alfheim.GUI.UserControls
             (sender as TriggerListEntry).BackColor = Color.FromArgb(209, 65, 26);
             SelectedRowIndex = pnl_parameters.Controls.IndexOf(sender as TriggerListEntry);
             SelectedTrigger = Triggers[SelectedRowIndex];
-            triggerDetail1.DetailedTrigger = SelectedTrigger;
         }
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            Triggers.Remove((sender as TriggerListEntry).Param);
-            pnl_parameters.Controls.Remove((sender as TriggerListEntry));
-            triggerDetail1.DetailedTrigger = null;
+            //Triggers.Remove((sender as TriggerListEntry).Param);
+            //pnl_parameters.Controls.Remove((sender as TriggerListEntry));
+            //triggerDetail1.DetailedTrigger = null;
         }
     }
 }

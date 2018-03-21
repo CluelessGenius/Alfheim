@@ -10,36 +10,39 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class ParamEnumEdit : UserControl
+    public partial class ParamEnumEdit : IReflectionEdit
     {
         Type EnumType;
 
         public ParamEnumEdit(string name, object value,long id)
         {
             InitializeComponent();
-            lbl_name.Text = name;
-            EnumType = value.GetType();
+            Propertyname = name;
+            PropertyValue = value;
+            lbl_name.Text = name.Split('.').Last();
+            EnumType = PropertyValue.GetType();
             string[] values = Enum.GetNames(EnumType);
             comboBox1.Items.AddRange(values);
-            comboBox1.SelectedItem = value.ToString();
+            comboBox1.SelectedItem = PropertyValue.ToString();
             iD = id;
         }
-
+        
         long iD;
 
         public event EventHandler<ValuechangedEventArgs> EnumChanged;
         
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PropertyValue = Enum.Parse(EnumType, (sender as ComboBox).SelectedItem.ToString());
             if (EnumChanged == null)
             {
                 return;
             }
             EnumChanged(this, new ValuechangedEventArgs()
             {
-                NewValue = Enum.Parse(EnumType, (sender as ComboBox).SelectedItem.ToString()),
+                NewValue = PropertyValue,
                 OldValue = null,
-                Property = lbl_name.Text,
+                Property = Propertyname,
                 ID = iD
             });
         }

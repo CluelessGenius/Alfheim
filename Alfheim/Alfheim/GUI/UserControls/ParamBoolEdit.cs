@@ -10,31 +10,34 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class ParamBoolEdit : UserControl
+    public partial class ParamBoolEdit : IReflectionEdit
     {
         public ParamBoolEdit(string name, bool value, long id)
         {
             InitializeComponent();
-            lbl_name.Text = name;
-            metroToggle1.Checked = value;
+            Propertyname = name;
+            PropertyValue = value;
+            lbl_name.Text = name.Split('.').Last();
+            metroToggle1.Checked = (bool)PropertyValue;
             iD = id;
         }
-
+        
         long iD;
 
         public event EventHandler<ValuechangedEventArgs> BoolChanged;
 
         private void metroToggle1_CheckedChanged(object sender, EventArgs e)
         {
+            PropertyValue = metroToggle1.Checked;
             if (BoolChanged == null)
             {
                 return;
             }
             BoolChanged(this, new ValuechangedEventArgs()
             {
-                NewValue = (sender as MetroFramework.Controls.MetroToggle).Checked,
+                NewValue = PropertyValue,
                 OldValue = null,
-                Property = lbl_name.Text,
+                Property = Propertyname,
                 ID = iD
             });
         }
