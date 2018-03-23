@@ -11,6 +11,9 @@ namespace Alfheim_Model.TRIGGERS
     [Serializable]
     public class StaticTrigger : ITrigger
     {
-
+        public StaticTrigger()
+        {
+            icon = Properties.Resources.icons8_aktiver_zustand_64;
+        }
     }
 }

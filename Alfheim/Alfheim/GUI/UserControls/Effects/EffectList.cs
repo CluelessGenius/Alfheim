@@ -75,16 +75,16 @@ namespace Alfheim.GUI.UserControls
             {
                 return;
             }
-            List<TriggerListEntry> entrycontrols = triggers.Select(t => (new TriggerListEntry(t))).ToList();
-            entrycontrols.ForEach(e =>
-            {
-                e.Width = pnl_parameters.Width - 24;
-                e.Clicked += Entry_Clicked;
-                e.Deleted += Entry_Deleted;
-                e.TriggerEnabledChanged += EntryEnabled_Changed;
-                //e.EnablingPossible = enablingEnabled;
-                pnl_parameters.Controls.Add(e);
-            });
+            //List<TriggerListEntry> entrycontrols = triggers.Select(t => (new TriggerListEntry(t))).ToList();
+            //entrycontrols.ForEach(e =>
+            //{
+            //    e.Width = pnl_parameters.Width - 24;
+            //    e.Clicked += Entry_Clicked;
+            //    e.Deleted += Entry_Deleted;
+            //    e.TriggerEnabledChanged += EntryEnabled_Changed;
+            //    //e.EnablingPossible = enablingEnabled;
+            //    pnl_parameters.Controls.Add(e);
+            //});
         }
 
         public void SetToggles(List<long> IDs)

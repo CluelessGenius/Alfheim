@@ -11,6 +11,11 @@ namespace Alfheim_Model.TRIGGERS
     [Serializable]
     public class AppointmentTrigger : ITrigger
     {
+        public AppointmentTrigger()
+        {
+            icon = Properties.Resources.icons8_calendar_64;
+        }
+
         private DateTime appointment = DateTime.Now;
 
         [DetailOrder(Position = 1)]

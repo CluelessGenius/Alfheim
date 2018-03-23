@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alfheim.Properties {
+namespace Alfheim_Model.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Alfheim.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Alfheim.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Alfheim_Model.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bg {
+        internal static System.Drawing.Bitmap icons8_aktiver_zustand_64 {
             get {
-                object obj = ResourceManager.GetObject("bg", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_aktiver_zustand_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bottomleft {
+        internal static System.Drawing.Bitmap icons8_breite_64 {
             get {
-                object obj = ResourceManager.GetObject("bottomleft", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_breite_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap close {
+        internal static System.Drawing.Bitmap icons8_calendar_64 {
             get {
-                object obj = ResourceManager.GetObject("close", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_calendar_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap doublearrow_left {
+        internal static System.Drawing.Bitmap icons8_einhorn_64 {
             get {
-                object obj = ResourceManager.GetObject("doublearrow_left", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_einhorn_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,29 +103,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap doublearrow_right {
+        internal static System.Drawing.Bitmap icons8_element_wasser_64 {
             get {
-                object obj = ResourceManager.GetObject("doublearrow_right", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon icon {
-            get {
-                object obj = ResourceManager.GetObject("icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_menü_32 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_menü_32", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_element_wasser_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +113,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_plus_math_64 {
+        internal static System.Drawing.Bitmap icons8_flash_bang_64 {
             get {
-                object obj = ResourceManager.GetObject("icons8_plus_math_64", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_flash_bang_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +123,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_systemaufgabe_32 {
+        internal static System.Drawing.Bitmap icons8_grafikkarte_64 {
             get {
-                object obj = ResourceManager.GetObject("icons8_systemaufgabe_32", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_grafikkarte_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +133,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_trash_64 {
+        internal static System.Drawing.Bitmap icons8_komet_64 {
             get {
-                object obj = ResourceManager.GetObject("icons8_trash_64", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_komet_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +143,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap max {
+        internal static System.Drawing.Bitmap icons8_lunge_64 {
             get {
-                object obj = ResourceManager.GetObject("max", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_lunge_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +153,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mini {
+        internal static System.Drawing.Bitmap icons8_motherboard_64 {
             get {
-                object obj = ResourceManager.GetObject("mini", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_motherboard_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +163,9 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap resto {
+        internal static System.Drawing.Bitmap icons8_prozess_64 {
             get {
-                object obj = ResourceManager.GetObject("resto", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_prozess_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +173,39 @@ namespace Alfheim.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap topright {
+        internal static System.Drawing.Bitmap icons8_raspberry_pi_64 {
             get {
-                object obj = ResourceManager.GetObject("topright", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_raspberry_pi_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_speicherkartensteckplatz_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_speicherkartensteckplatz_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_stern_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_stern_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_time_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_time_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

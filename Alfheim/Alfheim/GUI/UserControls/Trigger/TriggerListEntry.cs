@@ -10,9 +10,39 @@ namespace Alfheim.GUI.UserControls
         public TriggerListEntry(Trigger trigger)
         {
             InitializeComponent();
-            TriggerID = trigger.ID;
+
             lbl_name.Text = trigger.Name;
             lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
+            tgl_enabled.Checked = trigger.TriggerEnabled;
+
+            trigger.PropertyChanged += Trigger_PropertyChanged;
+        }
+
+        private void Trigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Trigger trigger = (sender as Trigger);
+            switch (e.PropertyName)
+            {
+                case nameof(trigger.Name):
+                    lbl_name.Text = trigger.Name;
+                    lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
+                    break;
+                case nameof(trigger.TriggerEnabled):
+                    tgl_enabled.Checked = trigger.TriggerEnabled;
+                    break;
+                case nameof(trigger.IsSelected):
+                    if (trigger.IsSelected)
+                    {
+                        BackColor = Color.FromArgb(209, 65, 26);
+                    }
+                    else
+                    {
+                        BackColor = Color.Transparent;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         public event EventHandler Clicked;
@@ -20,29 +50,19 @@ namespace Alfheim.GUI.UserControls
         public event EventHandler Deleted;
 
         public event EventHandler TriggerEnabledChanged;
-
-        public Color Backcolor
-        {
-            get { return this.BackColor; }
-            set { this.BackColor = value; }
-        }
         
-        public long TriggerID { get; private set; }
-
         public bool TriggerEnabled { get { return tgl_enabled.Checked; } }
 
         public void SetToggleEnabled(bool value)
         {
             tgl_enabled.Enabled = value;
         }
-        
-        public void Update(Trigger trigger)
+
+        public bool GetToggleEnabled()
         {
-            TriggerID = trigger.ID;
-            lbl_name.Text = trigger.Name;
-            tgl_enabled.Checked = trigger.TriggerEnabled;
+            return tgl_enabled.Enabled;
         }
-        
+
         private void btn_del_Click(object sender, EventArgs e)
         {
             if (Deleted != null)

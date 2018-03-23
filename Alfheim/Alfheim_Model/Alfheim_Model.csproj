@@ -51,6 +51,11 @@
     <Compile Include="DEVICES\Device.cs" />
     <Compile Include="EFFECTS\Effect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Task.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="TRIGGERS\AppointmentTrigger.cs" />
@@ -62,6 +67,56 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-aktiver-zustand-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-breite-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-einhorn-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-element-wasser-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-flash-bang-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-grafikkarte-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-komet-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-lunge-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-motherboard-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-prozess-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-raspberry-pi-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-speicherkartensteckplatz-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-stern-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-calendar-64.png" />
+    <Content Include="Resources\icons8-time-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

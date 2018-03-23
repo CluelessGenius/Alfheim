@@ -84,6 +84,9 @@
     <Compile Include="GUI\UserControls\AddButton.Designer.cs">
       <DependentUpon>AddButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\UserControls\AlphaBlendTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\UserControls\ParamDateTimeEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,6 +169,7 @@
       <DependentUpon>ParamStringEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\ValuechangedEventArgs.cs" />
+    <Compile Include="GUI\UserControls\win32.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\MainForm.resx">
@@ -255,25 +259,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <None Include="Resources\icons8-grafikkarte-64.png" />
-    <None Include="Resources\icons8-speicherkartensteckplatz-64.png" />
-    <None Include="Resources\icons8-raspberry-pi-64.png" />
-    <None Include="Resources\icons8-aktiver-zustand-64.png" />
-    <None Include="Resources\icons8-motherboard-64.png" />
-    <None Include="Resources\icons8-lunge-64.png" />
-    <None Include="Resources\icons8-prozess-64.png" />
-    <None Include="Resources\icons8-einhorn-64.png" />
-    <None Include="Resources\icons8-komet-64.png" />
-    <None Include="Resources\icons8-flash-bang-64.png" />
-    <None Include="Resources\icons8-element-wasser-64.png" />
-    <None Include="Resources\icons8-stern-64.png" />
-    <None Include="Resources\icons8-breite-64.png" />
-    <None Include="Resources\icons8-trash-32.png" />
+    <Content Include="Resources\bg.png" />
     <None Include="Resources\icons8-systemaufgabe-32.png" />
     <None Include="Resources\icons8-menü-32.png" />
     <None Include="Resources\doublearrow_right1.png" />
     <None Include="Resources\doublearrow_right.png" />
-    <None Include="Resources\bg.png" />
     <None Include="Resources\icons8-trash-64.png" />
     <None Include="Resources\icons8-plus-math-64.png" />
     <None Include="Resources\icon.ico" />

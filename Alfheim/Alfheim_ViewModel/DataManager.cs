@@ -18,6 +18,8 @@ namespace Alfheim_ViewModel
             triggerManager = new DataMemberManager<Trigger>();
             triggerManager.PropertyChanged += TriggerManager_PropertyChanged;
             effectManager = new DataMemberManager<Effect>();
+
+            taskManager.Members.ForEach(m=>m.UpdateTriggerInfo(triggerManager.Members.Where(t => m.Triggers.Contains(t.ID)).ToList()));
         }
 
         private void TriggerManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -30,6 +32,12 @@ namespace Alfheim_ViewModel
                     case nameof(sendertrgr.TriggerEnabled):
                         taskManager.SelectedMember?.UpdateTriggers(sendertrgr);
                         break;
+                    case nameof(sendertrgr.TriggerType):
+                        foreach (Task task in taskManager.Members.Where(t=>t.Triggers.Contains(sendertrgr.ID)))
+                        {
+                            task.UpdateTriggerInfo(triggerManager.Members.Where(t => task.Triggers.Contains(t.ID)).ToList());
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -40,13 +48,9 @@ namespace Alfheim_ViewModel
                 switch (e.PropertyName)
                 {
                     case nameof(sendertrgr.Members):
-                        if (taskManager.SelectedMember != null)
+                        foreach (Task task in taskManager.Members)
                         {
-                            long[] missingids = taskManager.SelectedMember.Triggers.Where(t => !triggerManager.Members.Select(m => m.ID).Contains(t)).ToArray();
-                            for (int i = 0; i < missingids.Length; i++)
-                            {
-                                taskManager.SelectedMember.Triggers.Remove(missingids[i]);
-                            }
+                            task.CleanUpTriggers(triggerManager.Members.Select(m => m.ID).ToArray());
                         }
                         break;
                     default:
@@ -76,6 +80,21 @@ namespace Alfheim_ViewModel
                             {
                                 trigg.TriggerEnabled = sendertaskmgr.SelectedMember.Triggers.Contains(trigg.ID);
                             }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (sender is Task)
+            {
+                var sendertask = (sender as Task);
+                switch (e.PropertyName)
+                {
+                    case nameof(sendertask.Triggers):
+                        if (sendertask.Triggers != null)
+                        {
+                            sendertask.UpdateTriggerInfo(triggerManager.Members.Where(t=> sendertask.Triggers.Contains(t.ID)).ToList());
                         }
                         break;
                     default:

@@ -11,6 +11,12 @@ namespace Alfheim_Model.TRIGGERS
     [Serializable]
     public class IntervalTrigger : ITrigger
     {
+        public IntervalTrigger()
+        {
+            icon = Properties.Resources.icons8_time_64;
+        }
+
+
         private long interval;
         
         [DetailOrder(Position = 1)]

@@ -44,7 +44,24 @@ namespace Alfheim_Model
                 }
             }
         }
-        
+
+        [JsonIgnore]
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+        private bool isSelected;
+
         public event PropertyChangedEventHandler PropertyChanged;
         
         protected virtual void OnPropertyChanged(string property, object sender = null)

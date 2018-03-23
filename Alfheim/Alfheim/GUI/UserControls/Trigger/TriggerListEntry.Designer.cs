@@ -71,7 +71,7 @@
             this.btn_del.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_del.BackColor = System.Drawing.Color.Transparent;
-            this.btn_del.BackgroundImage = global::Alfheim.Properties.Resources.icons8_trash_32;
+            this.btn_del.BackgroundImage = global::Alfheim.Properties.Resources.icons8_trash_64;
             this.btn_del.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_del.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_del.FlatAppearance.BorderSize = 0;

@@ -16,15 +16,17 @@ namespace Alfheim.GUI
 {
     public partial class MainForm : ResizableNonBorderForm
     {
-        DataManager dataManager = new DataManager();
+        DataManager dataManager;
 
         public MainForm():base()
         {
             InitializeComponent();
+            dataManager = new DataManager();
             dataManager.TaskManager.PropertyChanged += TaskManager_PropertyChanged;
             taskList3.SetDataManager(dataManager.TaskManager);
             trl_triggerlist.SetDataManager(dataManager.TriggerManager);
         }
+        
 
         private void TaskManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

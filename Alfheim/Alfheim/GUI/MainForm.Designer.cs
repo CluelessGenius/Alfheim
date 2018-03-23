@@ -120,7 +120,7 @@ namespace Alfheim.GUI
             this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(607, 666);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Orange;
             this.metroTabControl1.TabIndex = 1;
@@ -136,9 +136,9 @@ namespace Alfheim.GUI
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 41);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(599, 624);
+            this.metroTabPage1.Size = new System.Drawing.Size(599, 621);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "TRIGGERS";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -153,7 +153,7 @@ namespace Alfheim.GUI
             this.trl_triggerlist.Location = new System.Drawing.Point(0, 0);
             this.trl_triggerlist.Margin = new System.Windows.Forms.Padding(10, 5, 5, 10);
             this.trl_triggerlist.Name = "trl_triggerlist";
-            this.trl_triggerlist.Size = new System.Drawing.Size(599, 624);
+            this.trl_triggerlist.Size = new System.Drawing.Size(599, 621);
             this.trl_triggerlist.TabIndex = 0;
             // 
             // metroTabPage3

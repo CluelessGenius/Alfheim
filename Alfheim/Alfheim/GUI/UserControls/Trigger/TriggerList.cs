@@ -43,11 +43,14 @@ namespace Alfheim.GUI.UserControls
 
         public void SetTogglesEnabled(bool value)
         {
-            foreach (TriggerListEntry entry in pnl_parameters.Controls)
+            areTogglesEnabled = value;
+            foreach (TriggerListEntry entry in Entries)
             {
                 entry.SetToggleEnabled(value);
             }
         }
+
+        private bool areTogglesEnabled;
 
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
@@ -76,14 +79,11 @@ namespace Alfheim.GUI.UserControls
             foreach (Trigger trigger in triggerManager.Members)
             {
                 var tle = new TriggerListEntry(trigger);
+                tle.SetToggleEnabled(areTogglesEnabled);
                 tle.Width = pnl_parameters.Width - 24;
                 tle.Clicked += Entry_Clicked;
                 tle.Deleted += Entry_Deleted;
                 tle.TriggerEnabledChanged += EntryEnabled_Changed;
-                if (triggerManager.Members.IndexOf(trigger) == selectedindex)
-                {
-                    tle.BackColor = Color.FromArgb(209, 65, 26);
-                }
                 pnl_parameters.Controls.Add(tle);
             }
             selectedRowIndex = selectedindex;
@@ -103,12 +103,7 @@ namespace Alfheim.GUI.UserControls
 
         private void TriggerManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (sender is Trigger)
-            {
-                var trigsender = (sender as Trigger);
-                Entries.Single(le => le.TriggerID == trigsender.ID).Update(trigsender);
-            }
-            else if (sender is DataMemberManager<Trigger>)
+            if (sender is DataMemberManager<Trigger>)
             {
                 var trigsender = (sender as DataMemberManager<Trigger>);
                 switch (e.PropertyName)

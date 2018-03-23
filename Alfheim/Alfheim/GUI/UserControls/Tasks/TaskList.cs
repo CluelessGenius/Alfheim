@@ -54,12 +54,12 @@ namespace Alfheim.GUI.UserControls
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            taskManager.Delete(pnl_tasks.Controls.IndexOf((sender as TaskListEntry)));
+            taskManager.Delete(Entries.IndexOf((sender as TaskListEntry)));
         }
 
         private void Entry_EnabledChanged(object sender, EventArgs e)
         {
-            taskManager.Members[pnl_tasks.Controls.IndexOf(sender as TaskListEntry)].Enabled = (sender as TaskListEntry).TaskEnabled;
+            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Enabled = (sender as TaskListEntry).TaskEnabled;
         }
 
         private void pnl_tasks_SizeChanged(object sender, EventArgs e)
@@ -83,58 +83,41 @@ namespace Alfheim.GUI.UserControls
                 tle.Width = pnl_tasks.Width - 30;
                 tle.Clicked += Entry_Clicked;
                 tle.Deleted += Entry_Deleted;
+                tle.NameChanged += Tle_NameChanged;
                 tle.TaskEnabledChanged += Entry_EnabledChanged;
-                if (taskManager.Members.IndexOf(task) == selectedindex)
-                {
-                    tle.BackColor = Color.FromArgb(100, 209, 65, 26);
-                }
+                tle.DescriptionChanged += Tle_DescriptionChanged;
                 pnl_tasks.Controls.Add(tle);
             }
             selectedRowIndex = selectedindex;
             ResumeLayout();
         }
 
+        private void Tle_DescriptionChanged(object sender, ValuechangedEventArgs e)
+        {
+            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Description = e.NewValue.ToString();
+        }
+
+        private void Tle_NameChanged(object sender, ValuechangedEventArgs e)
+        {
+            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Name = e.NewValue.ToString();
+        }
+
         private void TaskManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (sender is Task)
-            {
-                var tasksender = (sender as Task);
-                switch (e.PropertyName)
-                {
-                    case nameof(tasksender.Enabled):
-                        Entries.Single(le => le.TaskID == tasksender.ID).TaskEnabled=tasksender.Enabled;
-                        break;
-                    case nameof(tasksender.Triggers):
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if (sender is DataMemberManager<Task>)
+            if (sender is DataMemberManager<Task>)
             {
                 var tasksender = (sender as DataMemberManager<Task>);
                 switch (e.PropertyName)
                 {
                     case nameof(tasksender.SelectedMember):
-                        if (tasksender.SelectedMember == null)
+                        if (tasksender.SelectedMember != null)
                         {
-                            return;
-                        }
-                        int index = tasksender.Members.IndexOf(tasksender.SelectedMember);
-                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
-                        {
-                            Entries[selectedRowIndex].BackColor = Color.Transparent;
-                        }
-                        selectedRowIndex = index;
-                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
-                        {
-                            Entries[selectedRowIndex].BackColor = Color.FromArgb(100, 209, 65, 26);
+                            selectedRowIndex = tasksender.Members.IndexOf(tasksender.SelectedMember);
                         }
                         break;
                     case nameof(tasksender.Members):
                         RefreshTaskList();
                         break;
-
                     default:
                         break;
                 }

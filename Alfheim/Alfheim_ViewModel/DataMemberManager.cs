@@ -97,7 +97,15 @@ namespace Alfheim_ViewModel
 
         public void Select(int index)
         {
+            if (members != null && selectedIndex >= 0 && selectedIndex < members.Count && index!=selectedIndex)
+            {
+                members[selectedIndex].IsSelected = false;
+            }
             selectedIndex = index;
+            if (members != null && selectedIndex >= 0 && selectedIndex < members.Count)
+            {
+                members[selectedIndex].IsSelected = true;
+            }
             OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(SelectedMember)));
         }
 

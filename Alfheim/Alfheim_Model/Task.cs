@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Alfheim_Model.TRIGGERS;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +51,20 @@ namespace Alfheim_Model
                 OnPropertyChanged(nameof(Triggers));
             }
         }
-        
+
+        public void CleanUpTriggers(long[] allpossibletriggerIDs)
+        {
+            long[] garbageIDs = triggers.Where(t => !allpossibletriggerIDs.Contains(t)).ToArray();
+            for (int i = 0; i < garbageIDs.Length; i++)
+            {
+                triggers.Remove(garbageIDs[i]);
+            }
+            if (garbageIDs.Length > 0)
+            {
+                OnPropertyChanged(nameof(Triggers));
+            }
+        }
+
         private bool enabled;
 
         public bool Enabled
@@ -85,6 +101,30 @@ namespace Alfheim_Model
             }
         }
 
+        [JsonIgnore]
+        [IgnoreWhenSaving]
+        public List<TriggerInfo> TriggerInfos
+        {
+            get
+            {
+                return triggerInfos;
+            }
+
+            private set
+            {
+                triggerInfos = value;
+                OnPropertyChanged(nameof(TriggerInfos));
+            }
+        }
+
+        private List<TriggerInfo> triggerInfos;
+
+        public void UpdateTriggerInfo(List<Trigger> infos)
+        {
+            TriggerInfos = infos.Select(i => new TriggerInfo() { ID=i.ID,Icon=i.Trig.Icon,Name=i.Name,Type=i.Trig.GetType() }).ToList();
+        }
+
+
         //public void ActivateTriggers()
         //{
         //    if (Triggers!=null && Triggers.Any(t=>t.Enabled&&t.TriggerType==TRIGGERS.TriggerType.Static))
@@ -109,6 +149,19 @@ namespace Alfheim_Model
             Description = "";
             Triggers = new List<long>();
             Actions = new List<ACTIONS.Action>();
+        }
+    }
+
+    public class TriggerInfo
+    {
+        public long ID;
+        public string Name;
+        public Type Type;
+        public Bitmap Icon;
+
+        public override string ToString()
+        {
+            return Name.ToString();
         }
     }
 }

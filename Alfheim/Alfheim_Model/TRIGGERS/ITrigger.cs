@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,18 @@ namespace Alfheim_Model.TRIGGERS
     [Serializable]
     public class ITrigger : INotifyPropertyChanged
     {
+        [JsonIgnore]
+        [IgnoreWhenSaving]
+        public Bitmap Icon
+        {
+            get
+            {
+                return icon;
+            }
+        }
+        
+        protected Bitmap icon;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string property, object sender=null)
