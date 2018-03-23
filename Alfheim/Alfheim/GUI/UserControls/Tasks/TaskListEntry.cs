@@ -9,6 +9,10 @@ namespace Alfheim.GUI.UserControls
 {
     public partial class TaskListEntry : UserControl
     {
+        private static Color selectionColor = Color.FromArgb(100, 209, 65, 26);
+
+        private static Color backgroundColor = Color.FromArgb(100, 0, 0, 0);
+
         public TaskListEntry(Alfheim_Model.Task task)
         {
             InitializeComponent();
@@ -16,7 +20,18 @@ namespace Alfheim.GUI.UserControls
             tbx_name.Text = task.Name;
             tbx_description.Text = task.Description;
             tgl_enabled.Checked = task.Enabled;
-
+            if (task.IsSelected)
+            {
+                BackColor = selectionColor;
+                panel1.BackColor = Color.Transparent;
+                panel2.BackColor = Color.Transparent;
+            }
+            else
+            {
+                BackColor = backgroundColor;
+                panel1.BackColor = Color.Transparent;
+                panel2.BackColor = Color.Transparent;
+            }
             task.PropertyChanged += Task_PropertyChanged;
             UpdateIconsTrigger(task.TriggerInfos);
         }
@@ -35,19 +50,15 @@ namespace Alfheim.GUI.UserControls
                 case nameof(task.IsSelected):
                     if (task.IsSelected)
                     {
-                        BackColor = Color.FromArgb(100, 209, 65, 26);
+                        BackColor = selectionColor;
                         panel1.BackColor = Color.Transparent;
                         panel2.BackColor = Color.Transparent;
-                        tbx_name.Refresh();
-                        tbx_description.Refresh();
                     }
                     else
                     {
-                        BackColor = Color.Transparent;
+                        BackColor = backgroundColor;
                         panel1.BackColor = Color.Transparent;
                         panel2.BackColor = Color.Transparent;
-                        tbx_name.Refresh();
-                        tbx_description.Refresh();
                     }
                     break;
                 case nameof(task.TriggerInfos):
@@ -83,7 +94,7 @@ namespace Alfheim.GUI.UserControls
                 Clicked(this, e);
         }
 
-        private void tgl_enabled_CheckedChanged(object sender, EventArgs e)
+        private void tgl_enabled_Click(object sender, EventArgs e)
         {
             if (TaskEnabledChanged != null)
                 TaskEnabledChanged(this, e);
@@ -91,6 +102,10 @@ namespace Alfheim.GUI.UserControls
 
         public void UpdateIconsTrigger(List<TriggerInfo> infos)
         {
+            if (infos==null)
+            {
+                return;
+            }
             pnl_trigger.Controls.Clear();
             for (int i = 0; i < infos.Count; i++)
             {
@@ -155,6 +170,17 @@ namespace Alfheim.GUI.UserControls
                 this.Focus();
                 if (Clicked != null)
                     Clicked(this, e);
+            }
+        }
+        
+        private void Drag_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button==MouseButtons.Left)
+            {
+                this.Focus();
+                if (Clicked != null)
+                    Clicked(this, e);
+                DoDragDrop(this, DragDropEffects.Move);
             }
         }
     }

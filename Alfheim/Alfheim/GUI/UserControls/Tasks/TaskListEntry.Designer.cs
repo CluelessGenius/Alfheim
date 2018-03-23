@@ -33,13 +33,13 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tbx_description = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
             this.pnl_actions = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_trigger = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_devices = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tbx_name = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tbx_description = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
+            this.tbx_name = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -63,8 +63,9 @@
             this.tgl_enabled.Style = MetroFramework.MetroColorStyle.Orange;
             this.tgl_enabled.TabIndex = 13;
             this.tgl_enabled.Text = "An";
+            this.toolTip1.SetToolTip(this.tgl_enabled, "sets the task in-/active");
             this.tgl_enabled.UseSelectable = true;
-            this.tgl_enabled.CheckedChanged += new System.EventHandler(this.tgl_enabled_CheckedChanged);
+            this.tgl_enabled.Click += new System.EventHandler(this.tgl_enabled_Click);
             // 
             // btn_del
             // 
@@ -110,11 +111,12 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1366, 59);
             this.tableLayoutPanel1.TabIndex = 14;
             this.tableLayoutPanel1.Click += new System.EventHandler(this.TaskListEntry_Click);
+            this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
             // 
             // panel2
             // 
@@ -122,11 +124,59 @@
             this.tableLayoutPanel1.SetColumnSpan(this.panel2, 4);
             this.panel2.Controls.Add(this.tbx_description);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(48, 23);
+            this.panel2.Location = new System.Drawing.Point(48, 17);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1242, 14);
+            this.panel2.Size = new System.Drawing.Size(1242, 16);
             this.panel2.TabIndex = 0;
+            // 
+            // pnl_actions
+            // 
+            this.pnl_actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_actions.BackColor = System.Drawing.Color.Transparent;
+            this.pnl_actions.Location = new System.Drawing.Point(935, 36);
+            this.pnl_actions.Margin = new System.Windows.Forms.Padding(0);
+            this.pnl_actions.Name = "pnl_actions";
+            this.pnl_actions.Size = new System.Drawing.Size(355, 20);
+            this.pnl_actions.TabIndex = 17;
+            this.pnl_actions.Click += new System.EventHandler(this.TaskListEntry_Click);
+            this.pnl_actions.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
+            // 
+            // pnl_trigger
+            // 
+            this.pnl_trigger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_trigger.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.pnl_trigger, 2);
+            this.pnl_trigger.Location = new System.Drawing.Point(48, 36);
+            this.pnl_trigger.Margin = new System.Windows.Forms.Padding(0);
+            this.pnl_trigger.Name = "pnl_trigger";
+            this.pnl_trigger.Size = new System.Drawing.Size(532, 20);
+            this.pnl_trigger.TabIndex = 15;
+            this.pnl_trigger.Click += new System.EventHandler(this.TaskListEntry_Click);
+            this.pnl_trigger.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
+            // 
+            // pnl_devices
+            // 
+            this.pnl_devices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_devices.BackColor = System.Drawing.Color.Transparent;
+            this.pnl_devices.Location = new System.Drawing.Point(580, 36);
+            this.pnl_devices.Margin = new System.Windows.Forms.Padding(0);
+            this.pnl_devices.Name = "pnl_devices";
+            this.pnl_devices.Size = new System.Drawing.Size(355, 20);
+            this.pnl_devices.TabIndex = 16;
+            this.pnl_devices.Click += new System.EventHandler(this.TaskListEntry_Click);
+            this.pnl_devices.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
+            // 
+            // panel1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 4);
+            this.panel1.Controls.Add(this.tbx_name);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(48, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1242, 17);
+            this.panel1.TabIndex = 20;
             // 
             // tbx_description
             // 
@@ -136,61 +186,19 @@
             this.tbx_description.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbx_description.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbx_description.EditingEnabled = false;
-            this.tbx_description.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_description.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbx_description.ForeColor = System.Drawing.Color.White;
             this.tbx_description.Location = new System.Drawing.Point(0, 0);
             this.tbx_description.Margin = new System.Windows.Forms.Padding(0);
             this.tbx_description.MinimumSize = new System.Drawing.Size(0, 15);
             this.tbx_description.Name = "tbx_description";
-            this.tbx_description.Size = new System.Drawing.Size(1242, 15);
+            this.tbx_description.Size = new System.Drawing.Size(1242, 16);
             this.tbx_description.TabIndex = 19;
             this.tbx_description.Text = "text describing the task and its purpose";
+            this.toolTip1.SetToolTip(this.tbx_description, "double-click to edit");
             this.tbx_description.TextChanged += new System.EventHandler(this.tbx_description_TextChanged);
             this.tbx_description.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbx_description_MouseDown);
-            // 
-            // pnl_actions
-            // 
-            this.pnl_actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnl_actions.BackColor = System.Drawing.Color.Transparent;
-            this.pnl_actions.Location = new System.Drawing.Point(935, 38);
-            this.pnl_actions.Margin = new System.Windows.Forms.Padding(0);
-            this.pnl_actions.Name = "pnl_actions";
-            this.pnl_actions.Size = new System.Drawing.Size(355, 20);
-            this.pnl_actions.TabIndex = 17;
-            this.pnl_actions.Click += new System.EventHandler(this.TaskListEntry_Click);
-            // 
-            // pnl_trigger
-            // 
-            this.pnl_trigger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnl_trigger.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.pnl_trigger, 2);
-            this.pnl_trigger.Location = new System.Drawing.Point(48, 38);
-            this.pnl_trigger.Margin = new System.Windows.Forms.Padding(0);
-            this.pnl_trigger.Name = "pnl_trigger";
-            this.pnl_trigger.Size = new System.Drawing.Size(532, 20);
-            this.pnl_trigger.TabIndex = 15;
-            this.pnl_trigger.Click += new System.EventHandler(this.TaskListEntry_Click);
-            // 
-            // pnl_devices
-            // 
-            this.pnl_devices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnl_devices.BackColor = System.Drawing.Color.Transparent;
-            this.pnl_devices.Location = new System.Drawing.Point(580, 38);
-            this.pnl_devices.Margin = new System.Windows.Forms.Padding(0);
-            this.pnl_devices.Name = "pnl_devices";
-            this.pnl_devices.Size = new System.Drawing.Size(355, 20);
-            this.pnl_devices.TabIndex = 16;
-            this.pnl_devices.Click += new System.EventHandler(this.TaskListEntry_Click);
-            // 
-            // panel1
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 4);
-            this.panel1.Controls.Add(this.tbx_name);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(51, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1236, 17);
-            this.panel1.TabIndex = 20;
+            this.tbx_description.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
             // 
             // tbx_name
             // 
@@ -205,17 +213,19 @@
             this.tbx_name.Location = new System.Drawing.Point(0, 0);
             this.tbx_name.Margin = new System.Windows.Forms.Padding(0);
             this.tbx_name.Name = "tbx_name";
-            this.tbx_name.Size = new System.Drawing.Size(1236, 22);
+            this.tbx_name.Size = new System.Drawing.Size(1242, 22);
             this.tbx_name.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.tbx_name, "double-click to edit");
             this.tbx_name.TextChanged += new System.EventHandler(this.tbx_name_TextChanged);
             this.tbx_name.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbx_name_MouseDown);
+            this.tbx_name.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
             // 
             // TaskListEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.Black;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;

@@ -46,6 +46,7 @@ namespace Alfheim_Model
         }
 
         [JsonIgnore]
+        [IgnoreWhenSaving]
         public bool IsSelected
         {
             get
@@ -60,7 +61,23 @@ namespace Alfheim_Model
             }
         }
 
+        [JsonProperty(nameof(DisplayedPosition), Order = 2)]
+        public int DisplayedPosition
+        {
+            get
+            {
+                return displayedPosition;
+            }
+
+            set
+            {
+                displayedPosition = value;
+            }
+        }
+
         private bool isSelected;
+
+        private int displayedPosition;
 
         public event PropertyChangedEventHandler PropertyChanged;
         

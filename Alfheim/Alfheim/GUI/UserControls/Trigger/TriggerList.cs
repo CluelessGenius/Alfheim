@@ -38,6 +38,12 @@ namespace Alfheim.GUI.UserControls
         {
             triggerManager = triggermanager;
             triggerManager.PropertyChanged += TriggerManager_PropertyChanged;
+            triggerManager.OrderChanged += TriggerManager_OrderChanged;
+            RefreshParamList();
+        }
+
+        private void TriggerManager_OrderChanged(object sender, EventArgs e)
+        {
             RefreshParamList();
         }
 
@@ -69,22 +75,38 @@ namespace Alfheim.GUI.UserControls
 
         private void EntryEnabled_Changed(object sender, EventArgs e)
         {
-            triggerManager.Members[Entries.IndexOf(sender as TriggerListEntry)].TriggerEnabled = (sender as TriggerListEntry).TriggerEnabled;
+            triggerManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as TriggerListEntry)).TriggerEnabled = (sender as TriggerListEntry).TriggerEnabled;
+        }
+
+        private void AddDragDropIndicator()
+        {
+            var tle = new DragDropIndicater();
+            tle.Width = pnl_parameters.Width - 24;
+            tle.Height = 3;
+            tle.Margin = new Padding() { Top = 2, Bottom = 2, Left = 0, Right = 0 };
+            pnl_parameters.Controls.Add(tle);
+        }
+
+        private void AddListEntry(Trigger trigger)
+        {
+            var tle = new TriggerListEntry(trigger);
+            tle.SetToggleEnabled(areTogglesEnabled);
+            tle.Width = pnl_parameters.Width - 24;
+            tle.Clicked += Entry_Clicked;
+            tle.Deleted += Entry_Deleted;
+            tle.TriggerEnabledChanged += EntryEnabled_Changed;
+            pnl_parameters.Controls.Add(tle);
         }
 
         private void RefreshParamList(int selectedindex = -1)
         {
             SuspendLayout();
             pnl_parameters.Controls.Clear();
-            foreach (Trigger trigger in triggerManager.Members)
+            AddDragDropIndicator();
+            foreach (Trigger trigger in triggerManager.Members.OrderBy(m=>m.DisplayedPosition))
             {
-                var tle = new TriggerListEntry(trigger);
-                tle.SetToggleEnabled(areTogglesEnabled);
-                tle.Width = pnl_parameters.Width - 24;
-                tle.Clicked += Entry_Clicked;
-                tle.Deleted += Entry_Deleted;
-                tle.TriggerEnabledChanged += EntryEnabled_Changed;
-                pnl_parameters.Controls.Add(tle);
+                AddListEntry(trigger);
+                AddDragDropIndicator();
             }
             selectedRowIndex = selectedindex;
             ResumeLayout();
@@ -109,23 +131,12 @@ namespace Alfheim.GUI.UserControls
                 switch (e.PropertyName)
                 {
                     case nameof(trigsender.SelectedMember):
-                        if (trigsender.SelectedMember == null)
+                        if (trigsender.SelectedMember != null)
                         {
-                            return;
+                            selectedRowIndex = trigsender.SelectedMember.DisplayedPosition;
+                            triggerDetail1.SetDetailedTrigger(trigsender.SelectedMember);
                         }
-                        int index = trigsender.Members.IndexOf(trigsender.SelectedMember);
-                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
-                        {
-                            Entries[selectedRowIndex].BackColor = Color.Transparent;
-                        }
-                        selectedRowIndex = index;
-                        if (selectedRowIndex >= 0 && selectedRowIndex < Entries.Count)
-                        {
-                            Entries[selectedRowIndex].BackColor = Color.FromArgb(209, 65, 26);
-                        }
-                        triggerDetail1.SetDetailedTrigger(trigsender.SelectedMember);
                         break;
-
                     case nameof(trigsender.Members):
                         RefreshParamList();
                         break;
@@ -133,6 +144,56 @@ namespace Alfheim.GUI.UserControls
                     default:
                         break;
                 }
+            }
+        }
+
+        private List<DragDropIndicater> Indicators { get { return pnl_parameters.Controls.OfType<DragDropIndicater>().ToList(); } }
+
+        private static Color indicatorColor = Color.FromArgb(209, 65, 26);
+        
+        private void pnl_parameters_DragOver(object sender, DragEventArgs e)
+        {
+            var data = e.Data.GetData(typeof(TriggerListEntry));
+            if (data == null)
+            {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+            e.Effect = DragDropEffects.Move;
+            Point mouselocation = pnl_parameters.PointToClient(new Point(e.X, e.Y));
+            var ini = Indicators.Select(i => Math.Abs(mouselocation.Y - i.Location.Y)).ToList();
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                //Indicators[i].SetText(ini[i].ToString()+" | "+Indicators[i].Location.Y+" | "+mouselocation.Y);
+                if (i == ini.IndexOf(ini.Min()))
+                {
+                    Indicators[i].BackColor = indicatorColor;
+                }
+                else
+                {
+                    Indicators[i].BackColor = Color.Transparent;
+                }
+            }
+        }
+
+        private void pnl_parameters_DragDrop(object sender, DragEventArgs e)
+        {
+            int index = Indicators.IndexOf(Indicators.First(ind => ind.BackColor == indicatorColor));
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                Indicators[i].BackColor = Color.Transparent;
+            }
+            var d = (TriggerListEntry)e.Data.GetData(typeof(TriggerListEntry));
+            int indexfrom = Entries.IndexOf(d);
+            index = index > indexfrom ? Math.Max(0, index - 1) : index;
+            triggerManager.Move(indexfrom, index);
+        }
+
+        private void pnl_parameters_DragLeave(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                Indicators[i].BackColor = Color.Transparent;
             }
         }
     }

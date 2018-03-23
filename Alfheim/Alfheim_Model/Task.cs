@@ -144,9 +144,9 @@ namespace Alfheim_Model
 
         public Task()
         {
-            Name = "Dummy Task";
+            Name = "new Task";
             Enabled = false;
-            Description = "";
+            Description = "text describing the task and its purpose";
             Triggers = new List<long>();
             Actions = new List<ACTIONS.Action>();
         }

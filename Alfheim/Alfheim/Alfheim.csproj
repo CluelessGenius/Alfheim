@@ -87,6 +87,12 @@
     <Compile Include="GUI\UserControls\AlphaBlendTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GUI\UserControls\DragDropIndicater.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\DragDropIndicater.Designer.cs">
+      <DependentUpon>DragDropIndicater.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\UserControls\ParamDateTimeEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\DragDropIndicater.resx">
+      <DependentUpon>DragDropIndicater.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\ParamDateTimeEdit.resx">
       <DependentUpon>ParamDateTimeEdit.cs</DependentUpon>

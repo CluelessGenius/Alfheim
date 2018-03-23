@@ -30,8 +30,8 @@
         {
             this.lbl_name = new System.Windows.Forms.Label();
             this.pnl_content = new System.Windows.Forms.TableLayoutPanel();
-            this.addButton1 = new Alfheim.GUI.UserControls.AddButton();
             this.pnl_tasks = new System.Windows.Forms.FlowLayoutPanel();
+            this.addButton1 = new Alfheim.GUI.UserControls.AddButton();
             this.pnl_content.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,20 +65,9 @@
             this.pnl_content.Size = new System.Drawing.Size(566, 350);
             this.pnl_content.TabIndex = 15;
             // 
-            // addButton1
-            // 
-            this.addButton1.AutoSize = true;
-            this.addButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addButton1.BackColor = System.Drawing.Color.Black;
-            this.addButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addButton1.Location = new System.Drawing.Point(3, 315);
-            this.addButton1.Name = "addButton1";
-            this.addButton1.Size = new System.Drawing.Size(560, 32);
-            this.addButton1.TabIndex = 0;
-            this.addButton1.Clicked += new System.EventHandler(this.Addbutton_Clicked);
-            // 
             // pnl_tasks
             // 
+            this.pnl_tasks.AllowDrop = true;
             this.pnl_tasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -92,6 +81,21 @@
             this.pnl_tasks.TabIndex = 14;
             this.pnl_tasks.WrapContents = false;
             this.pnl_tasks.SizeChanged += new System.EventHandler(this.pnl_tasks_SizeChanged);
+            this.pnl_tasks.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnl_tasks_DragDrop);
+            this.pnl_tasks.DragOver += new System.Windows.Forms.DragEventHandler(this.pnl_tasks_DragOver);
+            this.pnl_tasks.DragLeave += new System.EventHandler(this.pnl_tasks_DragLeave);
+            // 
+            // addButton1
+            // 
+            this.addButton1.AutoSize = true;
+            this.addButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addButton1.BackColor = System.Drawing.Color.Black;
+            this.addButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addButton1.Location = new System.Drawing.Point(3, 315);
+            this.addButton1.Name = "addButton1";
+            this.addButton1.Size = new System.Drawing.Size(560, 32);
+            this.addButton1.TabIndex = 0;
+            this.addButton1.Clicked += new System.EventHandler(this.Addbutton_Clicked);
             // 
             // TaskList
             // 

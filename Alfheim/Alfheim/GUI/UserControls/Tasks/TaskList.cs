@@ -39,6 +39,12 @@ namespace Alfheim.GUI.UserControls
         {
             taskManager = taskmanager;
             taskManager.PropertyChanged += TaskManager_PropertyChanged;
+            taskmanager.OrderChanged += Taskmanager_OrderChanged;
+            RefreshTaskList();
+        }
+
+        private void Taskmanager_OrderChanged(object sender, EventArgs e)
+        {
             RefreshTaskList();
         }
 
@@ -59,13 +65,18 @@ namespace Alfheim.GUI.UserControls
 
         private void Entry_EnabledChanged(object sender, EventArgs e)
         {
-            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Enabled = (sender as TaskListEntry).TaskEnabled;
+            if (Entries.IndexOf(sender as TaskListEntry)==-1)
+            {
+                (sender as TaskListEntry).TaskEnabled = !(sender as TaskListEntry).TaskEnabled;
+                return;
+            }
+            taskManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as TaskListEntry)).Enabled = (sender as TaskListEntry).TaskEnabled;
         }
 
         private void pnl_tasks_SizeChanged(object sender, EventArgs e)
         {
             pnl_tasks.SuspendLayout();
-            foreach (TaskListEntry ctrl in pnl_tasks.Controls)
+            foreach (Control ctrl in pnl_tasks.Controls)
             {
                 ctrl.Width = pnl_tasks.Width - 30;
             }
@@ -73,20 +84,36 @@ namespace Alfheim.GUI.UserControls
             pnl_tasks.PerformLayout();
         }
 
+        private void AddDragDropIndicator()
+        {
+            var tle = new DragDropIndicater();
+            tle.Width = pnl_tasks.Width - 30;
+            tle.Height = 5;
+            tle.Margin = new Padding() {Top=0,Bottom=0,Left=5,Right=5 };
+            pnl_tasks.Controls.Add(tle);
+        }
+
+        private void AddListEntry(Task task)
+        {
+            var tle = new TaskListEntry(task);
+            tle.Width = pnl_tasks.Width - 30;
+            tle.Clicked += Entry_Clicked;
+            tle.Deleted += Entry_Deleted;
+            tle.NameChanged += Tle_NameChanged;
+            tle.TaskEnabledChanged += Entry_EnabledChanged;
+            tle.DescriptionChanged += Tle_DescriptionChanged;
+            pnl_tasks.Controls.Add(tle);
+        }
+
         private void RefreshTaskList(int selectedindex = -1)
         {
             SuspendLayout();
             pnl_tasks.Controls.Clear();
-            foreach (Task task in taskManager.Members)
+            AddDragDropIndicator();
+            foreach (Task task in taskManager.Members.OrderBy(m=>m.DisplayedPosition))
             {
-                var tle = new TaskListEntry(task);
-                tle.Width = pnl_tasks.Width - 30;
-                tle.Clicked += Entry_Clicked;
-                tle.Deleted += Entry_Deleted;
-                tle.NameChanged += Tle_NameChanged;
-                tle.TaskEnabledChanged += Entry_EnabledChanged;
-                tle.DescriptionChanged += Tle_DescriptionChanged;
-                pnl_tasks.Controls.Add(tle);
+                AddListEntry(task);
+                AddDragDropIndicator();
             }
             selectedRowIndex = selectedindex;
             ResumeLayout();
@@ -94,12 +121,12 @@ namespace Alfheim.GUI.UserControls
 
         private void Tle_DescriptionChanged(object sender, ValuechangedEventArgs e)
         {
-            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Description = e.NewValue.ToString();
+            taskManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as TaskListEntry)).Description = e.NewValue.ToString();
         }
 
         private void Tle_NameChanged(object sender, ValuechangedEventArgs e)
         {
-            taskManager.Members[Entries.IndexOf(sender as TaskListEntry)].Name = e.NewValue.ToString();
+            taskManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as TaskListEntry)).Name = e.NewValue.ToString();
         }
 
         private void TaskManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -112,7 +139,7 @@ namespace Alfheim.GUI.UserControls
                     case nameof(tasksender.SelectedMember):
                         if (tasksender.SelectedMember != null)
                         {
-                            selectedRowIndex = tasksender.Members.IndexOf(tasksender.SelectedMember);
+                            selectedRowIndex = tasksender.SelectedMember.DisplayedPosition;
                         }
                         break;
                     case nameof(tasksender.Members):
@@ -121,6 +148,56 @@ namespace Alfheim.GUI.UserControls
                     default:
                         break;
                 }
+            }
+        }
+
+        private List<DragDropIndicater> Indicators { get { return pnl_tasks.Controls.OfType<DragDropIndicater>().ToList(); } }
+
+        private static Color indicatorColor = Color.FromArgb(209, 65, 26);
+        
+        private void pnl_tasks_DragOver(object sender, DragEventArgs e)
+        {
+            var data = e.Data.GetData(typeof(TaskListEntry));
+            if (data == null )
+            {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+            e.Effect = DragDropEffects.Move;
+            Point mouselocation = pnl_tasks.PointToClient(new Point(e.X, e.Y));
+            var ini = Indicators.Select(i=>Math.Abs(mouselocation.Y - i.Location.Y)).ToList();
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                //Indicators[i].SetText(ini[i].ToString()+" | "+Indicators[i].Location.Y+" | "+mouselocation.Y);
+                if (i == ini.IndexOf(ini.Min()))
+                {
+                    Indicators[i].BackColor = indicatorColor;
+                }
+                else
+                {
+                    Indicators[i].BackColor = Color.Transparent;
+                }
+            }
+        }
+
+        private void pnl_tasks_DragDrop(object sender, DragEventArgs e)
+        {
+            int index = Indicators.IndexOf(Indicators.First(ind=>ind.BackColor==indicatorColor));
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                Indicators[i].BackColor = Color.Transparent;
+            }
+            var d = (TaskListEntry)e.Data.GetData(typeof(TaskListEntry));
+            int indexfrom = Entries.IndexOf(d);
+            index = index>indexfrom?Math.Max(0, index-1):index;
+            taskManager.Move(indexfrom, index);
+        }
+
+        private void pnl_tasks_DragLeave(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Indicators.Count; i++)
+            {
+                Indicators[i].BackColor = Color.Transparent;
             }
         }
     }

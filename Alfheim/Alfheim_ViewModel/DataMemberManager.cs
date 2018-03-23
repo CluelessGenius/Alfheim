@@ -52,19 +52,13 @@ namespace Alfheim_ViewModel
         {
             get
             {
-                if (members!=null&&selectedIndex>=0&&selectedIndex<members.Count)
-                {
-                    return members[selectedIndex];
-                }
-                return null;
+                return members.FirstOrDefault(m => m.IsSelected == true);
             }
 
             set
             {
-                if (members != null && selectedIndex >= 0 && selectedIndex < members.Count)
-                {
-                    members[selectedIndex]=value;
-                }
+                var mem = members.FirstOrDefault(m => m.IsSelected == true);
+                mem = value;
             }
         }
 
@@ -77,8 +71,9 @@ namespace Alfheim_ViewModel
             Properties.SettingsData.Default.MaxID += 1;
             Properties.SettingsData.Default.Save();
             T newT = new T() { ID = Properties.SettingsData.Default.MaxID,
-                               Name = name };
+                               Name = name};
             newT.PropertyChanged += DataMember_PropertyChanged;
+            newT.DisplayedPosition = members.Count==0?0:members.Select(m=>m.DisplayedPosition).Max()+1;
             members.Add(newT);
             OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Members)));
             Save();
@@ -86,7 +81,15 @@ namespace Alfheim_ViewModel
 
         public void Delete(int index)
         {
-            members.RemoveAt(index);
+            var mem = members.First(m => m.DisplayedPosition == index);
+            members.Remove(mem);
+            for (int i = 0; i < members.Count; i++)
+            {
+                if (members[i].DisplayedPosition>index)
+                {
+                    members[i].DisplayedPosition--;
+                }
+            }
             OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Members)));
             if (index==selectedIndex)
             {
@@ -97,16 +100,34 @@ namespace Alfheim_ViewModel
 
         public void Select(int index)
         {
-            if (members != null && selectedIndex >= 0 && selectedIndex < members.Count && index!=selectedIndex)
+            for (int i = 0; i < members.Count; i++)
             {
-                members[selectedIndex].IsSelected = false;
+                members[i].IsSelected = members[i].DisplayedPosition == index;
             }
             selectedIndex = index;
-            if (members != null && selectedIndex >= 0 && selectedIndex < members.Count)
-            {
-                members[selectedIndex].IsSelected = true;
-            }
             OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(SelectedMember)));
+        }
+
+        public event EventHandler OrderChanged;
+
+        public void Move(int indexFrom, int indexTo)
+        {
+            List<long> ids = members.OrderBy(m => m.DisplayedPosition).Select(mem => mem.ID).ToList();
+
+            long item = ids[indexFrom];
+            ids.RemoveAt(indexFrom);
+            ids.Insert(indexTo, item);
+            
+            for (int i = 0; i < members.Count; i++)
+            {
+                members[i].DisplayedPosition = ids.IndexOf(members[i].ID);
+            }
+            if (OrderChanged!=null)
+            {
+                OrderChanged(new Dictionary<string, int>() { { "From",indexFrom }, { "To", indexTo } },EventArgs.Empty);
+            }
+            Save();
+            //Select(indexTo);
         }
 
         private void Load()
