@@ -51,6 +51,7 @@ namespace Alfheim.GUI
                 base.SuspendLayout();
                 this.SuspendLayout();
                 pnl_sidebar.Width = 16;
+                pnl_sidebar.BringToFront();
                 base.ResumeLayout();
                 this.ResumeLayout();
             }
@@ -59,32 +60,12 @@ namespace Alfheim.GUI
                 base.SuspendLayout();
                 this.SuspendLayout();
                 pnl_sidebar.Width = 200;
+                pnl_sidebar.BringToFront();
                 base.ResumeLayout();
                 this.ResumeLayout();
             }
         }
-
-        private void pnl_sysmon_expand_Click(object sender, EventArgs e)
-        {
-            if (pnl_sysmon.Width >= 200)
-            {
-                base.SuspendLayout();
-                this.SuspendLayout();
-                Width -= 400 - 16;
-                pnl_sysmon.Width = 16;
-                base.ResumeLayout();
-                this.ResumeLayout();
-            }
-            else
-            {
-                base.SuspendLayout();
-                this.SuspendLayout();
-                pnl_sysmon.Width = 400;
-                Width += 400 - 16;
-                base.ResumeLayout();
-                this.ResumeLayout();
-            }
-        }
+        
         
         
     }
