@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace Alfheim.GUI.UserControls
 {
-    public partial class TriggerList : UserControl
+    public partial class DevicePresetList : UserControl
     {
         public int selectedRowIndex = -1;
         private DataMemberManager<Trigger> triggerManager;
 
-        public TriggerList()
+        public DevicePresetList()
         {
             InitializeComponent();
         }
@@ -70,7 +70,7 @@ namespace Alfheim.GUI.UserControls
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            triggerManager.Delete(Entries.IndexOf(sender as TriggerListEntry));
+            triggerManager.Delete(pnl_parameters.Controls.IndexOf(sender as TriggerListEntry));
         }
 
         private void EntryEnabled_Changed(object sender, EventArgs e)
@@ -134,7 +134,6 @@ namespace Alfheim.GUI.UserControls
                         if (trigsender.SelectedMember != null)
                         {
                             selectedRowIndex = trigsender.SelectedMember.DisplayedPosition;
-                            triggerDetail1.SetDetailedTrigger(trigsender.SelectedMember);
                         }
                         break;
                     case nameof(trigsender.Members):

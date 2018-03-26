@@ -87,6 +87,18 @@
     <Compile Include="GUI\UserControls\AlphaBlendTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GUI\UserControls\Devices\DevicePresetList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DevicePresetList.Designer.cs">
+      <DependentUpon>DevicePresetList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DeviceListEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DeviceListEntry.Designer.cs">
+      <DependentUpon>DeviceListEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\UserControls\DragDropIndicater.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +143,30 @@
     </Compile>
     <Compile Include="GUI\UserControls\IReflectionEdit.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DeviceList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DeviceList.Designer.cs">
+      <DependentUpon>DeviceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DevicePresetListEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Devices\DevicePresetListEntry.Designer.cs">
+      <DependentUpon>DevicePresetListEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\Timeline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\Timeline.Designer.cs">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\TimeLineEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\TimeLineEntry.Designer.cs">
+      <DependentUpon>TimeLineEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\Trigger\TriggerDetail.cs">
       <SubType>UserControl</SubType>
@@ -188,6 +224,12 @@
     <EmbeddedResource Include="GUI\UserControls\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Devices\DevicePresetList.resx">
+      <DependentUpon>DevicePresetList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Devices\DeviceListEntry.resx">
+      <DependentUpon>DeviceListEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\DragDropIndicater.resx">
       <DependentUpon>DragDropIndicater.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +250,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\Effects\EffectListEntry.resx">
       <DependentUpon>EffectListEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Devices\DeviceList.resx">
+      <DependentUpon>DeviceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Devices\DevicePresetListEntry.resx">
+      <DependentUpon>DevicePresetListEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\Timeline.resx">
+      <DependentUpon>Timeline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControls\Trigger\TriggerDetail.resx">
       <DependentUpon>TriggerDetail.cs</DependentUpon>

@@ -103,20 +103,20 @@ namespace Alfheim.GUI.UserControls
             tle.TaskEnabledChanged += Entry_EnabledChanged;
             tle.DescriptionChanged += Tle_DescriptionChanged;
             pnl_tasks.Controls.Add(tle);
+            AddDragDropIndicator();
         }
 
         private void RefreshTaskList(int selectedindex = -1)
         {
-            SuspendLayout();
+            pnl_tasks.SuspendLayout();
             pnl_tasks.Controls.Clear();
             AddDragDropIndicator();
             foreach (Task task in taskManager.Members.OrderBy(m=>m.DisplayedPosition))
             {
                 AddListEntry(task);
-                AddDragDropIndicator();
             }
             selectedRowIndex = selectedindex;
-            ResumeLayout();
+            pnl_tasks.ResumeLayout();
         }
 
         private void Tle_DescriptionChanged(object sender, ValuechangedEventArgs e)

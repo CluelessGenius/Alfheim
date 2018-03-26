@@ -16,7 +16,7 @@ namespace Alfheim.GUI.UserControls
         public TaskListEntry(Alfheim_Model.Task task)
         {
             InitializeComponent();
-            
+            TaskID = task.ID;
             tbx_name.Text = task.Name;
             tbx_description.Text = task.Description;
             tgl_enabled.Checked = task.Enabled;
@@ -78,7 +78,9 @@ namespace Alfheim.GUI.UserControls
         public event EventHandler Clicked;
 
         public event EventHandler TaskEnabledChanged;
-        
+
+        public long TaskID;
+
         public bool TaskEnabled { get { return tgl_enabled.Checked; } set { tgl_enabled.Checked = value; } }
 
         private void btn_del_Click(object sender, EventArgs e)

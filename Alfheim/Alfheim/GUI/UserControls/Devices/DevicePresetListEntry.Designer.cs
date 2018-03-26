@@ -1,6 +1,6 @@
 ﻿namespace Alfheim.GUI.UserControls
 {
-    partial class TriggerListEntry
+    partial class DevicePresetListEntry
     {
         /// <summary> 
         /// Erforderliche Designervariable.

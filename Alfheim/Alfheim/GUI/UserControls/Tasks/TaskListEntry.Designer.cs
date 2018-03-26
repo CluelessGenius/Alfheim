@@ -33,13 +33,13 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tbx_description = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
             this.pnl_actions = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_trigger = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_devices = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tbx_description = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
             this.tbx_name = new Alfheim.GUI.UserControls.AlphaBlendTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -130,6 +130,28 @@
             this.panel2.Size = new System.Drawing.Size(1242, 16);
             this.panel2.TabIndex = 0;
             // 
+            // tbx_description
+            // 
+            this.tbx_description.BackAlpha = 0;
+            this.tbx_description.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tbx_description.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbx_description.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbx_description.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbx_description.EditingEnabled = false;
+            this.tbx_description.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_description.ForeColor = System.Drawing.Color.White;
+            this.tbx_description.Location = new System.Drawing.Point(0, 0);
+            this.tbx_description.Margin = new System.Windows.Forms.Padding(0);
+            this.tbx_description.MinimumSize = new System.Drawing.Size(0, 15);
+            this.tbx_description.Name = "tbx_description";
+            this.tbx_description.Size = new System.Drawing.Size(1242, 16);
+            this.tbx_description.TabIndex = 19;
+            this.tbx_description.Text = "text describing the task and its purpose";
+            this.toolTip1.SetToolTip(this.tbx_description, "double-click to edit");
+            this.tbx_description.TextChanged += new System.EventHandler(this.tbx_description_TextChanged);
+            this.tbx_description.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbx_description_MouseDown);
+            this.tbx_description.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
+            // 
             // pnl_actions
             // 
             this.pnl_actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -177,28 +199,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1242, 17);
             this.panel1.TabIndex = 20;
-            // 
-            // tbx_description
-            // 
-            this.tbx_description.BackAlpha = 0;
-            this.tbx_description.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tbx_description.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbx_description.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tbx_description.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbx_description.EditingEnabled = false;
-            this.tbx_description.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_description.ForeColor = System.Drawing.Color.White;
-            this.tbx_description.Location = new System.Drawing.Point(0, 0);
-            this.tbx_description.Margin = new System.Windows.Forms.Padding(0);
-            this.tbx_description.MinimumSize = new System.Drawing.Size(0, 15);
-            this.tbx_description.Name = "tbx_description";
-            this.tbx_description.Size = new System.Drawing.Size(1242, 16);
-            this.tbx_description.TabIndex = 19;
-            this.tbx_description.Text = "text describing the task and its purpose";
-            this.toolTip1.SetToolTip(this.tbx_description, "double-click to edit");
-            this.tbx_description.TextChanged += new System.EventHandler(this.tbx_description_TextChanged);
-            this.tbx_description.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbx_description_MouseDown);
-            this.tbx_description.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
             // 
             // tbx_name
             // 
