@@ -1,14 +1,19 @@
 ﻿using Alfheim_Model;
 using Alfheim_Model.EFFECTS;
 using Alfheim_Model.TRIGGERS;
+using Alfheim_Model.DEVICES;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.ComponentModel;
 
 namespace Alfheim_ViewModel
 {
     public class DataManager
     {
         private DataMemberManager<Effect> effectManager;
+        private DataMemberManager<DevicePreset> devicePresetManager;
+        private DataMemberManager<Device> deviceManager;
         private DataMemberManager<Task> taskManager;
         private DataMemberManager<Trigger> triggerManager;
         public DataManager()
@@ -18,8 +23,34 @@ namespace Alfheim_ViewModel
             triggerManager = new DataMemberManager<Trigger>();
             triggerManager.PropertyChanged += TriggerManager_PropertyChanged;
             effectManager = new DataMemberManager<Effect>();
+            DevicePresetManager = new DataMemberManager<DevicePreset>();
+            DevicePresetManager.PropertyChanged += DevicePresetManager_PropertyChanged;
+            DevicesManager = new DataMemberManager<Device>();
+            DevicesManager.SetMembers(DeviceManager.GetAvailableDevices());
+            DevicesManager.PropertyChanged += DeviceManager_PropertyChanged;
 
             taskManager.Members.ForEach(m=>m.UpdateTriggerInfo(triggerManager.Members.Where(t => m.Triggers.Contains(t.ID)).ToList()));
+        }
+
+        private void DeviceManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is Device)
+            {
+                var sendertrgr = (sender as Device);
+                switch (e.PropertyName)
+                {
+                    case nameof(sendertrgr.DeviceEnabled):
+                        devicePresetManager.SelectedMember?.UpdateDevices(sendertrgr);
+                        taskManager.SelectedMember?.UpdateTriggers(sendertrgr);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void DevicePresetManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
         }
 
         private void TriggerManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -138,6 +169,31 @@ namespace Alfheim_ViewModel
                 triggerManager = value;
             }
         }
-        
+
+        public DataMemberManager<DevicePreset> DevicePresetManager
+        {
+            get
+            {
+                return devicePresetManager;
+            }
+
+            set
+            {
+                devicePresetManager = value;
+            }
+        }
+
+        public DataMemberManager<Device> DevicesManager
+        {
+            get
+            {
+                return deviceManager;
+            }
+
+            set
+            {
+                deviceManager = value;
+            }
+        }
     }
 }

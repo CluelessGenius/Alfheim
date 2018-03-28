@@ -14,7 +14,14 @@ namespace Alfheim.GUI.UserControls
             lbl_name.Text = trigger.Name;
             lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
             tgl_enabled.Checked = trigger.TriggerEnabled;
-
+            if (trigger.IsSelected)
+            {
+                BackColor = selectionColor;
+            }
+            else
+            {
+                BackColor = backgroundColor;
+            }
             trigger.PropertyChanged += Trigger_PropertyChanged;
         }
 

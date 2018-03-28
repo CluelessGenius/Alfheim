@@ -142,13 +142,30 @@ namespace Alfheim_ViewModel
             }
         }
 
+        public void SetMembers(List<T> members)
+        {
+            this.members = members;
+        }
+
+        public static List<T> SynchronizeLists(List<T> a, List<T> b)
+        {
+            List<T> result = new List<T>();
+            result = a.Union(b).ToList();
+            return result;
+        }
+
         private void Save()
         {
+            if (typeof(T)==typeof(Alfheim_Model.DEVICES.Device))
+            {
+                return;
+            }
             string xmllist = serializationhelper.Serialize(members);
             Properties.SettingsData.Default.GetType().GetProperty(typeof(T).Name + "s").SetValue(Properties.SettingsData.Default, xmllist);
             Properties.SettingsData.Default.Save();
             Debug.WriteLine(typeof(T).Name + "s have been saved!");
         }
         
+
     }
 }

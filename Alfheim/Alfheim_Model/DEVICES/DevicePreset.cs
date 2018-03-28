@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace Alfheim_Model.DEVICES
 {
-    public class LED : Param
+    public class DevicePreset : Param
     {
-        private Color color;
+        List<DEVICES.Device> devices;
 
-        public Color Color
+        public List<Device> Devices
         {
             get
             {
-                return color;
+                return devices;
             }
 
             set
             {
-                color = value;
+                devices = value;
             }
         }
     }

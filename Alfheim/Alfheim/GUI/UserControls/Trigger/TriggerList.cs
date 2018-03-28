@@ -44,7 +44,21 @@ namespace Alfheim.GUI.UserControls
 
         private void TriggerManager_OrderChanged(object sender, EventArgs e)
         {
-            RefreshParamList();
+            var dict = sender as Dictionary<string, int>;
+            if (dict["From"] == dict["To"])
+            {
+                return;
+            }
+            int indexto = pnl_parameters.Controls.IndexOf(Entries[dict["To"]]);
+            if (dict["From"] < dict["To"])
+            {
+                pnl_parameters.Controls.SetChildIndex(Entries[dict["From"]], indexto + 1);
+            }
+            else
+            {
+                pnl_parameters.Controls.SetChildIndex(Entries[dict["From"]], indexto);
+            }
+            pnl_parameters.Controls.SetChildIndex(Indicators[dict["From"] + 1], indexto + 1);
         }
 
         public void SetTogglesEnabled(bool value)
@@ -61,6 +75,7 @@ namespace Alfheim.GUI.UserControls
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
             triggerManager.Create();
+            AddListEntry(triggerManager.Members.OrderByDescending(m => m.ID).First());
         }
 
         private void Entry_Clicked(object sender, EventArgs e)
@@ -71,6 +86,9 @@ namespace Alfheim.GUI.UserControls
         private void Entry_Deleted(object sender, EventArgs e)
         {
             triggerManager.Delete(Entries.IndexOf(sender as TriggerListEntry));
+            int index = pnl_parameters.Controls.IndexOf(sender as TriggerListEntry);
+            pnl_parameters.Controls.RemoveAt(index);
+            pnl_parameters.Controls.RemoveAt(index);
         }
 
         private void EntryEnabled_Changed(object sender, EventArgs e)
@@ -96,6 +114,7 @@ namespace Alfheim.GUI.UserControls
             tle.Deleted += Entry_Deleted;
             tle.TriggerEnabledChanged += EntryEnabled_Changed;
             pnl_parameters.Controls.Add(tle);
+            AddDragDropIndicator();
         }
 
         private void RefreshParamList(int selectedindex = -1)
@@ -106,7 +125,6 @@ namespace Alfheim.GUI.UserControls
             foreach (Trigger trigger in triggerManager.Members.OrderBy(m=>m.DisplayedPosition))
             {
                 AddListEntry(trigger);
-                AddDragDropIndicator();
             }
             selectedRowIndex = selectedindex;
             ResumeLayout();
@@ -115,7 +133,7 @@ namespace Alfheim.GUI.UserControls
         private void TriggerList_SizeChanged(object sender, EventArgs e)
         {
             pnl_parameters.SuspendLayout();
-            foreach (TriggerListEntry ctrl in Entries)
+            foreach (Control ctrl in pnl_parameters.Controls)
             {
                 ctrl.Width = pnl_parameters.Width - 24;
             }
@@ -138,7 +156,7 @@ namespace Alfheim.GUI.UserControls
                         }
                         break;
                     case nameof(trigsender.Members):
-                        RefreshParamList();
+                        //RefreshParamList();
                         break;
 
                     default:

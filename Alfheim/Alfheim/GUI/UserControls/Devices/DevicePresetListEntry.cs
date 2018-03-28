@@ -1,4 +1,4 @@
-﻿using Alfheim_Model.TRIGGERS;
+﻿using Alfheim_Model.DEVICES;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,31 +7,32 @@ namespace Alfheim.GUI.UserControls
 {
     public partial class DevicePresetListEntry : UserControl
     {
-        public DevicePresetListEntry(Trigger trigger)
+        public DevicePresetListEntry(DevicePreset preset)
         {
             InitializeComponent();
 
-            lbl_name.Text = trigger.Name;
-            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
-            tgl_enabled.Checked = trigger.TriggerEnabled;
-
-            trigger.PropertyChanged += Trigger_PropertyChanged;
+            tbx_name.Text = preset.Name;
+            if (preset.IsSelected)
+            {
+                BackColor = selectionColor;
+            }
+            else
+            {
+                BackColor = backgroundColor;
+            }
+            preset.PropertyChanged += Preset_PropertyChanged;
         }
-
-        private void Trigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        
+        private void Preset_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Trigger trigger = (sender as Trigger);
+            DevicePreset preset = (sender as DevicePreset);
             switch (e.PropertyName)
             {
-                case nameof(trigger.Name):
-                    lbl_name.Text = trigger.Name;
-                    lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
+                case nameof(preset.Name):
+                    tbx_name.Text = preset.Name;
                     break;
-                case nameof(trigger.TriggerEnabled):
-                    tgl_enabled.Checked = trigger.TriggerEnabled;
-                    break;
-                case nameof(trigger.IsSelected):
-                    if (trigger.IsSelected)
+                case nameof(preset.IsSelected):
+                    if (preset.IsSelected)
                     {
                         BackColor = selectionColor;
                     }
@@ -52,20 +53,8 @@ namespace Alfheim.GUI.UserControls
         public event EventHandler Clicked;
 
         public event EventHandler Deleted;
-
-        public event EventHandler TriggerEnabledChanged;
         
-        public bool TriggerEnabled { get { return tgl_enabled.Checked; } }
-
-        public void SetToggleEnabled(bool value)
-        {
-            tgl_enabled.Enabled = value;
-        }
-
-        public bool GetToggleEnabled()
-        {
-            return tgl_enabled.Enabled;
-        }
+        public event EventHandler<ValuechangedEventArgs> NameChanged;
 
         private void btn_del_Click(object sender, EventArgs e)
         {
@@ -78,24 +67,13 @@ namespace Alfheim.GUI.UserControls
             if (Clicked != null)
                 Clicked(this, e);
         }
-
-        private void tgl_enabled_Click(object sender, EventArgs e)
-        {
-            if (TriggerEnabledChanged != null)
-                TriggerEnabledChanged(this, e);
-        }
-
+        
         private void TriggerListEntry_Click(object sender, EventArgs e)
         {
             if (Clicked != null)
                 Clicked(this, e);
         }
-
-        private void TriggerListEntry_SizeChanged(object sender, EventArgs e)
-        {
-            lbl_name.MaximumSize = new Size(tgl_enabled.Location.X - lbl_name.Location.X, Height);
-        }
-
+        
         private void TriggerListEntry_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -104,6 +82,29 @@ namespace Alfheim.GUI.UserControls
                 if (Clicked != null)
                     Clicked(this, e);
                 DoDragDrop(this, DragDropEffects.Move);
+            }
+        }
+
+        private void tbx_name_TextChanged(object sender, EventArgs e)
+        {
+            if (NameChanged != null)
+            {
+                NameChanged(this, new ValuechangedEventArgs() { NewValue = (sender as AlphaBlendTextBox).Text });
+            }
+        }
+
+        private void tbx_name_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks > 1)
+            {
+                tbx_name.EditingEnabled = true;
+                tbx_name.Invalidate();
+            }
+            else
+            {
+                this.Focus();
+                if (Clicked != null)
+                    Clicked(this, e);
             }
         }
     }

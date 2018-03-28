@@ -50,12 +50,12 @@ namespace Alfheim_ViewModel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Devices {
+        public string DevicePresets {
             get {
-                return ((string)(this["Devices"]));
+                return ((string)(this["DevicePresets"]));
             }
             set {
-                this["Devices"] = value;
+                this["DevicePresets"] = value;
             }
         }
         
@@ -80,6 +80,18 @@ namespace Alfheim_ViewModel.Properties {
             }
             set {
                 this["MaxID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Devices {
+            get {
+                return ((string)(this["Devices"]));
+            }
+            set {
+                this["Devices"] = value;
             }
         }
     }

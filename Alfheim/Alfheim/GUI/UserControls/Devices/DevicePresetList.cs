@@ -1,4 +1,4 @@
-﻿using Alfheim_Model.TRIGGERS;
+﻿using Alfheim_Model.DEVICES;
 using Alfheim_ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,73 +11,81 @@ namespace Alfheim.GUI.UserControls
     public partial class DevicePresetList : UserControl
     {
         public int selectedRowIndex = -1;
-        private DataMemberManager<Trigger> triggerManager;
+        private DataMemberManager<DevicePreset> devicePresetManager;
 
         public DevicePresetList()
         {
             InitializeComponent();
         }
 
-        public List<TriggerListEntry> Entries
+        public List<DevicePresetListEntry> Entries
         {
             get
             {
-                return pnl_parameters.Controls.OfType<TriggerListEntry>().ToList();
+                return pnl_parameters.Controls.OfType<DevicePresetListEntry>().ToList();
             }
         }
 
-        public DataMemberManager<Trigger> TriggerManager
+        public DataMemberManager<DevicePreset> DevicePresetManager
         {
             get
             {
-                return triggerManager;
+                return devicePresetManager;
             }
         }
 
-        public void SetDataManager(DataMemberManager<Trigger> triggermanager)
+        public void SetDataManager(DataMemberManager<DevicePreset> devicepresetmanager, DataMemberManager<Device> devicemanager)
         {
-            triggerManager = triggermanager;
-            triggerManager.PropertyChanged += TriggerManager_PropertyChanged;
-            triggerManager.OrderChanged += TriggerManager_OrderChanged;
+            devicePresetManager = devicepresetmanager;
+            devicePresetManager.PropertyChanged += DevicesManager_PropertyChanged;
+            devicePresetManager.OrderChanged += DevicesManager_OrderChanged;
             RefreshParamList();
-        }
-
-        private void TriggerManager_OrderChanged(object sender, EventArgs e)
-        {
-            RefreshParamList();
+            deviceList1.SetDataManager(devicemanager);
         }
 
         public void SetTogglesEnabled(bool value)
         {
-            areTogglesEnabled = value;
-            foreach (TriggerListEntry entry in Entries)
-            {
-                entry.SetToggleEnabled(value);
-            }
+            deviceList1.SetTogglesEnabled(value);
         }
-
-        private bool areTogglesEnabled;
-
+        
+        private void DevicesManager_OrderChanged(object sender, EventArgs e)
+        {
+            var dict = sender as Dictionary<string, int>;
+            if (dict["From"] == dict["To"])
+            {
+                return;
+            }
+            int indexto = pnl_parameters.Controls.IndexOf(Entries[dict["To"]]);
+            if (dict["From"] < dict["To"])
+            {
+                pnl_parameters.Controls.SetChildIndex(Entries[dict["From"]], indexto + 1);
+            }
+            else
+            {
+                pnl_parameters.Controls.SetChildIndex(Entries[dict["From"]], indexto);
+            }
+            pnl_parameters.Controls.SetChildIndex(Indicators[dict["From"] + 1], indexto + 1);
+        }
+        
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
-            triggerManager.Create();
+            devicePresetManager.Create();
+            AddListEntry(devicePresetManager.Members.OrderByDescending(m => m.ID).First());
         }
 
         private void Entry_Clicked(object sender, EventArgs e)
         {
-            triggerManager.Select(Entries.IndexOf(sender as TriggerListEntry));
+            devicePresetManager.Select(Entries.IndexOf(sender as DevicePresetListEntry));
         }
 
         private void Entry_Deleted(object sender, EventArgs e)
         {
-            triggerManager.Delete(pnl_parameters.Controls.IndexOf(sender as TriggerListEntry));
+            devicePresetManager.Delete(Entries.IndexOf(sender as DevicePresetListEntry));
+            int index = pnl_parameters.Controls.IndexOf(sender as DevicePresetListEntry);
+            pnl_parameters.Controls.RemoveAt(index);
+            pnl_parameters.Controls.RemoveAt(index);
         }
-
-        private void EntryEnabled_Changed(object sender, EventArgs e)
-        {
-            triggerManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as TriggerListEntry)).TriggerEnabled = (sender as TriggerListEntry).TriggerEnabled;
-        }
-
+        
         private void AddDragDropIndicator()
         {
             var tle = new DragDropIndicater();
@@ -87,15 +95,20 @@ namespace Alfheim.GUI.UserControls
             pnl_parameters.Controls.Add(tle);
         }
 
-        private void AddListEntry(Trigger trigger)
+        private void AddListEntry(DevicePreset preset)
         {
-            var tle = new TriggerListEntry(trigger);
-            tle.SetToggleEnabled(areTogglesEnabled);
+            var tle = new DevicePresetListEntry(preset);
             tle.Width = pnl_parameters.Width - 24;
             tle.Clicked += Entry_Clicked;
             tle.Deleted += Entry_Deleted;
-            tle.TriggerEnabledChanged += EntryEnabled_Changed;
+            tle.NameChanged += Tle_NameChanged;
             pnl_parameters.Controls.Add(tle);
+            AddDragDropIndicator();
+        }
+
+        private void Tle_NameChanged(object sender, ValuechangedEventArgs e)
+        {
+            devicePresetManager.Members.First(m => m.DisplayedPosition == Entries.IndexOf(sender as DevicePresetListEntry)).Name = e.NewValue.ToString();
         }
 
         private void RefreshParamList(int selectedindex = -1)
@@ -103,19 +116,18 @@ namespace Alfheim.GUI.UserControls
             SuspendLayout();
             pnl_parameters.Controls.Clear();
             AddDragDropIndicator();
-            foreach (Trigger trigger in triggerManager.Members.OrderBy(m=>m.DisplayedPosition))
+            foreach (DevicePreset preset in devicePresetManager.Members.OrderBy(m=>m.DisplayedPosition))
             {
-                AddListEntry(trigger);
-                AddDragDropIndicator();
+                AddListEntry(preset);
             }
             selectedRowIndex = selectedindex;
             ResumeLayout();
         }
         
-        private void TriggerList_SizeChanged(object sender, EventArgs e)
+        private void DevicePresetList_SizeChanged(object sender, EventArgs e)
         {
             pnl_parameters.SuspendLayout();
-            foreach (TriggerListEntry ctrl in Entries)
+            foreach (Control ctrl in pnl_parameters.Controls)
             {
                 ctrl.Width = pnl_parameters.Width - 24;
             }
@@ -123,11 +135,11 @@ namespace Alfheim.GUI.UserControls
             pnl_parameters.PerformLayout();
         }
 
-        private void TriggerManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void DevicesManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (sender is DataMemberManager<Trigger>)
+            if (sender is DataMemberManager<DevicePreset>)
             {
-                var trigsender = (sender as DataMemberManager<Trigger>);
+                var trigsender = (sender as DataMemberManager<DevicePreset>);
                 switch (e.PropertyName)
                 {
                     case nameof(trigsender.SelectedMember):
@@ -137,7 +149,7 @@ namespace Alfheim.GUI.UserControls
                         }
                         break;
                     case nameof(trigsender.Members):
-                        RefreshParamList();
+                        //RefreshParamList();
                         break;
 
                     default:
@@ -152,7 +164,7 @@ namespace Alfheim.GUI.UserControls
         
         private void pnl_parameters_DragOver(object sender, DragEventArgs e)
         {
-            var data = e.Data.GetData(typeof(TriggerListEntry));
+            var data = e.Data.GetData(typeof(DevicePresetListEntry));
             if (data == null)
             {
                 e.Effect = DragDropEffects.None;
@@ -182,10 +194,10 @@ namespace Alfheim.GUI.UserControls
             {
                 Indicators[i].BackColor = Color.Transparent;
             }
-            var d = (TriggerListEntry)e.Data.GetData(typeof(TriggerListEntry));
+            var d = (DevicePresetListEntry)e.Data.GetData(typeof(DevicePresetListEntry));
             int indexfrom = Entries.IndexOf(d);
             index = index > indexfrom ? Math.Max(0, index - 1) : index;
-            triggerManager.Move(indexfrom, index);
+            devicePresetManager.Move(indexfrom, index);
         }
 
         private void pnl_parameters_DragLeave(object sender, EventArgs e)

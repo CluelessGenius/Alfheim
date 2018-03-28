@@ -45,12 +45,27 @@ namespace Alfheim.GUI.UserControls
 
         private void Taskmanager_OrderChanged(object sender, EventArgs e)
         {
-            RefreshTaskList();
+            var dict = sender as Dictionary<string, int>;
+            if (dict["From"] == dict["To"])
+            {
+                return;
+            }
+            int indexto = pnl_tasks.Controls.IndexOf(Entries[dict["To"]]);
+            if (dict["From"] < dict["To"])
+            {
+                pnl_tasks.Controls.SetChildIndex(Entries[dict["From"]], indexto+1);
+            }
+            else
+            {
+                pnl_tasks.Controls.SetChildIndex(Entries[dict["From"]], indexto);
+            }
+            pnl_tasks.Controls.SetChildIndex(Indicators[dict["From"] + 1], indexto + 1);
         }
 
         private void Addbutton_Clicked(object sender, EventArgs e)
         {
             taskManager.Create();
+            AddListEntry(taskManager.Members.OrderByDescending(m=>m.ID).First());
         }
 
         private void Entry_Clicked(object sender, EventArgs e)
@@ -61,6 +76,9 @@ namespace Alfheim.GUI.UserControls
         private void Entry_Deleted(object sender, EventArgs e)
         {
             taskManager.Delete(Entries.IndexOf((sender as TaskListEntry)));
+            int index = pnl_tasks.Controls.IndexOf(sender as TaskListEntry);
+            pnl_tasks.Controls.RemoveAt(index);
+            pnl_tasks.Controls.RemoveAt(index);
         }
 
         private void Entry_EnabledChanged(object sender, EventArgs e)
@@ -143,7 +161,7 @@ namespace Alfheim.GUI.UserControls
                         }
                         break;
                     case nameof(tasksender.Members):
-                        RefreshTaskList();
+                        //RefreshTaskList();
                         break;
                     default:
                         break;

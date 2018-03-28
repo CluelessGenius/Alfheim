@@ -1,5 +1,6 @@
 ﻿using Alfheim.GUI.UserControls;
 using Alfheim_Model;
+using Alfheim_Model.DEVICES;
 using Alfheim_Model.EFFECTS;
 using Alfheim_Model.TRIGGERS;
 using Alfheim_ViewModel;
@@ -23,10 +24,27 @@ namespace Alfheim.GUI
             InitializeComponent();
             dataManager = new DataManager();
             dataManager.TaskManager.PropertyChanged += TaskManager_PropertyChanged;
+            dataManager.DevicePresetManager.PropertyChanged += DevicePresetManager_PropertyChanged;
             taskList3.SetDataManager(dataManager.TaskManager);
             trl_triggerlist.SetDataManager(dataManager.TriggerManager);
+            devicePresetList1.SetDataManager(dataManager.DevicePresetManager,dataManager.DevicesManager);
         }
-        
+
+        private void DevicePresetManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is DataMemberManager<DevicePreset>)
+            {
+                var sendermgr = (sender as DataMemberManager<DevicePreset>);
+                switch (e.PropertyName)
+                {
+                    case nameof(sendermgr.SelectedMember):
+                        devicePresetList1.SetTogglesEnabled(sendermgr.SelectedMember != null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         private void TaskManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

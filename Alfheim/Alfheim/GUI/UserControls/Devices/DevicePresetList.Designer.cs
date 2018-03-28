@@ -101,7 +101,7 @@
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Name = "DevicePresetList";
             this.Size = new System.Drawing.Size(570, 352);
-            this.SizeChanged += new System.EventHandler(this.TriggerList_SizeChanged);
+            this.SizeChanged += new System.EventHandler(this.DevicePresetList_SizeChanged);
             this.pnl_content.ResumeLayout(false);
             this.ResumeLayout(false);
 
